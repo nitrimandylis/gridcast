@@ -46,7 +46,9 @@ Before using any historical data, decide which of the two it is.
    lap and the Monte Carlo loses its variance.
 6. **Safety car: per-circuit rate from 2018-2026**, shrunk toward a
    street/permanent base rate. Sample occurrence, lap timing AND duration.
-   Model VSC separately from full SC. Red flags omitted from v1.
+   Model VSC separately from full SC. Red flags omitted from v1, but see
+   the gate results below: they are commoner in 2026 than assumed, so revisit
+   before Phase 2 ships.
 7. **DNFs split by cause**, because the causes have different owners:
    mechanical (team; weak 2025 operational-quality prior, updated by 2026),
    first-lap incident (grid position and circuit, from long history, pools
@@ -58,6 +60,28 @@ Before using any historical data, decide which of the two it is.
 9. **Predictions are committed as JSON before lights out.** Git history is the
    timestamp proof. No database, no timestamping service.
 10. **Not a CLI.** Personal pipeline. Do not package it.
+
+## Gate results, verified 2026-08-31
+
+All three gates PASS. `scripts/gates.py` reruns them.
+
+- **2026 sessions**: 23 events in schedule. Dutch GP race loads 1368 lap rows
+  across 22 drivers.
+- **Track status back to 2018**: yes. 2018 British GP returns 22 status-change
+  rows. It is a change log, not per-lap, so expand it against lap timestamps.
+- **2026 per-lap compound and tyre age**: yes. Compound, TyreLife, Stint,
+  TrackStatus and LapTime all present, 1368/1368 laps carry a compound.
+
+Status codes are `1` AllClear, `2` Yellow, `4` SafetyCar, `5` Red, `6` VSC,
+`7` VSCEnding. SC and VSC are cleanly distinguishable, so decision 6 holds.
+
+**Red flags are not rare.** Sampling four 2026 races: Australia had VSC only,
+Monaco had SC and a red flag, Britain had both SC and VSC, Zandvoort had VSC
+and a red flag. Two red flags in four races is far more than v1 assumed.
+
+FastF1 emits timing integrity warnings on real sessions (misaligned laps,
+drivers finishing before session end). Expect them and handle them in
+cleaning rather than treating them as failures.
 
 ## Traps
 
