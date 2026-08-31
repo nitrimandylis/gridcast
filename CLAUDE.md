@@ -83,6 +83,51 @@ FastF1 emits timing integrity warnings on real sessions (misaligned laps,
 drivers finishing before session end). Expect them and handle them in
 cleaning rather than treating them as failures.
 
+## Prior art, surveyed 2026-08-31
+
+**Nothing exists to fork for prediction.** The GitHub landscape tops out at 11
+stars: one-off unlicensed scripts predicting a single 2025 race. The bar is
+very low.
+
+**TUMFTM/race-simulation** (115 stars, LGPL, Python 3.8, last pushed
+2023-03-25) is the one serious open artifact. Lap-wise discretisation, tyre
+degradation, fuel mass, inter-car interaction, Monte Carlo, and a "Virtual
+Strategy Engineer" with four pit-decision variants. But it is a STRATEGY
+OPTIMISER, not a predictor: it answers "what is the optimal pit strategy given
+these parameters", not "who wins Sunday". Its parameter files cover 2014-2019
+and were generated from a private timing database we do not have. It claims no
+quantitative accuracy.
+
+Do not fork it for Phase 1. Read it before Phase 2 and steal two things:
+- **Lap-wise discretisation** instead of a fixed time tick. Pitwall's 10Hz tick
+  quantised every lap time to a multiple of 0.1s.
+- **Its "real strategy" VSE variant**: replay the strategy teams actually used
+  as a backtest control. That isolates strategy error from pace error, and we
+  do not currently have that.
+
+Note if forking is ever considered: LGPL is copyleft, so gridcast would have
+to be LGPL rather than MIT.
+
+**Published accuracy numbers in this space are mostly not real.** Two patterns
+to never reproduce:
+- Claims like "R2 = 0.993 predicting finishing position" almost certainly leak
+  post-race features (points, laps completed, status, race time) into the
+  inputs. Finishing position is not that predictable.
+- "78% accuracy predicting podiums" is worse than the trivial baseline: with 3
+  podium slots in 20 drivers, predicting "no podium" for everyone scores 85%.
+
+This is exactly why the harness uses RPS against explicit baselines.
+
+**Academic frontier is strategy control, not outcome prediction.** RSRL
+(arXiv 2501.04068) reached P5.33 against a P5.63 baseline in a car with P5.5
+expected pace, inside a simulator. arXiv 2512.21570 pairs a MINLP with RL for
+~5s suboptimality over a 1.5h race, no public code. Nobody is publishing
+calibrated pre-race outcome probabilities with a live scorecard.
+
+**Add a third baseline if odds are easy to obtain**: bookmaker implied
+probabilities are the honest hard benchmark. Beating them is not the goal;
+comparing calibration against them is a strong line in the writeup.
+
 ## Traps
 
 - **Strategy is an OUTPUT of the simulator, never an input to the pace model.**
