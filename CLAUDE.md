@@ -5,32 +5,14 @@ set of decisions that are already made, and the traps that cost time to find.
 
 ## READ FIRST: unresolved decisions, grill Nick before building
 
-Ten decisions are locked (below). These are NOT, and they were deliberately
-left open rather than forgotten. **Do not start writing model code until the
-Phase 1 blockers are resolved with Nick.**
+Thirteen decisions are locked (below; 11-13 resolved the former Phase 1
+blockers in the 2026-08-31 grill). The rest are NOT, and they were
+deliberately left open rather than forgotten.
 
-Run this as a grill, one question at a time, in the format he expects: the
+Run each as a grill, one question at a time, in the format he expects: the
 full written case first, then options, then your recommendation. Options
 without the case get rejected. Do not ask them all at once, and do not answer
 them yourself and proceed.
-
-### Blocking Phase 1 (resolve at the very first working session)
-
-1. **What is the direct model, exactly?** It has only ever been described as
-   "an ordinal regression or a boosted tree". Those are different commitments.
-   Ordinal regression respects that finishing position is ordered and stays
-   interpretable, which matters because he has to defend every line. A boosted
-   tree will probably score better and explains nothing. Decide before coding.
-2. **What is the Thursday predicted grid in Phase 1?** Decision 2 survived the
-   scope cut on the claim that Thursday vs Saturday is "one feature swap".
-   That claim needs cashing out: what actually fills the grid column on
-   Thursday? Championship order, a pace ranking, last race's grid, FP2 pace?
-   This is unspecified and it is on the critical path for 26 September.
-3. **Which output shape gets published?** P(win), P(podium), P(points) was
-   agreed, but the full P(position) matrix is what RPS scores. Decide whether
-   the JSON stores the full distribution (and the page renders a summary) or
-   only the three headline numbers, because the scorecard cannot be rebuilt
-   later from data that was never written.
 
 ### Resolve before Phase 2 (October)
 
@@ -120,6 +102,23 @@ Before using any historical data, decide which of the two it is.
 9. **Predictions are committed as JSON before lights out.** Git history is the
    timestamp proof. No database, no timestamping service.
 10. **Not a CLI.** Personal pipeline. Do not package it.
+11. **The direct model is Plackett-Luce** (grilled 2026-08-31). Each driver
+    gets a strength, a linear function of the features; P(win) is softmax over
+    strengths, remove the winner and repeat. A race is a ranking, so the
+    probabilities are coherent by construction: win probs sum to 1, one driver
+    per position. Fit by maximum likelihood on observed finishing orders,
+    plain numpy/scipy, no modelling library. Ordinal regression was the
+    fallback, boosted tree rejected (uninterpretable, overfits 240 rows).
+12. **The Thursday grid column is each driver's season-average grid position**,
+    and the Thursday model is trained as its own fit with that feature
+    (grilled 2026-08-31). Never feed a guessed grid into the Saturday-trained
+    model: it learned the weight of a KNOWN grid and would be overconfident.
+    Upgrades in October when the real qualifying model replaces the proxy.
+13. **The prediction JSON stores the full P(driver, position) matrix, the
+    derived P(win)/P(podium)/P(points), and run metadata** (event, call type,
+    model version, races trained on, timestamp) (grilled 2026-08-31).
+    Headlines-only was rejected: RPS can never be computed from data that was
+    never written, and git history means no regeneration after the race.
 
 ## Gate results, verified 2026-08-31
 
