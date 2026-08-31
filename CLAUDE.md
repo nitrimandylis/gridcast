@@ -3,6 +3,66 @@
 F1 race outcome prediction. Read PRODUCT.md for what it is. This file is the
 set of decisions that are already made, and the traps that cost time to find.
 
+## READ FIRST: unresolved decisions, grill Nick before building
+
+Ten decisions are locked (below). These are NOT, and they were deliberately
+left open rather than forgotten. **Do not start writing model code until the
+Phase 1 blockers are resolved with Nick.**
+
+Run this as a grill, one question at a time, in the format he expects: the
+full written case first, then options, then your recommendation. Options
+without the case get rejected. Do not ask them all at once, and do not answer
+them yourself and proceed.
+
+### Blocking Phase 1 (resolve at the very first working session)
+
+1. **What is the direct model, exactly?** It has only ever been described as
+   "an ordinal regression or a boosted tree". Those are different commitments.
+   Ordinal regression respects that finishing position is ordered and stays
+   interpretable, which matters because he has to defend every line. A boosted
+   tree will probably score better and explains nothing. Decide before coding.
+2. **What is the Thursday predicted grid in Phase 1?** Decision 2 survived the
+   scope cut on the claim that Thursday vs Saturday is "one feature swap".
+   That claim needs cashing out: what actually fills the grid column on
+   Thursday? Championship order, a pace ranking, last race's grid, FP2 pace?
+   This is unspecified and it is on the critical path for 26 September.
+3. **Which output shape gets published?** P(win), P(podium), P(points) was
+   agreed, but the full P(position) matrix is what RPS scores. Decide whether
+   the JSON stores the full distribution (and the page renders a summary) or
+   only the three headline numbers, because the scorecard cannot be rebuilt
+   later from data that was never written.
+
+### Resolve before Phase 2 (October)
+
+4. **Fork TUMFTM/race-simulation, or reimplement?** See the prior-art section.
+   Forking imports a validated engine and imposes LGPL on gridcast. That
+   collides with his default of MIT for public repos, and the licence has to
+   be chosen before the repo is published, not after.
+5. **Build the "real strategy replay" backtest control?** Replaying the
+   strategy teams actually used isolates strategy error from pace error. It is
+   the single most useful validation tool we do not have, and it is not free.
+6. **Do red flags go into the model?** v1 omits them, but the gate scan found
+   two in four sampled 2026 races. That is far commoner than the omission
+   assumed. See gate results below.
+7. **What is the real qualifying model?** October scope, entirely unspecified.
+   One-lap pace is not race pace and track evolution matters.
+
+### Housekeeping, but blocking publication
+
+8. **Licence.** Not chosen, and gated by question 4.
+9. **Publishing.** Repo is local only. `publish-repo` requires a README and a
+   LICENSE first, and neither exists. The scorecard depends on the repo being
+   public, so this cannot slip past the first live prediction.
+10. **A third baseline from bookmaker implied probabilities?** Proposed, never
+    decided. Betting markets are the honest hard benchmark since no public F1
+    forecast carries a track record. Needs an odds source that can be
+    collected before each race, and if that is not practical the idea dies.
+
+### Scorecard, low urgency
+
+11. **What the results page actually shows.** Undesigned. It only matters once
+    there are two or three predictions to display.
+
 ## Environment
 
 - conda env `gridcast`, Python 3.12. Install into it, never into base.
