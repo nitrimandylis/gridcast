@@ -23,10 +23,11 @@
  "grid_overrides": {
   "ANT": 22.0
  },
- "generated_at": "2026-09-01T14:39:25+00:00",
+ "generated_at": "2026-09-01T15:25:45+00:00",
  "drivers": [
   {
    "driver": "RUS",
+   "team": "Mercedes",
    "p_win": 0.0893,
    "p_podium": 0.2568,
    "p_points": 0.7358,
@@ -57,6 +58,7 @@
   },
   {
    "driver": "HAM",
+   "team": "Ferrari",
    "p_win": 0.0862,
    "p_podium": 0.2458,
    "p_points": 0.7058,
@@ -87,6 +89,7 @@
   },
   {
    "driver": "LEC",
+   "team": "Ferrari",
    "p_win": 0.0854,
    "p_podium": 0.2483,
    "p_points": 0.7044,
@@ -117,6 +120,7 @@
   },
   {
    "driver": "PIA",
+   "team": "McLaren",
    "p_win": 0.075,
    "p_podium": 0.2217,
    "p_points": 0.6553,
@@ -147,6 +151,7 @@
   },
   {
    "driver": "NOR",
+   "team": "McLaren",
    "p_win": 0.0736,
    "p_podium": 0.2249,
    "p_points": 0.6702,
@@ -177,6 +182,7 @@
   },
   {
    "driver": "VER",
+   "team": "Red Bull Racing",
    "p_win": 0.073,
    "p_podium": 0.2129,
    "p_points": 0.6442,
@@ -207,6 +213,7 @@
   },
   {
    "driver": "LIN",
+   "team": "Racing Bulls",
    "p_win": 0.0459,
    "p_podium": 0.1361,
    "p_points": 0.4744,
@@ -237,6 +244,7 @@
   },
   {
    "driver": "LAW",
+   "team": "Red Bull Racing",
    "p_win": 0.0434,
    "p_podium": 0.1386,
    "p_points": 0.4915,
@@ -267,6 +275,7 @@
   },
   {
    "driver": "TSU",
+   "team": "Racing Bulls",
    "p_win": 0.0433,
    "p_podium": 0.1271,
    "p_points": 0.462,
@@ -297,6 +306,7 @@
   },
   {
    "driver": "GAS",
+   "team": "Alpine",
    "p_win": 0.0427,
    "p_podium": 0.1374,
    "p_points": 0.4738,
@@ -327,6 +337,7 @@
   },
   {
    "driver": "HUL",
+   "team": "Audi",
    "p_win": 0.0403,
    "p_podium": 0.1268,
    "p_points": 0.4487,
@@ -357,6 +368,7 @@
   },
   {
    "driver": "BOR",
+   "team": "Audi",
    "p_win": 0.0389,
    "p_podium": 0.117,
    "p_points": 0.4373,
@@ -387,6 +399,7 @@
   },
   {
    "driver": "COL",
+   "team": "Alpine",
    "p_win": 0.0364,
    "p_podium": 0.1132,
    "p_points": 0.4098,
@@ -417,6 +430,7 @@
   },
   {
    "driver": "BEA",
+   "team": "Haas F1 Team",
    "p_win": 0.0326,
    "p_podium": 0.0997,
    "p_points": 0.3715,
@@ -447,6 +461,7 @@
   },
   {
    "driver": "ANT",
+   "team": "Mercedes",
    "p_win": 0.0311,
    "p_podium": 0.1002,
    "p_points": 0.3703,
@@ -477,6 +492,7 @@
   },
   {
    "driver": "SAI",
+   "team": "Williams",
    "p_win": 0.0309,
    "p_podium": 0.0894,
    "p_points": 0.3411,
@@ -507,6 +523,7 @@
   },
   {
    "driver": "OCO",
+   "team": "Haas F1 Team",
    "p_win": 0.0301,
    "p_podium": 0.0963,
    "p_points": 0.367,
@@ -537,6 +554,7 @@
   },
   {
    "driver": "ALB",
+   "team": "Williams",
    "p_win": 0.0262,
    "p_podium": 0.0811,
    "p_points": 0.3187,
@@ -567,6 +585,7 @@
   },
   {
    "driver": "PER",
+   "team": "Cadillac",
    "p_win": 0.0207,
    "p_podium": 0.0601,
    "p_points": 0.2451,
@@ -597,6 +616,7 @@
   },
   {
    "driver": "ALO",
+   "team": "Aston Martin",
    "p_win": 0.0186,
    "p_podium": 0.0575,
    "p_points": 0.2372,
@@ -627,6 +647,7 @@
   },
   {
    "driver": "BOT",
+   "team": "Cadillac",
    "p_win": 0.0186,
    "p_podium": 0.0575,
    "p_points": 0.2241,
@@ -657,6 +678,7 @@
   },
   {
    "driver": "STR",
+   "team": "Aston Martin",
    "p_win": 0.0176,
    "p_podium": 0.0513,
    "p_points": 0.2119,

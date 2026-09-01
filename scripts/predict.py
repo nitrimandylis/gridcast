@@ -81,11 +81,12 @@ def expected_laps(tables: dict, circuit: str) -> int:
     return int(here["total_laps"].median()) if len(here) else DEFAULT_LAPS
 
 
-def headline_rows(matrix: np.ndarray, drivers: list[str]) -> list[dict]:
+def headline_rows(matrix: np.ndarray, drivers: list[str], teams: list[str]) -> list[dict]:
     rows = []
     for i, driver in enumerate(drivers):
         rows.append({
             "driver": driver,
+            "team": teams[i],
             "p_win": round(float(matrix[i, 0]), 4),
             "p_podium": round(float(matrix[i, :3].sum()), 4),
             "p_points": round(float(matrix[i, :10].sum()), 4),
@@ -149,7 +150,7 @@ def main() -> None:
 
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     for key, matrix in matrices.items():
-        rows = headline_rows(matrix, drivers)
+        rows = headline_rows(matrix, drivers, list(latest["team"]))
         out = {
             "event": event["EventName"],
             "season": SEASON,

@@ -7,7 +7,9 @@ data/driver_races.csv, and writes two files the static page fetches:
                          next to the grid-order baseline on the same race,
                          plus a running mean per model and call
     site/manifest.json   every prediction file with its metadata, scored or
-                         not, because a browser cannot list a directory
+                         not, because a browser cannot list a directory, plus
+                         the hash and author date of the commit that added it.
+                         That commit is the timestamp proof; the page links it.
 
 All the arithmetic is here, in Python, reusing backtest.rps. The page only
 renders. Run after build_data.py has picked up the race:
@@ -16,6 +18,7 @@ renders. Run after build_data.py has picked up the race:
 """
 
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -44,7 +47,8 @@ def score_prediction(pred: dict, race: pd.DataFrame) -> dict:
         baseline_cdf = (np.arange(1, len(cdf) + 1) >= grid[driver]).astype(float)
         s = rps(cdf, int(finish[driver]))
         b = rps(baseline_cdf, int(finish[driver]))
-        per_driver.append({"driver": driver, "finish_rank": int(finish[driver]),
+        per_driver.append({"driver": driver, "team": row.get("team", ""),
+                           "finish_rank": int(finish[driver]),
                            "grid": int(grid[driver]), "rps": round(s, 4)})
         model_scores.append(s)
         baseline_scores.append(b)
@@ -57,10 +61,21 @@ def score_prediction(pred: dict, race: pd.DataFrame) -> dict:
     }
 
 
+def first_commit(path: Path) -> dict:
+    """Hash and author date of the commit that added the file, or nulls."""
+    out = subprocess.run(
+        ["git", "log", "--follow", "--diff-filter=A", "--format=%H%x09%aI", "--", str(path)],
+        cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    if not out:
+        return {"commit": None, "committed_at": None}
+    commit, when = out.splitlines()[-1].split("\t")  # oldest add, across renames
+    return {"commit": commit, "committed_at": when}
+
+
 def metadata(pred: dict, path: Path) -> dict:
     return {"file": path.name, "season": pred["season"], "round": pred["round"],
             "event": pred["event"], "call": pred["call"], "model": pred["model"],
-            "generated_at": pred["generated_at"]}
+            "generated_at": pred["generated_at"], **first_commit(path)}
 
 
 def main() -> None:

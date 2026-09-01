@@ -62,6 +62,15 @@ conda run -n gridcast python scripts/backtest.py
 
 The backtest prints per-race and mean RPS for the baseline, both direct calls, both sim calls and the replay control. Lower is better, and the baseline is harder to beat than it looks.
 
+To preview the scorecard locally, `site/predictions` is a symlink to `predictions/`, so serving `site/` is enough:
+
+```bash
+conda run -n gridcast python scripts/score.py
+python -m http.server -d site 8000
+```
+
+On GitHub Pages the workflow in `.github/workflows/pages.yml` copies `predictions/` into the artifact instead.
+
 ## 🔩 Under the hood
 
 | file | path | job |

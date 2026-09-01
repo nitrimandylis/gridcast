@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gridcast · F1 probabilities, committed before lights out</title>
+<meta name="description" content="Two models predict every Formula 1 race before it starts. Every prediction is committed to git first, so the misses are on the record too.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='7' y='7' width='18' height='18' rx='4' transform='rotate(45 16 16)' fill='%23E10600'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="wordmark">GRIDCAST</span>
+    <span class="tag">WRONG IN PUBLIC, ON PURPOSE</span>
+    <span class="spacer"></span>
+    <a class="repo" id="repo-link" href="#" hidden>source</a>
+  </header>
+
+  <section id="hero" class="card hero" aria-label="Next race">
+    <p class="muted">Loading the next call…</p>
+  </section>
+
+  <section id="record" class="record" aria-label="Record so far"></section>
+
+  <section id="races" class="card races" aria-label="Scored races"></section>
+
+  <footer class="foot">
+    <p>Two models, both fit on the 2026 season only. <b>Direct</b> is Plackett-Luce on grid position and season pace. <b>Sim</b> runs the race lap by lap ten thousand times: pace, tyres, pit strategy, safety cars, red flags, retirements.</p>
+    <p>Scored with the ranked probability score, lower is better, always next to the baseline “you finish where you start”. Every prediction file is committed before the race; the commit is the timestamp.</p>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
