@@ -8,6 +8,8 @@ against the grid-order baseline. Five predictors are scored:
   saturday   PL model on [actual grid, pace history]
   thursday   PL model on [season-average grid so far, pace history]
   sim        Monte Carlo simulator on the actual grid, strategy optimised
+  sim_thu    the simulator on the season-average grid, each run drawing the
+             grid from each driver's own scatter (the Thursday call)
   replay     the simulator running the strategies teams actually used. A
              control, not a predictor: it reads the race being scored. The
              gap between sim and replay is strategy error; the gap between
@@ -44,14 +46,24 @@ def load_tables() -> dict:
 def add_history_features(table: pd.DataFrame) -> pd.DataFrame:
     """pace_hist and grid_avg for each row, from strictly earlier rounds."""
     table = table.sort_values(["round", "finish_rank"]).copy()
-    pace_hist, grid_avg = [], []
+    pace_hist, grid_avg, grid_sd = [], [], []
     for _, row in table.iterrows():
         earlier = table[(table["driver"] == row["driver"]) & (table["round"] < row["round"])]
         pace_hist.append(earlier["pace_delta"].mean())  # NaN when no history
         grid_avg.append(earlier["grid"].mean())
+        grid_sd.append(grid_scatter(earlier["grid"]))
     table["pace_hist"] = pace_hist
     table["grid_avg"] = grid_avg
+    table["grid_sd"] = grid_sd
     return table
+
+
+POOLED_GRID_SD = 4.0   # a driver's typical qualifying scatter in slots, 2026
+
+
+def grid_scatter(grids: pd.Series) -> float:
+    """How far a driver's grid slot wanders race to race, in slots."""
+    return float(grids.std()) if grids.count() >= MIN_TRAIN_RACES else POOLED_GRID_SD
 
 
 def races_as_arrays(table: pd.DataFrame, feature_cols: list[str]):
@@ -89,9 +101,13 @@ def baseline_matrix(race: pd.DataFrame) -> np.ndarray:
     return matrix
 
 
-def sim_matrix(tables: dict, race: pd.DataFrame, k: int, replay: bool) -> np.ndarray:
+def sim_matrix(tables: dict, race: pd.DataFrame, k: int, replay: bool = False,
+               thursday: bool = False) -> np.ndarray:
     """Simulator prediction for round k, rows in `race` (finish) order."""
     entry = race[["driver", "team", "grid"]].reset_index(drop=True)
+    if thursday:
+        entry["grid"] = race["grid_avg"].fillna(race["grid"].mean()).to_numpy()
+        entry["grid_sd"] = race["grid_sd"].to_numpy()
     total_laps = int(tables["laps"].loc[tables["laps"]["round"] == k, "lap_number"].max())
     fitted = fit_race(tables, k, race["circuit"].iloc[0], entry, total_laps,
                       replay_round=k if replay else None)
@@ -106,7 +122,7 @@ def main() -> None:
         "saturday": ["grid", "pace_hist"],
         "thursday": ["grid_avg", "pace_hist"],
     }
-    columns = ["baseline", *models, "sim", "replay"]
+    columns = ["baseline", *models, "sim", "sim_thu", "replay"]
 
     results = []
     for k in rounds[MIN_TRAIN_RACES:]:
@@ -118,7 +134,8 @@ def main() -> None:
             model = fit(*races_as_arrays(train, cols))
             s = strengths(model, race[cols].to_numpy(dtype=float))
             row[name] = score_matrix(sample_position_matrix(s), race)
-        row["sim"] = score_matrix(sim_matrix(tables, race, k, replay=False), race)
+        row["sim"] = score_matrix(sim_matrix(tables, race, k), race)
+        row["sim_thu"] = score_matrix(sim_matrix(tables, race, k, thursday=True), race)
         row["replay"] = score_matrix(sim_matrix(tables, race, k, replay=True), race)
         results.append(row)
         print(f"round {k:2d} {row['event']:<20}  "

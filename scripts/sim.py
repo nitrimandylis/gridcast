@@ -49,10 +49,18 @@ RED_GAP = 0.3             # seconds between cars at a standing restart
 PIT_LAP_STEP = 3          # candidate pit laps, coarse so the search stays cheap
 POOLED_FORM_SD = 0.48     # median race-to-race scatter of pace_delta in 2026
 MIN_FORM_RACES = 3        # fewer races than this and a driver gets the pooled sd
-# ponytail: grid persistence is a calibration term, not an overtaking model.
-# Its ceiling: it can say how often the grid order survives, never why. A
-# pairwise P(pass | pace delta, circuit, DRS) model replaces it in Phase 3.
-GRID_PERSISTENCE = 0.35   # weight on grid order when blending with pace order
+# ponytail: grid persistence is a calibration term, not an overtaking model
+# (decision 8). Starting one slot further back costs PASS_PACE seconds on
+# every lap of the race, i.e. you need that much pace in hand per lap to make
+# up one place over a race distance. Backtest RPS is flat from 0.6 s/lap up,
+# and a rank blend or a small fixed start offset both scored worse. Its
+# ceiling: it can say how often the grid order survives, never why. When a
+# safety car bunches the field the penalty is re-issued by current order over
+# the laps that remain, so a restart closes the gaps without handing out
+# passes.
+# Per-circuit values (Monaco high, Monza low) are the next step; a pairwise
+# P(pass | pace delta, circuit, DRS) model replaces it in Phase 3.
+PASS_PACE = 1.0           # seconds per lap per grid slot
 
 
 # --- pit strategy ---------------------------------------------------------
@@ -150,7 +158,11 @@ def build_race(entry: pd.DataFrame, history: pd.DataFrame, deg: dict,
                observed: dict | None = None) -> dict:
     """Everything one race needs, as arrays indexed like `entry`.
 
-    entry: one row per driver with driver, team, grid.
+    entry: one row per driver with driver, team, grid, and optionally grid_sd.
+      grid_sd > 0 means the grid is a guess (the Thursday call): every run
+      draws each driver's slot from N(grid, grid_sd) and ranks the draws, so
+      the proxy grid carries its uncertainty instead of posing as known
+      (the same rule as locked decision 12 for the direct model).
     history: driver_races rows from strictly earlier rounds (pace only).
     deg, hz, dnf: fitted by degradation.fit, hazards.fit_events, hazards.fit_dnf.
     observed: {driver: plan} to replay instead of optimising (backtest control).
@@ -177,6 +189,8 @@ def build_race(entry: pd.DataFrame, history: pd.DataFrame, deg: dict,
     return {
         "drivers": drivers,
         "grid": entry["grid"].to_numpy(dtype=float),
+        "grid_sd": (entry["grid_sd"].to_numpy(dtype=float)
+                    if "grid_sd" in entry else np.zeros(len(entry))),
         "base": np.array(base, dtype=float),
         "sd": np.array(sd, dtype=float),
         "team_hazard": np.array([dnf["team_hazard"].get(t, dnf["pooled_hazard"])
@@ -240,7 +254,13 @@ def run_once(race: dict, rng: np.random.Generator) -> np.ndarray:
     next_stop = np.zeros(n, dtype=int)          # index into pit_laps
     compound = compounds[:, 0].copy()
     age = np.zeros(n)
-    time = np.zeros(n)
+    grid = race["grid"]
+    if race["grid_sd"].any():
+        # Thursday: the grid is a guess, so draw one and rank it into slots.
+        drawn = rng.normal(grid, race["grid_sd"])
+        grid = np.empty(n)
+        grid[np.argsort(drawn)] = np.arange(1, n + 1)
+    time = PASS_PACE * total_laps * (grid - 1)   # track position, as time owed
 
     alive = rng.random(n) >= race["p_first_lap"]
     retired_on = np.where(alive, 0, 1)          # lap a car stopped, 0 = finished
@@ -287,44 +307,43 @@ def run_once(race: dict, rng: np.random.Generator) -> np.ndarray:
             next_stop[free] += 1
             compound[free] = compounds[free, next_stop[free]]
             age[alive] = 0
-            time = bunch(time, alive, RED_GAP)
+            time = bunch(time, alive, RED_GAP, PASS_PACE * (total_laps - lap))
             # Standing restart: another lap-one incident draw.
             crash = alive & (rng.random(n) < race["p_first_lap"])
             alive[crash] = False
             retired_on[crash] = lap
         elif lap in sc_ends:
-            time = bunch(time, alive, SC_GAP)
+            time = bunch(time, alive, SC_GAP, PASS_PACE * (total_laps - lap))
 
         # Mid-race retirements, per-lap hazard by team.
         dying = alive & (retire_at == lap)
         alive[dying] = False
         retired_on[dying] = lap
 
-    return finishing_positions(time, alive, retired_on, race["grid"])
+    return finishing_positions(time, alive, retired_on)
 
 
-def bunch(time: np.ndarray, alive: np.ndarray, gap: float) -> np.ndarray:
-    """Close the field up: leader unchanged, everyone else `gap` seconds apart."""
+def bunch(time: np.ndarray, alive: np.ndarray, gap: float, slot: float) -> np.ndarray:
+    """Close the field up in its current order.
+
+    Leader unchanged, each car `gap` seconds behind the one ahead, plus `slot`
+    seconds per place: the track-position penalty for the laps still to run.
+    """
     time = time.copy()
     order = np.argsort(np.where(alive, time, np.inf))
     leader = time[order[0]]
     for rank, i in enumerate(order):
         if alive[i]:
-            time[i] = leader + rank * gap
+            time[i] = leader + rank * (gap + slot)
     return time
 
 
 def finishing_positions(time: np.ndarray, alive: np.ndarray,
-                        retired_on: np.ndarray, grid: np.ndarray) -> np.ndarray:
-    """Classified cars by blended pace/grid order, retirements behind by laps done."""
+                        retired_on: np.ndarray) -> np.ndarray:
+    """Classified cars by race time, retirements behind by laps completed."""
     n = len(time)
     running = np.where(alive)[0]
-    pace_rank = np.empty(len(running))
-    pace_rank[np.argsort(time[running])] = np.arange(len(running))
-    grid_rank = np.empty(len(running))
-    grid_rank[np.argsort(grid[running])] = np.arange(len(running))
-    blended = (1 - GRID_PERSISTENCE) * pace_rank + GRID_PERSISTENCE * grid_rank
-    classified = running[np.argsort(blended)]
+    classified = running[np.argsort(time[running])]
 
     stopped = np.where(~alive)[0]
     stopped = stopped[np.argsort(-retired_on[stopped], kind="stable")]
@@ -372,11 +391,12 @@ def demo() -> None:
     finally:
         GREEN_PIT_LOSS = saved
 
-    # A three-car race: A half a second a lap quicker than B, C from pole.
+    # A three-car race. C is on pole and slowest. A starts P2 with 2 s/lap in
+    # hand, enough to pass. B starts P3 with 0.5 s/lap over C, not enough.
     entry = pd.DataFrame({"driver": ["A", "B", "C"], "team": ["t", "t", "u"],
                           "grid": [2, 3, 1]})
     history = pd.DataFrame({"driver": ["A"] * 3 + ["B"] * 3 + ["C"] * 3,
-                            "pace_delta": [-0.6, -0.5, -0.4, -0.1, 0, 0.1, 0.4, 0.5, 0.6]})
+                            "pace_delta": [-1.6, -1.5, -1.4, -0.1, 0, 0.1, 0.4, 0.5, 0.6]})
     deg3 = {"offsets": flat, "slopes": {f"{d}/{c}": 0.05 for d in "ABC" for c in DRY},
             "progress": -0.04}
     quiet = {"sc_rate": 0.0, "vsc_rate": 0.0, "red_rate": 0.0,
@@ -387,16 +407,24 @@ def demo() -> None:
     race = build_race(entry, history, deg3, quiet, safe, total_laps=40)
     matrix = simulate(race, n_samples=400)
     assert abs(matrix.sum() - 3) < 1e-9 and np.allclose(matrix.sum(axis=1), 1), "rows must sum to 1"
-    assert matrix[0, 0] > 0.5 and matrix[0, 0] > matrix[1, 0] >= matrix[2, 0], \
-        f"faster driver must win more often: {matrix[:, 0]}"
+    assert matrix[0, 0] > 0.9, f"2 s/lap in hand from P2 must win: {matrix[:, 0]}"
+    assert matrix[2, 1] > matrix[1, 1], \
+        f"0.5 s/lap is not enough to pass from P3: P2 probs {matrix[:, 1]}"
 
-    global GRID_PERSISTENCE
-    saved_w, GRID_PERSISTENCE = GRID_PERSISTENCE, 1.0
+    global PASS_PACE
+    saved_w, PASS_PACE = PASS_PACE, 100.0
     try:
         locked = simulate(race, n_samples=100)
-        assert locked[2, 0] == 1.0, "grid persistence 1.0 must reproduce the grid"
+        assert locked[2, 0] == 1.0, "an unpassable grid slot must reproduce the grid"
     finally:
-        GRID_PERSISTENCE = saved_w
+        PASS_PACE = saved_w
+
+    # A guessed grid must not behave like a known one: with the grid drawn
+    # from a wide scatter, the slowest car on "pole" no longer keeps P2.
+    guessed = entry.assign(grid_sd=[3.0, 3.0, 3.0])
+    race_guess = build_race(guessed, history, deg3, quiet, safe, total_laps=40)
+    m = simulate(race_guess, n_samples=400)
+    assert m[1, 1] > matrix[1, 1], "grid uncertainty must loosen the grid's grip"
 
     # A team that always breaks never scores.
     doomed = {**safe, "team_hazard": {"t": 0.0, "u": 0.5}}

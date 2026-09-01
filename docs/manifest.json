@@ -1,0 +1,22 @@
+[
+ {
+  "file": "2026-r13-thursday-direct.json",
+  "season": 2026,
+  "round": 13,
+  "event": "Italian Grand Prix",
+  "call": "thursday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-09-01T14:39:25+00:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r13-thursday-sim.json",
+  "season": 2026,
+  "round": 13,
+  "event": "Italian Grand Prix",
+  "call": "thursday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-09-01T14:39:25+00:00",
+  "scored": false
+ }
+]

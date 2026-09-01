@@ -2,6 +2,7 @@
  "event": "Italian Grand Prix",
  "season": 2026,
  "round": 13,
+ "circuit": "Monza",
  "call": "thursday",
  "model": "direct-v1-plackett-luce",
  "trained_on_rounds": [
@@ -22,7 +23,7 @@
  "grid_overrides": {
   "ANT": 22.0
  },
- "generated_at": "2026-09-01T08:44:42+00:00",
+ "generated_at": "2026-09-01T14:39:25+00:00",
  "drivers": [
   {
    "driver": "RUS",

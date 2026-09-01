@@ -1,9 +1,15 @@
 """Make a live prediction and write the JSON (locked decisions 9 and 13).
 
-Trains the direct model fresh on every completed 2026 race, predicts the
-named event, and writes predictions/<season>-r<round>-<call>.json holding the
-full P(driver, position) matrix, the derived headlines and run metadata.
-The file must be committed before lights out: git history is the timestamp.
+Trains BOTH models fresh on every completed 2026 race, predicts the named
+event, and writes two files:
+
+    predictions/<season>-r<round>-<call>-direct.json   Plackett-Luce
+    predictions/<season>-r<round>-<call>-sim.json      Monte Carlo simulator
+
+Same schema in each: the full P(driver, position) matrix, the derived
+headlines and run metadata, with the `model` field saying which is which.
+Both are committed before lights out, so the live season is an out-of-sample
+head-to-head between them. Git history is the timestamp.
 
     conda run -n gridcast python scripts/predict.py "Italian Grand Prix" thursday
     conda run -n gridcast python scripts/predict.py "Italian Grand Prix" saturday
@@ -30,14 +36,17 @@ import fastf1
 import numpy as np
 import pandas as pd
 
-from backtest import add_history_features, races_as_arrays
+from backtest import add_history_features, grid_scatter, load_tables, races_as_arrays
+from hazards import canonical
 from model import fit, sample_position_matrix, strengths
+from sim import fit_race, simulate
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data" / "driver_races.csv"
 SEASON = 2026
 N_SAMPLES = 20000
-MODEL_VERSION = "direct-v1-plackett-luce"
+SIM_SAMPLES = 10000
+DEFAULT_LAPS = 60
+MODELS = {"direct": "direct-v1-plackett-luce", "sim": "sim-v1-monte-carlo"}
 
 
 def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
@@ -65,6 +74,27 @@ def parse_grid_overrides(args: list[str], drivers: list[str]) -> dict[str, float
     return overrides
 
 
+def expected_laps(tables: dict, circuit: str) -> int:
+    """Race distance from this circuit's history, since the event has not run."""
+    seen = tables["seen"]
+    here = seen[seen["circuit"].map(canonical) == canonical(circuit)]
+    return int(here["total_laps"].median()) if len(here) else DEFAULT_LAPS
+
+
+def headline_rows(matrix: np.ndarray, drivers: list[str]) -> list[dict]:
+    rows = []
+    for i, driver in enumerate(drivers):
+        rows.append({
+            "driver": driver,
+            "p_win": round(float(matrix[i, 0]), 4),
+            "p_podium": round(float(matrix[i, :3].sum()), 4),
+            "p_points": round(float(matrix[i, :10].sum()), 4),
+            "p_position": [round(float(p), 4) for p in matrix[i]],
+        })
+    rows.sort(key=lambda r: -r["p_win"])
+    return rows
+
+
 def main() -> None:
     if len(sys.argv) < 3 or sys.argv[2] not in ("thursday", "saturday"):
         raise SystemExit(__doc__)
@@ -74,14 +104,15 @@ def main() -> None:
     event = fastf1.get_event(SEASON, event_name)
     round_number = int(event["RoundNumber"])
 
-    table = pd.read_csv(DATA)
+    tables = load_tables()
+    table = tables["races"]
     trained_rounds = sorted(int(r) for r in table["round"].unique())
     if round_number <= max(trained_rounds):
         raise SystemExit(f"round {round_number} is already in the training data")
 
     # Entry list and season-to-date features, from all completed races.
-    latest = table[table["round"] == max(trained_rounds)]
-    drivers = sorted(latest["driver"])
+    latest = table[table["round"] == max(trained_rounds)].sort_values("driver")
+    drivers = list(latest["driver"])
     per_driver = table.groupby("driver").agg(
         pace_hist=("pace_delta", "mean"), grid_avg=("grid", "mean")
     )
@@ -96,49 +127,54 @@ def main() -> None:
     overrides = parse_grid_overrides(sys.argv[3:], drivers)
     grid_feature.update(overrides)
 
-    # Train on walk-forward features, exactly as the backtest validated.
+    # Direct model, trained on walk-forward features exactly as the backtest validated.
     train = add_history_features(table)
     model = fit(*races_as_arrays(train, feature_cols))
+    X = np.array([[grid_feature[d], per_driver.loc[d, "pace_hist"]] for d in drivers])
+    matrices = {"direct": sample_position_matrix(strengths(model, X), n_samples=N_SAMPLES)}
 
-    X = np.array(
-        [[grid_feature[d], per_driver.loc[d, "pace_hist"]] for d in drivers]
-    )
-    matrix = sample_position_matrix(strengths(model, X), n_samples=N_SAMPLES)
+    # Simulator, fit on the same rounds. The grid it sees is the same feature
+    # the direct model sees, so on Thursday both run on the season average.
+    entry = pd.DataFrame({"driver": drivers, "team": list(latest["team"]),
+                          "grid": [grid_feature[d] for d in drivers]})
+    if call == "thursday":
+        # A guessed grid carries its scatter; an overridden slot (penalty) is known.
+        by_driver = table.groupby("driver")["grid"]
+        entry["grid_sd"] = [0.0 if d in overrides else grid_scatter(by_driver.get_group(d))
+                            for d in drivers]
+    circuit = event["Location"]
+    total_laps = expected_laps(tables, circuit)
+    race = fit_race(tables, round_number, circuit, entry, total_laps)
+    matrices["sim"] = simulate(race, n_samples=SIM_SAMPLES)
 
-    rows = []
-    for i, driver in enumerate(drivers):
-        rows.append(
-            {
-                "driver": driver,
-                "p_win": round(float(matrix[i, 0]), 4),
-                "p_podium": round(float(matrix[i, :3].sum()), 4),
-                "p_points": round(float(matrix[i, :10].sum()), 4),
-                "p_position": [round(float(p), 4) for p in matrix[i]],
-            }
-        )
-    rows.sort(key=lambda r: -r["p_win"])
+    generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for key, matrix in matrices.items():
+        rows = headline_rows(matrix, drivers)
+        out = {
+            "event": event["EventName"],
+            "season": SEASON,
+            "round": round_number,
+            "circuit": circuit,
+            "call": call,
+            "model": MODELS[key],
+            "trained_on_rounds": trained_rounds,
+            "n_samples": N_SAMPLES if key == "direct" else SIM_SAMPLES,
+            "grid_overrides": overrides,
+            "generated_at": generated_at,
+            "drivers": rows,
+        }
+        if key == "sim":
+            out["total_laps"] = total_laps
+        path = ROOT / "predictions" / f"{SEASON}-r{round_number:02d}-{call}-{key}.json"
+        path.parent.mkdir(exist_ok=True)
+        path.write_text(json.dumps(out, indent=1) + "\n")
 
-    out = {
-        "event": event["EventName"],
-        "season": SEASON,
-        "round": round_number,
-        "call": call,
-        "model": MODEL_VERSION,
-        "trained_on_rounds": trained_rounds,
-        "n_samples": N_SAMPLES,
-        "grid_overrides": overrides,
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "drivers": rows,
-    }
-    path = ROOT / "predictions" / f"{SEASON}-r{round_number:02d}-{call}.json"
-    path.parent.mkdir(exist_ok=True)
-    path.write_text(json.dumps(out, indent=1) + "\n")
-
-    print(f"{out['event']} round {round_number}, {call} call\n")
-    print("driver   p_win  p_podium  p_points")
-    for r in rows:
-        print(f"{r['driver']:<6} {r['p_win']:7.3f} {r['p_podium']:9.3f} {r['p_points']:9.3f}")
-    print(f"\nwrote {path.relative_to(ROOT)}  (commit before lights out)")
+        print(f"\n{out['event']} round {round_number}, {call} call, {MODELS[key]}\n")
+        print("driver   p_win  p_podium  p_points")
+        for r in rows:
+            print(f"{r['driver']:<6} {r['p_win']:7.3f} {r['p_podium']:9.3f} {r['p_points']:9.3f}")
+        print(f"\nwrote {path.relative_to(ROOT)}")
+    print("\ncommit both before lights out")
 
 
 if __name__ == "__main__":
