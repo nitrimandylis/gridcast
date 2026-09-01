@@ -7,10 +7,18 @@ The file must be committed before lights out: git history is the timestamp.
 
     conda run -n gridcast python scripts/predict.py "Italian Grand Prix" thursday
     conda run -n gridcast python scripts/predict.py "Italian Grand Prix" saturday
+    conda run -n gridcast python scripts/predict.py "Italian Grand Prix" thursday ANT=22
 
 thursday uses each driver's season-average grid (locked decision 12).
-saturday uses the actual grid from qualifying, so it only works after quali.
+saturday uses the qualifying classification, so it only works after quali.
 The entry list is the set of drivers from the latest completed race.
+
+Trailing DRIVER=POSITION arguments override the grid feature. Grid penalties
+are the case that needs them: build_data.py trains on the real post-penalty
+starting grid, but neither call can see a penalty. The season average cannot,
+and qualifying classification cannot either, because penalties are applied
+after the session. Without the override the model is fed a front-row start
+for a driver who is starting last.
 """
 
 import json
@@ -33,6 +41,8 @@ MODEL_VERSION = "direct-v1-plackett-luce"
 
 
 def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
+    """Qualifying classification. NOT the starting grid: penalties come after,
+    so anything already known has to be passed in as a DRIVER=POSITION override."""
     session = fastf1.get_session(SEASON, round_number, "Q")
     session.load(telemetry=False, weather=False, messages=False)
     positions = dict(zip(session.results["Abbreviation"], session.results["Position"]))
@@ -42,8 +52,21 @@ def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
     return positions
 
 
+def parse_grid_overrides(args: list[str], drivers: list[str]) -> dict[str, float]:
+    """Turn ['ANT=22'] into {'ANT': 22.0}, refusing anything unrecognised."""
+    overrides = {}
+    for arg in args:
+        if "=" not in arg:
+            raise SystemExit(f"expected DRIVER=POSITION, got {arg!r}")
+        driver, position = arg.split("=", 1)
+        if driver not in drivers:
+            raise SystemExit(f"{driver} is not in the entry list: {' '.join(drivers)}")
+        overrides[driver] = float(position)
+    return overrides
+
+
 def main() -> None:
-    if len(sys.argv) != 3 or sys.argv[2] not in ("thursday", "saturday"):
+    if len(sys.argv) < 3 or sys.argv[2] not in ("thursday", "saturday"):
         raise SystemExit(__doc__)
     event_name, call = sys.argv[1], sys.argv[2]
 
@@ -69,6 +92,9 @@ def main() -> None:
     else:
         feature_cols = ["grid", "pace_hist"]
         grid_feature = qualifying_grid(round_number, drivers)
+
+    overrides = parse_grid_overrides(sys.argv[3:], drivers)
+    grid_feature.update(overrides)
 
     # Train on walk-forward features, exactly as the backtest validated.
     train = add_history_features(table)
@@ -100,6 +126,7 @@ def main() -> None:
         "model": MODEL_VERSION,
         "trained_on_rounds": trained_rounds,
         "n_samples": N_SAMPLES,
+        "grid_overrides": overrides,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "drivers": rows,
     }
