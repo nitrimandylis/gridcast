@@ -78,7 +78,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
 .heat th { font-size: 9.5px; font-weight: 600; color: var(--ink-faint); padding: 0 0 6px; text-align: center; }
 .heat th.n { text-align: right; padding-right: 6px; }
 .heat td.d {
-  position: sticky; left: 0; background: var(--paper);
+  position: sticky; left: 0; background: #0c0c0e; /* paper under the glass card */
   font-size: 12.5px; font-weight: 500; padding: 0 8px 0 0; white-space: nowrap;
 }
 .heat td.c { width: 20px; height: 19px; padding: 1px; }
