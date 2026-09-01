@@ -7,12 +7,14 @@ positions for every driver, before the race, with a public scorecard.
 
 Two calls per race weekend:
 
-- **Thursday**, from a predicted grid.
+- **Thursday**, from each driver's season-average grid position, standing in
+  for a predicted grid until the real qualifying model exists.
 - **Saturday**, from the actual grid after qualifying.
 
-Each call is a table of P(win), P(podium), P(points) per driver, committed to
-this repo as JSON before the race starts. The commit history is the timestamp
-proof: every prediction demonstrably existed before the result.
+Each call is committed to this repo as JSON before the race starts: the full
+P(driver, position) matrix, the derived P(win), P(podium), P(points) per
+driver, and run metadata. The commit history is the timestamp proof: every
+prediction demonstrably existed before the result.
 
 The scorecard page is generated from the accumulated JSON and gets more
 convincing every fortnight without further work.
@@ -26,10 +28,12 @@ Two reasons, both real:
 
 ## Where it is headed
 
-**Phase 1, ships 26 September 2026 (Azerbaijan GP).**
-A direct statistical model. Features in, finish position distribution out.
-Grid position, per-driver pace, circuit characteristics, reliability. No
-simulation. This is the benchmark everything later has to beat.
+**Phase 1, built. First public target 26 September 2026 (Azerbaijan GP).**
+A direct statistical model: Plackett-Luce, each driver's strength a linear
+function of grid position and season pace history. No simulation. Walk-forward
+backtest over rounds 4-12 scores 0.1340 mean RPS (Saturday call) against
+0.1655 for the grid-order baseline. First live call made for Monza, round 13.
+This is the benchmark everything later has to beat.
 
 **Phase 2, October 2026.**
 A Monte Carlo race simulator: per-driver pace and tyre degradation, a
