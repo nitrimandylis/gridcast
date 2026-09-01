@@ -229,3 +229,59 @@ season,round,event,circuit,kind,start_lap,end_lap,laps
 2025,1,Australian Grand Prix,Melbourne,SC,1,7,7
 2025,1,Australian Grand Prix,Melbourne,SC,34,41,8
 2025,1,Australian Grand Prix,Melbourne,SC,47,51,5
+2025,4,Bahrain Grand Prix,Sakhir,SC,32,35,4
+2025,5,Saudi Arabian Grand Prix,Jeddah,SC,1,3,3
+2025,6,Miami Grand Prix,Miami Gardens,VSC,2,3,2
+2025,6,Miami Grand Prix,Miami Gardens,VSC,29,30,2
+2025,6,Miami Grand Prix,Miami Gardens,VSC,33,34,2
+2025,7,Emilia Romagna Grand Prix,Imola,VSC,29,31,3
+2025,7,Emilia Romagna Grand Prix,Imola,SC,46,53,8
+2025,8,Monaco Grand Prix,Monaco,VSC,2,4,3
+2025,9,Spanish Grand Prix,Barcelona,SC,55,60,6
+2025,10,Canadian Grand Prix,Montréal,SC,67,70,4
+2025,11,Austrian Grand Prix,Spielberg,SC,1,3,3
+2025,12,British Grand Prix,Silverstone,VSC,2,4,3
+2025,12,British Grand Prix,Silverstone,VSC,5,7,3
+2025,12,British Grand Prix,Silverstone,SC,14,17,4
+2025,12,British Grand Prix,Silverstone,SC,18,21,4
+2025,13,Belgian Grand Prix,Spa-Francorchamps,RED,1,1,1
+2025,13,Belgian Grand Prix,Spa-Francorchamps,SC,1,4,4
+2025,15,Dutch Grand Prix,Zandvoort,SC,23,26,4
+2025,15,Dutch Grand Prix,Zandvoort,VSC,31,32,2
+2025,15,Dutch Grand Prix,Zandvoort,SC,53,57,5
+2025,15,Dutch Grand Prix,Zandvoort,SC,65,68,4
+2025,17,Azerbaijan Grand Prix,Baku,SC,1,4,4
+2025,19,United States Grand Prix,Austin,VSC,7,8,2
+2025,20,Mexico City Grand Prix,Mexico City,VSC,70,71,2
+2025,21,São Paulo Grand Prix,São Paulo,SC,2,5,4
+2025,21,São Paulo Grand Prix,São Paulo,VSC,7,8,2
+2025,22,Las Vegas Grand Prix,Las Vegas,VSC,2,4,3
+2025,22,Las Vegas Grand Prix,Las Vegas,VSC,16,16,1
+2025,23,Qatar Grand Prix,Lusail,SC,7,10,4
+2026,1,Australian Grand Prix,Melbourne,VSC,12,14,3
+2026,1,Australian Grand Prix,Melbourne,VSC,18,20,3
+2026,1,Australian Grand Prix,Melbourne,VSC,34,34,1
+2026,2,Chinese Grand Prix,Shanghai,SC,10,13,4
+2026,3,Japanese Grand Prix,Suzuka,SC,22,27,6
+2026,4,Miami Grand Prix,Miami Gardens,SC,6,11,6
+2026,5,Canadian Grand Prix,Montréal,VSC,31,32,2
+2026,5,Canadian Grand Prix,Montréal,VSC,46,46,1
+2026,5,Canadian Grand Prix,Montréal,VSC,53,54,2
+2026,6,Monaco Grand Prix,Monte Carlo,SC,60,65,6
+2026,6,Monaco Grand Prix,Monte Carlo,SC,66,68,3
+2026,6,Monaco Grand Prix,Monte Carlo,RED,68,68,1
+2026,6,Monaco Grand Prix,Monte Carlo,SC,69,70,2
+2026,7,Barcelona Grand Prix,Barcelona,VSC,41,42,2
+2026,7,Barcelona Grand Prix,Barcelona,VSC,63,65,3
+2026,8,Austrian Grand Prix,Spielberg,VSC,25,26,2
+2026,8,Austrian Grand Prix,Spielberg,VSC,52,53,2
+2026,9,British Grand Prix,Silverstone,VSC,22,22,1
+2026,9,British Grand Prix,Silverstone,VSC,39,39,1
+2026,9,British Grand Prix,Silverstone,SC,48,52,5
+2026,10,Belgian Grand Prix,Spa-Francorchamps,SC,1,4,4
+2026,10,Belgian Grand Prix,Spa-Francorchamps,VSC,18,18,1
+2026,10,Belgian Grand Prix,Spa-Francorchamps,VSC,20,21,2
+2026,11,Hungarian Grand Prix,Budapest,VSC,56,57,2
+2026,12,Dutch Grand Prix,Zandvoort,RED,2,2,1
+2026,12,Dutch Grand Prix,Zandvoort,VSC,55,57,3
+2026,12,Dutch Grand Prix,Zandvoort,VSC,70,70,1

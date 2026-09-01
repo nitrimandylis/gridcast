@@ -13,12 +13,15 @@
 </head>
 <body>
 <main>
-  <header class="top">
-    <span class="mark" aria-hidden="true"></span>
-    <span class="wordmark">GRIDCAST</span>
-    <span class="tag">WRONG IN PUBLIC, ON PURPOSE</span>
-    <span class="spacer"></span>
-    <a class="repo" id="repo-link" href="#" hidden>source</a>
+  <header class="mast">
+    <div class="mast-row">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="wordmark">GRIDCAST</span>
+      <span class="spacer"></span>
+      <a class="repo" id="repo-link" href="#" hidden>source on github</a>
+    </div>
+    <h1 class="thesis sweep">Two models call every Formula&nbsp;1 race before it starts. The call is committed to git first, so the misses are on the record too.</h1>
+    <p class="tag">WRONG IN PUBLIC, ON PURPOSE</p>
   </header>
 
   <section id="hero" class="card hero" aria-label="Next race">
@@ -29,9 +32,35 @@
 
   <section id="races" class="card races" aria-label="Scored races"></section>
 
-  <footer class="foot">
-    <p>Two models, both fit on the 2026 season only. <b>Direct</b> is Plackett-Luce on grid position and season pace. <b>Sim</b> runs the race lap by lap ten thousand times: pace, tyres, pit strategy, safety cars, red flags, retirements.</p>
-    <p>Scored with the ranked probability score, lower is better, always next to the baseline “you finish where you start”. Every prediction file is committed before the race; the commit is the timestamp.</p>
+  <section class="method" aria-label="How it works">
+    <p class="label">HOW IT WORKS</p>
+    <div class="steps">
+      <article class="step">
+        <span class="num">01</span>
+        <h3>Clean laps</h3>
+        <p>Every 2026 race lap, minus in-laps, out-laps, the first two racing laps and anything under yellow. Nothing from before the 2026 regulation change touches car pace: those cars no longer exist.</p>
+      </article>
+      <article class="step">
+        <span class="num">02</span>
+        <h3>Direct model</h3>
+        <p>Plackett-Luce: each driver gets a strength from grid position and season pace, the winner is drawn by softmax, removed, and the next place drawn again. Fit by maximum likelihood on finishing orders. Two weights, nothing to hide behind.</p>
+      </article>
+      <article class="step">
+        <span class="num">03</span>
+        <h3>Simulator</h3>
+        <p>Ten thousand races, lap by lap: a form draw per driver, tyre degradation fit on 11,000 laps, a minimum-race-time pit strategy search, safety cars and red flags at each circuit's historic rate, retirements by team. Cars do not interact, on purpose.</p>
+      </article>
+      <article class="step">
+        <span class="num">04</span>
+        <h3>Score in public</h3>
+        <p>Ranked probability score on every driver's full position distribution, lower is better, always next to the baseline “you finish where you start”. Thursday calls run on a guessed grid, Saturday calls on the real one, and the commit hash is the timestamp.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="statement">
+    <p class="big">Every forecast here existed before the race it describes.<br>Git history says when. The scorecard says how wrong.</p>
+    <p class="small">A personal pipeline, plain numpy and scipy, data from FastF1. Sibling of <a href="https://github.com/nitrimandylis/apex">apex</a>, which the circuit outlines are borrowed from. <span id="foot-repo"></span></p>
   </footer>
 </main>
 <script src="app.js"></script>

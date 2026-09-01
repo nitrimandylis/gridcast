@@ -144,6 +144,8 @@ def main() -> None:
         entry["grid_sd"] = [0.0 if d in overrides else grid_scatter(by_driver.get_group(d))
                             for d in drivers]
     circuit = event["Location"]
+    # Lights out, UTC. The page counts down to it; the commit must beat it.
+    race_start = event["Session5DateUtc"].strftime("%Y-%m-%dT%H:%M:%SZ")
     total_laps = expected_laps(tables, circuit)
     race = fit_race(tables, round_number, circuit, entry, total_laps)
     matrices["sim"] = simulate(race, n_samples=SIM_SAMPLES)
@@ -156,6 +158,7 @@ def main() -> None:
             "season": SEASON,
             "round": round_number,
             "circuit": circuit,
+            "race_start": race_start,
             "call": call,
             "model": MODELS[key],
             "trained_on_rounds": trained_rounds,

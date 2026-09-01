@@ -6,7 +6,7 @@
   "event": "Italian Grand Prix",
   "call": "thursday",
   "model": "direct-v1-plackett-luce",
-  "generated_at": "2026-09-01T15:25:45+00:00",
+  "generated_at": "2026-09-01T15:40:17+00:00",
   "commit": "28d72b51366bf7194c091cc1da2f87361de205e8",
   "committed_at": "2026-08-31T21:14:06+03:00",
   "scored": false
@@ -18,7 +18,7 @@
   "event": "Italian Grand Prix",
   "call": "thursday",
   "model": "sim-v1-monte-carlo",
-  "generated_at": "2026-09-01T15:25:45+00:00",
+  "generated_at": "2026-09-01T15:40:17+00:00",
   "commit": "3bc5f96d70c276acb41505830fa5c0d27bde95c9",
   "committed_at": "2026-09-01T17:39:42+03:00",
   "scored": false

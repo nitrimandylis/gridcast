@@ -12,6 +12,9 @@ const TEAM_COLORS = {
   "Aston Martin": "#229971", "Cadillac": "#C5A253",
 };
 const MODEL_LABEL = { direct: "DIRECT · PLACKETT-LUCE", sim: "SIM · MONTE CARLO" };
+// FastF1 location names that differ from the keys in circuits.json (apex's outlines).
+const CIRCUIT_ALIAS = { "Montréal": "Montreal", "Spa-Francorchamps": "Spa", "Yas Island": "Abu Dhabi",
+  "Yas Marina": "Abu Dhabi", "Singapore": "Marina Bay", "Monaco": "Monte Carlo", "Sakhir": "Bahrain" };
 const METRICS = { p_win: "win", p_podium: "podium", p_points: "points" };
 
 function modelKey(name) { return name.startsWith("sim") ? "sim" : "direct"; }
@@ -29,6 +32,33 @@ async function getJSON(path) {
   const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`${path}: ${res.status}`);
   return res.json();
+}
+
+// ---- circuit outline and countdown ----------------------------------------
+
+// One lap of real car position data, fitted into a 100x100 box (apex's TrackMap).
+function circuitSvg(points) {
+  if (!points) return "";
+  const xs = points.map(p => p[0]), ys = points.map(p => p[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const pad = 8, scale = (100 - 2 * pad) / Math.max(maxX - minX, maxY - minY);
+  const ox = (100 - (maxX - minX) * scale) / 2, oy = (100 - (maxY - minY) * scale) / 2;
+  const d = points.map(([x, y], i) =>
+    `${i ? "L" : "M"}${(ox + (x - minX) * scale).toFixed(1)},${(100 - (oy + (y - minY) * scale)).toFixed(1)}`).join(" ") + " Z";
+  return `<svg class="circuit" viewBox="0 0 100 100" aria-hidden="true"><path class="glow" d="${d}"/><path d="${d}"/></svg>`;
+}
+
+function countdown(iso) {
+  const target = new Date(iso).getTime();
+  const box = (v, l, accent) => `<div class="box ${accent ? "accent" : ""}"><div class="v">${String(v).padStart(2, "0")}</div><div class="l">${l}</div></div>`;
+  return () => {
+    let left = Math.floor((target - Date.now()) / 1000);
+    if (left <= 0) return `<div class="done">Lights out has passed. The result is scored the evening after the race.</div>`;
+    const d = Math.floor(left / 86400); left -= d * 86400;
+    const h = Math.floor(left / 3600); left -= h * 3600;
+    const m = Math.floor(left / 60), s = left - m * 60;
+    return box(d, "DAYS") + box(h, "HRS") + box(m, "MIN") + box(s, "SEC", true);
+  };
 }
 
 // ---- hero -----------------------------------------------------------------
@@ -91,14 +121,24 @@ function bars(preds, metric) {
   return h;
 }
 
-function renderHero(entries, preds) {
+function renderHero(entries, preds, circuits) {
   const hero = document.getElementById("hero");
   if (!entries.length) { hero.innerHTML = `<p class="muted">No prediction committed yet.</p>`; return; }
   const any = preds.direct || preds.sim;
   const trained = any.trained_on_rounds;
   const byKey = Object.fromEntries(entries.map(e => [modelKey(e.model), e]));
-  let h = `<h1 class="sweep">${esc(any.event)}</h1>
-    <p class="sub">Round ${any.round} · ${any.call} call · both models trained on rounds ${trained[0]}–${trained[trained.length - 1]}</p>
+  const outline = circuitSvg(circuits[CIRCUIT_ALIAS[any.circuit] || any.circuit]);
+  const when = any.race_start ? new Date(any.race_start).toLocaleString("en-GB",
+    { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit", timeZoneName: "short" }) : "";
+  let h = `<div class="event">
+      ${outline || "<span></span>"}
+      <div>
+        <p class="kicker">NEXT UP · ROUND ${any.round} · ${any.call.toUpperCase()} CALL</p>
+        <h2>${esc(any.event)}</h2>
+        <p class="sub">${esc(any.circuit)}${when ? " · lights out " + when : ""} · both models trained on rounds ${trained[0]}–${trained[trained.length - 1]}</p>
+      </div>
+      <div class="clock" id="clock"></div>
+    </div>
     <ul class="stamps">${stamp(byKey.direct)}${stamp(byKey.sim)}</ul>`;
   if (preds.direct && preds.sim) {
     h += `<div class="heatmaps">${heatmap(preds.direct, "direct")}${heatmap(preds.sim, "sim")}</div>`;
@@ -112,6 +152,11 @@ function renderHero(entries, preds) {
     h += `<div class="heatmaps" style="grid-template-columns:1fr">${heatmap(preds[key], key)}</div>`;
   }
   hero.innerHTML = h;
+  if (any.race_start) {
+    const tick = countdown(any.race_start), clock = document.getElementById("clock");
+    clock.innerHTML = tick();
+    setInterval(() => { clock.innerHTML = tick(); }, 1000);
+  }
   for (const btn of hero.querySelectorAll(".seg button")) {
     btn.addEventListener("click", () => {
       for (const b of hero.querySelectorAll(".seg button")) b.setAttribute("aria-pressed", b === btn);
@@ -204,12 +249,14 @@ async function main() {
   if (REPO_URL) {
     const link = document.getElementById("repo-link");
     link.href = REPO_URL; link.hidden = false;
+    document.getElementById("foot-repo").innerHTML = `Code and every prediction file: <a href="${REPO_URL}">${REPO_URL.replace("https://", "")}</a>.`;
   }
-  const [manifest, scores] = await Promise.all([getJSON("manifest.json"), getJSON("results.json")]);
+  const [manifest, scores, circuits] = await Promise.all([
+    getJSON("manifest.json"), getJSON("results.json"), getJSON("circuits.json").catch(() => ({}))]);
   const entries = latestCall(manifest);
   const preds = {};
   await Promise.all(entries.map(async e => { preds[modelKey(e.model)] = await getJSON(`predictions/${e.file}`); }));
-  renderHero(entries, preds);
+  renderHero(entries, preds, circuits);
   renderRecord(scores.summary);
   renderRaces(scores.results, scores.summary);
 }
