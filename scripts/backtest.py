@@ -1,12 +1,17 @@
-"""Walk-forward backtest of the direct model (locked decision 3).
+"""Walk-forward backtest of both models (locked decisions 1 and 3).
 
 For each test race, fit on every earlier race only, predict the finishing
 position distribution, and score it with the ranked probability score
-against the grid-order baseline. Three predictors are scored:
+against the grid-order baseline. Five predictors are scored:
 
   baseline   finish order equals grid order (a point mass on the grid slot)
   saturday   PL model on [actual grid, pace history]
   thursday   PL model on [season-average grid so far, pace history]
+  sim        Monte Carlo simulator on the actual grid, strategy optimised
+  replay     the simulator running the strategies teams actually used. A
+             control, not a predictor: it reads the race being scored. The
+             gap between sim and replay is strategy error; the gap between
+             replay and the truth is pace and event error.
 
 Every feature is walk-forward safe: a race is only ever predicted from data
 that existed before it. Pace history for race r is the mean of a driver's
@@ -22,9 +27,18 @@ import numpy as np
 import pandas as pd
 
 from model import fit, sample_position_matrix, strengths
+from sim import fit_race, simulate
 
-DATA = Path(__file__).resolve().parent.parent / "data" / "driver_races.csv"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DATA = DATA_DIR / "driver_races.csv"
 MIN_TRAIN_RACES = 3
+SIM_SAMPLES = 2000
+
+
+def load_tables() -> dict:
+    return {name: pd.read_csv(DATA_DIR / f"{file}.csv") for name, file in [
+        ("races", "driver_races"), ("laps", "laps"), ("events", "race_events"),
+        ("seen", "races_seen"), ("dnf_history", "dnf_history")]}
 
 
 def add_history_features(table: pd.DataFrame) -> pd.DataFrame:
@@ -75,13 +89,24 @@ def baseline_matrix(race: pd.DataFrame) -> np.ndarray:
     return matrix
 
 
+def sim_matrix(tables: dict, race: pd.DataFrame, k: int, replay: bool) -> np.ndarray:
+    """Simulator prediction for round k, rows in `race` (finish) order."""
+    entry = race[["driver", "team", "grid"]].reset_index(drop=True)
+    total_laps = int(tables["laps"].loc[tables["laps"]["round"] == k, "lap_number"].max())
+    fitted = fit_race(tables, k, race["circuit"].iloc[0], entry, total_laps,
+                      replay_round=k if replay else None)
+    return simulate(fitted, n_samples=SIM_SAMPLES)
+
+
 def main() -> None:
-    table = add_history_features(pd.read_csv(DATA))
+    tables = load_tables()
+    table = add_history_features(tables["races"])
     rounds = sorted(table["round"].unique())
     models = {
         "saturday": ["grid", "pace_hist"],
         "thursday": ["grid_avg", "pace_hist"],
     }
+    columns = ["baseline", *models, "sim", "replay"]
 
     results = []
     for k in rounds[MIN_TRAIN_RACES:]:
@@ -93,15 +118,15 @@ def main() -> None:
             model = fit(*races_as_arrays(train, cols))
             s = strengths(model, race[cols].to_numpy(dtype=float))
             row[name] = score_matrix(sample_position_matrix(s), race)
+        row["sim"] = score_matrix(sim_matrix(tables, race, k, replay=False), race)
+        row["replay"] = score_matrix(sim_matrix(tables, race, k, replay=True), race)
         results.append(row)
-        print(
-            f"round {k:2d} {row['event']:<20}  baseline {row['baseline']:.4f}"
-            f"  saturday {row['saturday']:.4f}  thursday {row['thursday']:.4f}"
-        )
+        print(f"round {k:2d} {row['event']:<20}  "
+              + "  ".join(f"{c} {row[c]:.4f}" for c in columns))
 
     scores = pd.DataFrame(results)
     print("\nmean RPS (lower is better)")
-    for col in ["baseline", "saturday", "thursday"]:
+    for col in columns:
         print(f"  {col:<9} {scores[col].mean():.4f}")
 
 

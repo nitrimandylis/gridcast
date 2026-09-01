@@ -3,8 +3,12 @@
 Loads every completed 2026 race, cleans the laps, and writes one row per
 driver per race to data/driver_races.csv:
 
-    round, event, driver, grid, finish_rank, n_entrants, pace_delta,
-    laps_completed, status
+    round, event, circuit, driver, team, grid, finish_rank, n_entrants,
+    pace_delta, laps_completed, status
+
+circuit is the FastF1 event Location, the key the simulator uses to look up
+track properties (safety car rates, first-lap incident rates). team is the
+owner of mechanical retirements in the simulator's DNF model.
 
 finish_rank is the official classification order, with unclassified drivers
 (DNF, DNS) ranked at the back by laps completed. pace_delta is that driver's
@@ -46,7 +50,7 @@ def clean_laps(laps: pd.DataFrame) -> pd.DataFrame:
     return laps[ok]
 
 
-def race_rows(season: int, rnd: int, event_name: str) -> list[dict]:
+def race_rows(season: int, rnd: int, event_name: str, circuit: str) -> list[dict]:
     session = fastf1.get_session(season, rnd, "R")
     session.load(telemetry=False, weather=False, messages=False)
     results = session.results
@@ -69,7 +73,9 @@ def race_rows(season: int, rnd: int, event_name: str) -> list[dict]:
             {
                 "round": rnd,
                 "event": event_name,
+                "circuit": circuit,
                 "driver": drv,
+                "team": res["TeamName"],
                 "grid": int(grid),
                 "position": res["Position"],  # NaN when unclassified
                 "n_entrants": n,
@@ -105,7 +111,7 @@ def main() -> None:
         name = ev["EventName"]
         print(f"[round {rnd:2d}] {name}")
         try:
-            all_rows.extend(race_rows(2026, rnd, name))
+            all_rows.extend(race_rows(2026, rnd, name, ev["Location"]))
         except Exception as error:
             print(f"  SKIPPED: {type(error).__name__}: {error}")
 

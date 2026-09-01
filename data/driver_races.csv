@@ -1,265 +1,265 @@
-round,event,driver,grid,n_entrants,pace_delta,laps_completed,status,finish_rank
-1,Australian Grand Prix,RUS,1,22,-2.092,58,Finished,1
-1,Australian Grand Prix,ANT,2,22,-2.163,58,Finished,2
-1,Australian Grand Prix,LEC,4,22,-2.019,58,Finished,3
-1,Australian Grand Prix,HAM,7,22,-1.869,58,Finished,4
-1,Australian Grand Prix,NOR,6,22,-1.662,58,Finished,5
-1,Australian Grand Prix,VER,20,22,-1.646,58,Finished,6
-1,Australian Grand Prix,BEA,12,22,-0.558,57,Lapped,7
-1,Australian Grand Prix,LIN,9,22,-0.317,57,Lapped,8
-1,Australian Grand Prix,BOR,10,22,-0.558,57,Lapped,9
-1,Australian Grand Prix,GAS,14,22,0.011,57,Lapped,10
-1,Australian Grand Prix,OCO,13,22,0.06,57,Lapped,11
-1,Australian Grand Prix,ALB,15,22,0.137,57,Lapped,12
-1,Australian Grand Prix,LAW,8,22,-0.011,57,Lapped,13
-1,Australian Grand Prix,COL,16,22,0.454,56,Lapped,14
-1,Australian Grand Prix,SAI,21,22,0.421,56,Lapped,15
-1,Australian Grand Prix,PER,18,22,2.347,55,Lapped,16
-1,Australian Grand Prix,STR,22,22,2.214,43,Lapped,17
-1,Australian Grand Prix,ALO,17,22,2.245,22,Retired,18
-1,Australian Grand Prix,BOT,19,22,2.592,16,Retired,19
-1,Australian Grand Prix,HAD,3,22,0.18,11,Retired,20
-1,Australian Grand Prix,PIA,5,22,,0,Did not start,21
-1,Australian Grand Prix,HUL,11,22,,0,Did not start,22
-2,Chinese Grand Prix,ANT,1,22,-1.915,56,Finished,1
-2,Chinese Grand Prix,RUS,2,22,-1.779,56,Finished,2
-2,Chinese Grand Prix,HAM,3,22,-1.369,56,Finished,3
-2,Chinese Grand Prix,LEC,4,22,-1.356,56,Finished,4
-2,Chinese Grand Prix,BEA,10,22,-0.704,56,Finished,5
-2,Chinese Grand Prix,GAS,7,22,-0.626,56,Finished,6
-2,Chinese Grand Prix,LAW,14,22,-0.211,56,Finished,7
-2,Chinese Grand Prix,HAD,9,22,-0.153,56,Finished,8
-2,Chinese Grand Prix,SAI,17,22,0.516,55,Lapped,9
-2,Chinese Grand Prix,COL,12,22,0.191,55,Lapped,10
-2,Chinese Grand Prix,HUL,11,22,0.19,55,Lapped,11
-2,Chinese Grand Prix,LIN,15,22,0.331,55,Lapped,12
-2,Chinese Grand Prix,BOT,19,22,1.564,55,Lapped,13
-2,Chinese Grand Prix,OCO,13,22,0.153,55,Lapped,14
-2,Chinese Grand Prix,PER,21,22,1.798,55,Lapped,15
-2,Chinese Grand Prix,VER,8,22,-0.432,45,Retired,16
-2,Chinese Grand Prix,ALO,18,22,2.157,32,Retired,17
-2,Chinese Grand Prix,STR,20,22,2.8,10,Retired,18
-2,Chinese Grand Prix,PIA,5,22,,0,Did not start,19
-2,Chinese Grand Prix,NOR,6,22,,0,Did not start,20
-2,Chinese Grand Prix,BOR,16,22,,0,Did not start,21
-2,Chinese Grand Prix,ALB,22,22,,0,Did not start,22
-3,Japanese Grand Prix,ANT,1,22,-2.072,53,Finished,1
-3,Japanese Grand Prix,PIA,3,22,-1.731,53,Finished,2
-3,Japanese Grand Prix,LEC,4,22,-1.695,53,Finished,3
-3,Japanese Grand Prix,RUS,2,22,-1.379,53,Finished,4
-3,Japanese Grand Prix,NOR,5,22,-1.352,53,Finished,5
-3,Japanese Grand Prix,HAM,6,22,-0.777,53,Finished,6
-3,Japanese Grand Prix,GAS,7,22,-0.982,53,Finished,7
-3,Japanese Grand Prix,VER,11,22,-1.093,53,Finished,8
-3,Japanese Grand Prix,LAW,14,22,-0.513,53,Finished,9
-3,Japanese Grand Prix,OCO,12,22,-0.547,53,Finished,10
-3,Japanese Grand Prix,HUL,13,22,0.176,53,Finished,11
-3,Japanese Grand Prix,HAD,8,22,0.124,53,Finished,12
-3,Japanese Grand Prix,BOR,9,22,0.207,53,Finished,13
-3,Japanese Grand Prix,LIN,10,22,-0.123,53,Finished,14
-3,Japanese Grand Prix,SAI,16,22,0.413,53,Finished,15
-3,Japanese Grand Prix,COL,15,22,0.151,53,Finished,16
-3,Japanese Grand Prix,PER,19,22,1.028,53,Finished,17
-3,Japanese Grand Prix,ALO,21,22,2.427,52,Lapped,18
-3,Japanese Grand Prix,BOT,20,22,1.778,52,Lapped,19
-3,Japanese Grand Prix,ALB,17,22,1.309,51,Lapped,20
-3,Japanese Grand Prix,STR,22,22,2.977,30,Retired,21
-3,Japanese Grand Prix,BEA,18,22,1.275,21,Retired,22
-4,Miami Grand Prix,ANT,1,22,-2.144,57,Finished,1
-4,Miami Grand Prix,NOR,4,22,-1.974,57,Finished,2
-4,Miami Grand Prix,PIA,7,22,-1.411,57,Finished,3
-4,Miami Grand Prix,RUS,5,22,-1.208,57,Finished,4
-4,Miami Grand Prix,VER,2,22,-1.049,57,Finished,5
-4,Miami Grand Prix,HAM,6,22,-0.962,57,Finished,6
-4,Miami Grand Prix,COL,8,22,-0.69,57,Finished,7
-4,Miami Grand Prix,LEC,3,22,-1.638,57,Finished,8
-4,Miami Grand Prix,SAI,13,22,-0.408,57,Finished,9
-4,Miami Grand Prix,ALB,15,22,-0.275,57,Finished,10
-4,Miami Grand Prix,BEA,12,22,-0.096,56,Lapped,11
-4,Miami Grand Prix,BOR,21,22,0.256,56,Lapped,12
-4,Miami Grand Prix,OCO,14,22,0.283,56,Lapped,13
-4,Miami Grand Prix,LIN,16,22,0.427,56,Lapped,14
-4,Miami Grand Prix,ALO,17,22,1.737,56,Lapped,15
-4,Miami Grand Prix,PER,20,22,1.774,56,Lapped,16
-4,Miami Grand Prix,STR,18,22,1.056,56,Lapped,17
-4,Miami Grand Prix,BOT,19,22,3.01,55,Lapped,18
-4,Miami Grand Prix,HUL,10,22,0.096,7,Retired,19
-4,Miami Grand Prix,LAW,11,22,0.368,6,Retired,20
-4,Miami Grand Prix,GAS,9,22,0.32,5,Retired,21
-4,Miami Grand Prix,HAD,22,22,0.38,5,Retired,22
-5,Canadian Grand Prix,ANT,2,22,-1.69,68,Finished,1
-5,Canadian Grand Prix,HAM,5,22,-1.29,68,Finished,2
-5,Canadian Grand Prix,VER,6,22,-1.178,68,Finished,3
-5,Canadian Grand Prix,LEC,8,22,-0.892,68,Finished,4
-5,Canadian Grand Prix,HAD,7,22,-0.856,67,Lapped,5
-5,Canadian Grand Prix,COL,10,22,-0.139,67,Lapped,6
-5,Canadian Grand Prix,LAW,12,22,0.316,67,Lapped,7
-5,Canadian Grand Prix,GAS,14,22,0.163,67,Lapped,8
-5,Canadian Grand Prix,SAI,15,22,-0.02,67,Lapped,9
-5,Canadian Grand Prix,BEA,16,22,0.241,67,Lapped,10
-5,Canadian Grand Prix,PIA,4,22,-0.159,66,Lapped,11
-5,Canadian Grand Prix,HUL,11,22,0.0,66,Lapped,12
-5,Canadian Grand Prix,BOR,13,22,0.352,66,Lapped,13
-5,Canadian Grand Prix,OCO,17,22,1.373,66,Lapped,14
-5,Canadian Grand Prix,STR,22,22,3.383,64,Lapped,15
-5,Canadian Grand Prix,BOT,21,22,2.318,64,Lapped,16
-5,Canadian Grand Prix,PER,20,22,1.412,40,Retired,17
-5,Canadian Grand Prix,NOR,3,22,-0.182,39,Retired,18
-5,Canadian Grand Prix,RUS,1,22,-0.883,30,Retired,19
-5,Canadian Grand Prix,ALO,19,22,3.27,24,Retired,20
-5,Canadian Grand Prix,ALB,18,22,1.903,12,Retired,21
-5,Canadian Grand Prix,LIN,9,22,,0,Did not start,22
-6,Monaco Grand Prix,ANT,1,22,-2.495,78,Finished,1
-6,Monaco Grand Prix,HAM,3,22,-2.128,78,Finished,2
-6,Monaco Grand Prix,GAS,9,22,-0.74,78,Finished,3
-6,Monaco Grand Prix,HAD,5,22,-1.341,78,Finished,4
-6,Monaco Grand Prix,PIA,7,22,-0.906,78,Finished,5
-6,Monaco Grand Prix,LAW,10,22,-0.459,78,Finished,6
-6,Monaco Grand Prix,LIN,15,22,0.075,78,Finished,7
-6,Monaco Grand Prix,ALB,11,22,0.0,78,Finished,8
-6,Monaco Grand Prix,OCO,17,22,0.198,78,Finished,9
-6,Monaco Grand Prix,ALO,21,22,0.162,78,Finished,10
-6,Monaco Grand Prix,BOR,16,22,-0.228,78,Finished,11
-6,Monaco Grand Prix,RUS,6,22,-1.234,78,Finished,12
-6,Monaco Grand Prix,HUL,13,22,0.378,78,Finished,13
-6,Monaco Grand Prix,COL,14,22,0.279,78,Finished,14
-6,Monaco Grand Prix,PER,18,22,0.441,78,Finished,15
-6,Monaco Grand Prix,SAI,12,22,0.004,71,Retired,16
-6,Monaco Grand Prix,LEC,4,22,-2.105,65,Retired,17
-6,Monaco Grand Prix,STR,22,22,0.197,57,Retired,18
-6,Monaco Grand Prix,NOR,8,22,-0.662,44,Retired,19
-6,Monaco Grand Prix,BEA,19,22,1.359,28,Retired,20
-6,Monaco Grand Prix,BOT,20,22,2.168,16,Retired,21
-6,Monaco Grand Prix,VER,2,22,,1,Retired,22
-7,Barcelona Grand Prix,HAM,2,22,-2.906,66,Finished,1
-7,Barcelona Grand Prix,RUS,1,22,-2.025,66,Finished,2
-7,Barcelona Grand Prix,NOR,4,22,-1.942,66,Finished,3
-7,Barcelona Grand Prix,VER,5,22,-2.198,66,Finished,4
-7,Barcelona Grand Prix,PIA,7,22,-1.445,66,Finished,5
-7,Barcelona Grand Prix,HAD,6,22,-1.313,65,Lapped,6
-7,Barcelona Grand Prix,GAS,14,22,-0.077,65,Lapped,7
-7,Barcelona Grand Prix,LAW,8,22,0.078,65,Lapped,8
-7,Barcelona Grand Prix,LIN,11,22,-0.037,65,Lapped,9
-7,Barcelona Grand Prix,COL,13,22,0.037,65,Lapped,10
-7,Barcelona Grand Prix,BOR,12,22,-0.113,64,Lapped,11
-7,Barcelona Grand Prix,SAI,16,22,0.257,64,Lapped,12
-7,Barcelona Grand Prix,OCO,17,22,0.686,64,Lapped,13
-7,Barcelona Grand Prix,PER,19,22,1.424,63,Lapped,14
-7,Barcelona Grand Prix,LEC,10,22,-1.576,62,Retired,15
-7,Barcelona Grand Prix,ANT,3,22,-2.156,62,Retired,16
-7,Barcelona Grand Prix,BEA,15,22,0.346,60,Retired,17
-7,Barcelona Grand Prix,ALB,18,22,0.917,55,Lapped,18
-7,Barcelona Grand Prix,ALO,22,22,2.037,38,Retired,19
-7,Barcelona Grand Prix,HUL,9,22,0.426,29,Retired,20
-7,Barcelona Grand Prix,BOT,20,22,2.874,15,Retired,21
-7,Barcelona Grand Prix,STR,21,22,1.871,5,Retired,22
-8,Austrian Grand Prix,RUS,1,22,-1.359,71,Finished,1
-8,Austrian Grand Prix,VER,5,22,-1.225,71,Finished,2
-8,Austrian Grand Prix,ANT,4,22,-1.294,71,Finished,3
-8,Austrian Grand Prix,PIA,7,22,-1.085,71,Finished,4
-8,Austrian Grand Prix,HAM,3,22,-1.101,71,Finished,5
-8,Austrian Grand Prix,HAD,8,22,-1.099,71,Finished,6
-8,Austrian Grand Prix,NOR,6,22,-1.046,71,Finished,7
-8,Austrian Grand Prix,LEC,2,22,-1.033,71,Finished,8
-8,Austrian Grand Prix,LAW,9,22,0.05,70,Lapped,9
-8,Austrian Grand Prix,LIN,10,22,-0.116,70,Lapped,10
-8,Austrian Grand Prix,BOR,12,22,0.207,70,Lapped,11
-8,Austrian Grand Prix,HUL,14,22,-0.02,70,Lapped,12
-8,Austrian Grand Prix,GAS,11,22,0.0,70,Lapped,13
-8,Austrian Grand Prix,BEA,13,22,0.454,70,Lapped,14
-8,Austrian Grand Prix,COL,16,22,0.587,70,Lapped,15
-8,Austrian Grand Prix,OCO,15,22,0.881,69,Lapped,16
-8,Austrian Grand Prix,ALB,18,22,1.092,69,Lapped,17
-8,Austrian Grand Prix,ALO,21,22,2.033,68,Lapped,18
-8,Austrian Grand Prix,STR,22,22,2.261,45,Retired,19
-8,Austrian Grand Prix,SAI,17,22,1.272,24,Retired,20
-8,Austrian Grand Prix,PER,19,22,1.463,4,Retired,21
-8,Austrian Grand Prix,BOT,20,22,,2,Retired,22
-9,British Grand Prix,LEC,2,22,-1.803,52,Finished,1
-9,British Grand Prix,RUS,4,22,-1.184,52,Finished,2
-9,British Grand Prix,HAM,3,22,-1.603,52,Finished,3
-9,British Grand Prix,NOR,6,22,-0.931,52,Finished,4
-9,British Grand Prix,HAD,5,22,-0.908,52,Finished,5
-9,British Grand Prix,LAW,10,22,-0.018,52,Finished,6
-9,British Grand Prix,LIN,9,22,-0.071,52,Finished,7
-9,British Grand Prix,BOR,11,22,0.009,52,Finished,8
-9,British Grand Prix,COL,19,22,0.053,52,Finished,9
-9,British Grand Prix,GAS,15,22,-0.009,52,Finished,10
-9,British Grand Prix,PIA,8,22,-0.66,52,Finished,11
-9,British Grand Prix,BEA,13,22,1.145,52,Finished,12
-9,British Grand Prix,OCO,17,22,0.854,52,Finished,13
-9,British Grand Prix,PER,20,22,1.322,52,Finished,14
-9,British Grand Prix,ANT,1,22,-1.603,52,Finished,15
-9,British Grand Prix,BOT,18,22,2.017,52,Finished,16
-9,British Grand Prix,SAI,14,22,0.817,52,Lapped,17
-9,British Grand Prix,ALO,21,22,3.076,51,Lapped,18
-9,British Grand Prix,STR,22,22,3.254,51,Lapped,19
-9,British Grand Prix,VER,7,22,-1.51,47,Retired,20
-9,British Grand Prix,ALB,16,22,0.767,43,Retired,21
-9,British Grand Prix,HUL,12,22,0.309,37,Retired,22
-10,Belgian Grand Prix,ANT,1,22,-1.998,44,Finished,1
-10,Belgian Grand Prix,LEC,4,22,-1.727,44,Finished,2
-10,Belgian Grand Prix,VER,2,22,-1.578,44,Finished,3
-10,Belgian Grand Prix,HAM,5,22,-1.721,44,Finished,4
-10,Belgian Grand Prix,PIA,6,22,-1.237,44,Finished,5
-10,Belgian Grand Prix,HAD,21,22,-1.685,44,Finished,6
-10,Belgian Grand Prix,NOR,13,22,-1.133,44,Finished,7
-10,Belgian Grand Prix,BOR,8,22,-0.658,44,Finished,8
-10,Belgian Grand Prix,LIN,7,22,-0.824,44,Finished,9
-10,Belgian Grand Prix,COL,11,22,0.0,44,Finished,10
-10,Belgian Grand Prix,GAS,10,22,-0.036,44,Finished,11
-10,Belgian Grand Prix,LAW,9,22,0.085,44,Finished,12
-10,Belgian Grand Prix,HUL,12,22,0.197,44,Finished,13
-10,Belgian Grand Prix,BEA,14,22,0.201,44,Finished,14
-10,Belgian Grand Prix,ALB,15,22,0.775,44,Finished,15
-10,Belgian Grand Prix,SAI,19,22,0.305,44,Finished,16
-10,Belgian Grand Prix,OCO,16,22,0.558,44,Finished,17
-10,Belgian Grand Prix,BOT,17,22,2.67,43,Lapped,18
-10,Belgian Grand Prix,ALO,22,22,3.926,42,Lapped,19
-10,Belgian Grand Prix,STR,20,22,4.143,25,Retired,20
-10,Belgian Grand Prix,PER,18,22,2.158,13,Retired,21
-10,Belgian Grand Prix,RUS,3,22,,1,Retired,22
-11,Hungarian Grand Prix,NOR,1,22,-2.142,70,Finished,1
-11,Hungarian Grand Prix,VER,4,22,-1.569,70,Finished,2
-11,Hungarian Grand Prix,ANT,7,22,-1.629,70,Finished,3
-11,Hungarian Grand Prix,LEC,2,22,-1.74,70,Finished,4
-11,Hungarian Grand Prix,HAM,5,22,-1.892,70,Finished,5
-11,Hungarian Grand Prix,HAD,8,22,-1.173,70,Finished,6
-11,Hungarian Grand Prix,RUS,6,22,-1.421,70,Finished,7
-11,Hungarian Grand Prix,LAW,11,22,-0.365,69,Lapped,8
-11,Hungarian Grand Prix,HUL,10,22,-0.331,69,Lapped,9
-11,Hungarian Grand Prix,LIN,9,22,0.068,69,Lapped,10
-11,Hungarian Grand Prix,BOR,14,22,0.49,69,Lapped,11
-11,Hungarian Grand Prix,GAS,12,22,-0.068,69,Lapped,12
-11,Hungarian Grand Prix,STR,20,22,0.237,69,Lapped,13
-11,Hungarian Grand Prix,ALO,16,22,0.624,69,Lapped,14
-11,Hungarian Grand Prix,COL,13,22,0.607,68,Lapped,15
-11,Hungarian Grand Prix,OCO,15,22,0.626,68,Lapped,16
-11,Hungarian Grand Prix,ALB,19,22,1.209,68,Lapped,17
-11,Hungarian Grand Prix,SAI,18,22,1.046,68,Lapped,18
-11,Hungarian Grand Prix,BEA,17,22,1.316,68,Lapped,19
-11,Hungarian Grand Prix,PIA,3,22,-1.681,56,Retired,20
-11,Hungarian Grand Prix,PER,22,22,2.445,48,Retired,21
-11,Hungarian Grand Prix,BOT,21,22,2.297,14,Retired,22
-12,Dutch Grand Prix,NOR,1,22,-1.933,72,Finished,1
-12,Dutch Grand Prix,ANT,3,22,-2.073,72,Finished,2
-12,Dutch Grand Prix,RUS,2,22,-1.712,72,Finished,3
-12,Dutch Grand Prix,HAM,5,22,-1.93,72,Finished,4
-12,Dutch Grand Prix,LEC,6,22,-2.014,72,Finished,5
-12,Dutch Grand Prix,PIA,4,22,-1.53,72,Finished,6
-12,Dutch Grand Prix,LAW,8,22,-1.052,72,Finished,7
-12,Dutch Grand Prix,HUL,13,22,-0.293,71,Lapped,8
-12,Dutch Grand Prix,ALO,18,22,0.518,71,Lapped,9
-12,Dutch Grand Prix,GAS,11,22,0.059,71,Lapped,10
-12,Dutch Grand Prix,TSU,12,22,-0.223,71,Lapped,11
-12,Dutch Grand Prix,LIN,10,22,0.477,71,Lapped,12
-12,Dutch Grand Prix,BOR,9,22,-0.059,71,Lapped,13
-12,Dutch Grand Prix,COL,14,22,0.187,70,Lapped,14
-12,Dutch Grand Prix,PER,22,22,1.451,70,Lapped,15
-12,Dutch Grand Prix,SAI,17,22,1.081,70,Lapped,16
-12,Dutch Grand Prix,ALB,16,22,0.851,66,Retired,17
-12,Dutch Grand Prix,BOT,21,22,1.731,61,Retired,18
-12,Dutch Grand Prix,OCO,15,22,0.537,53,Retired,19
-12,Dutch Grand Prix,STR,19,22,0.845,45,Retired,20
-12,Dutch Grand Prix,BEA,20,22,,2,Retired,21
-12,Dutch Grand Prix,VER,7,22,,1,Retired,22
+round,event,circuit,driver,team,grid,n_entrants,pace_delta,laps_completed,status,finish_rank
+1,Australian Grand Prix,Melbourne,RUS,Mercedes,1,22,-2.092,58,Finished,1
+1,Australian Grand Prix,Melbourne,ANT,Mercedes,2,22,-2.163,58,Finished,2
+1,Australian Grand Prix,Melbourne,LEC,Ferrari,4,22,-2.019,58,Finished,3
+1,Australian Grand Prix,Melbourne,HAM,Ferrari,7,22,-1.869,58,Finished,4
+1,Australian Grand Prix,Melbourne,NOR,McLaren,6,22,-1.662,58,Finished,5
+1,Australian Grand Prix,Melbourne,VER,Red Bull Racing,20,22,-1.646,58,Finished,6
+1,Australian Grand Prix,Melbourne,BEA,Haas F1 Team,12,22,-0.558,57,Lapped,7
+1,Australian Grand Prix,Melbourne,LIN,Racing Bulls,9,22,-0.317,57,Lapped,8
+1,Australian Grand Prix,Melbourne,BOR,Audi,10,22,-0.558,57,Lapped,9
+1,Australian Grand Prix,Melbourne,GAS,Alpine,14,22,0.011,57,Lapped,10
+1,Australian Grand Prix,Melbourne,OCO,Haas F1 Team,13,22,0.06,57,Lapped,11
+1,Australian Grand Prix,Melbourne,ALB,Williams,15,22,0.137,57,Lapped,12
+1,Australian Grand Prix,Melbourne,LAW,Racing Bulls,8,22,-0.011,57,Lapped,13
+1,Australian Grand Prix,Melbourne,COL,Alpine,16,22,0.454,56,Lapped,14
+1,Australian Grand Prix,Melbourne,SAI,Williams,21,22,0.421,56,Lapped,15
+1,Australian Grand Prix,Melbourne,PER,Cadillac,18,22,2.347,55,Lapped,16
+1,Australian Grand Prix,Melbourne,STR,Aston Martin,22,22,2.214,43,Lapped,17
+1,Australian Grand Prix,Melbourne,ALO,Aston Martin,17,22,2.245,22,Retired,18
+1,Australian Grand Prix,Melbourne,BOT,Cadillac,19,22,2.592,16,Retired,19
+1,Australian Grand Prix,Melbourne,HAD,Red Bull Racing,3,22,0.18,11,Retired,20
+1,Australian Grand Prix,Melbourne,PIA,McLaren,5,22,,0,Did not start,21
+1,Australian Grand Prix,Melbourne,HUL,Audi,11,22,,0,Did not start,22
+2,Chinese Grand Prix,Shanghai,ANT,Mercedes,1,22,-1.915,56,Finished,1
+2,Chinese Grand Prix,Shanghai,RUS,Mercedes,2,22,-1.779,56,Finished,2
+2,Chinese Grand Prix,Shanghai,HAM,Ferrari,3,22,-1.369,56,Finished,3
+2,Chinese Grand Prix,Shanghai,LEC,Ferrari,4,22,-1.356,56,Finished,4
+2,Chinese Grand Prix,Shanghai,BEA,Haas F1 Team,10,22,-0.704,56,Finished,5
+2,Chinese Grand Prix,Shanghai,GAS,Alpine,7,22,-0.626,56,Finished,6
+2,Chinese Grand Prix,Shanghai,LAW,Racing Bulls,14,22,-0.211,56,Finished,7
+2,Chinese Grand Prix,Shanghai,HAD,Red Bull Racing,9,22,-0.153,56,Finished,8
+2,Chinese Grand Prix,Shanghai,SAI,Williams,17,22,0.516,55,Lapped,9
+2,Chinese Grand Prix,Shanghai,COL,Alpine,12,22,0.191,55,Lapped,10
+2,Chinese Grand Prix,Shanghai,HUL,Audi,11,22,0.19,55,Lapped,11
+2,Chinese Grand Prix,Shanghai,LIN,Racing Bulls,15,22,0.331,55,Lapped,12
+2,Chinese Grand Prix,Shanghai,BOT,Cadillac,19,22,1.564,55,Lapped,13
+2,Chinese Grand Prix,Shanghai,OCO,Haas F1 Team,13,22,0.153,55,Lapped,14
+2,Chinese Grand Prix,Shanghai,PER,Cadillac,21,22,1.798,55,Lapped,15
+2,Chinese Grand Prix,Shanghai,VER,Red Bull Racing,8,22,-0.432,45,Retired,16
+2,Chinese Grand Prix,Shanghai,ALO,Aston Martin,18,22,2.157,32,Retired,17
+2,Chinese Grand Prix,Shanghai,STR,Aston Martin,20,22,2.8,10,Retired,18
+2,Chinese Grand Prix,Shanghai,PIA,McLaren,5,22,,0,Did not start,19
+2,Chinese Grand Prix,Shanghai,NOR,McLaren,6,22,,0,Did not start,20
+2,Chinese Grand Prix,Shanghai,BOR,Audi,16,22,,0,Did not start,21
+2,Chinese Grand Prix,Shanghai,ALB,Williams,22,22,,0,Did not start,22
+3,Japanese Grand Prix,Suzuka,ANT,Mercedes,1,22,-2.072,53,Finished,1
+3,Japanese Grand Prix,Suzuka,PIA,McLaren,3,22,-1.731,53,Finished,2
+3,Japanese Grand Prix,Suzuka,LEC,Ferrari,4,22,-1.695,53,Finished,3
+3,Japanese Grand Prix,Suzuka,RUS,Mercedes,2,22,-1.379,53,Finished,4
+3,Japanese Grand Prix,Suzuka,NOR,McLaren,5,22,-1.352,53,Finished,5
+3,Japanese Grand Prix,Suzuka,HAM,Ferrari,6,22,-0.777,53,Finished,6
+3,Japanese Grand Prix,Suzuka,GAS,Alpine,7,22,-0.982,53,Finished,7
+3,Japanese Grand Prix,Suzuka,VER,Red Bull Racing,11,22,-1.093,53,Finished,8
+3,Japanese Grand Prix,Suzuka,LAW,Racing Bulls,14,22,-0.513,53,Finished,9
+3,Japanese Grand Prix,Suzuka,OCO,Haas F1 Team,12,22,-0.547,53,Finished,10
+3,Japanese Grand Prix,Suzuka,HUL,Audi,13,22,0.176,53,Finished,11
+3,Japanese Grand Prix,Suzuka,HAD,Red Bull Racing,8,22,0.124,53,Finished,12
+3,Japanese Grand Prix,Suzuka,BOR,Audi,9,22,0.207,53,Finished,13
+3,Japanese Grand Prix,Suzuka,LIN,Racing Bulls,10,22,-0.123,53,Finished,14
+3,Japanese Grand Prix,Suzuka,SAI,Williams,16,22,0.413,53,Finished,15
+3,Japanese Grand Prix,Suzuka,COL,Alpine,15,22,0.151,53,Finished,16
+3,Japanese Grand Prix,Suzuka,PER,Cadillac,19,22,1.028,53,Finished,17
+3,Japanese Grand Prix,Suzuka,ALO,Aston Martin,21,22,2.427,52,Lapped,18
+3,Japanese Grand Prix,Suzuka,BOT,Cadillac,20,22,1.778,52,Lapped,19
+3,Japanese Grand Prix,Suzuka,ALB,Williams,17,22,1.309,51,Lapped,20
+3,Japanese Grand Prix,Suzuka,STR,Aston Martin,22,22,2.977,30,Retired,21
+3,Japanese Grand Prix,Suzuka,BEA,Haas F1 Team,18,22,1.275,21,Retired,22
+4,Miami Grand Prix,Miami Gardens,ANT,Mercedes,1,22,-2.144,57,Finished,1
+4,Miami Grand Prix,Miami Gardens,NOR,McLaren,4,22,-1.974,57,Finished,2
+4,Miami Grand Prix,Miami Gardens,PIA,McLaren,7,22,-1.411,57,Finished,3
+4,Miami Grand Prix,Miami Gardens,RUS,Mercedes,5,22,-1.208,57,Finished,4
+4,Miami Grand Prix,Miami Gardens,VER,Red Bull Racing,2,22,-1.049,57,Finished,5
+4,Miami Grand Prix,Miami Gardens,HAM,Ferrari,6,22,-0.962,57,Finished,6
+4,Miami Grand Prix,Miami Gardens,COL,Alpine,8,22,-0.69,57,Finished,7
+4,Miami Grand Prix,Miami Gardens,LEC,Ferrari,3,22,-1.638,57,Finished,8
+4,Miami Grand Prix,Miami Gardens,SAI,Williams,13,22,-0.408,57,Finished,9
+4,Miami Grand Prix,Miami Gardens,ALB,Williams,15,22,-0.275,57,Finished,10
+4,Miami Grand Prix,Miami Gardens,BEA,Haas F1 Team,12,22,-0.096,56,Lapped,11
+4,Miami Grand Prix,Miami Gardens,BOR,Audi,21,22,0.256,56,Lapped,12
+4,Miami Grand Prix,Miami Gardens,OCO,Haas F1 Team,14,22,0.283,56,Lapped,13
+4,Miami Grand Prix,Miami Gardens,LIN,Racing Bulls,16,22,0.427,56,Lapped,14
+4,Miami Grand Prix,Miami Gardens,ALO,Aston Martin,17,22,1.737,56,Lapped,15
+4,Miami Grand Prix,Miami Gardens,PER,Cadillac,20,22,1.774,56,Lapped,16
+4,Miami Grand Prix,Miami Gardens,STR,Aston Martin,18,22,1.056,56,Lapped,17
+4,Miami Grand Prix,Miami Gardens,BOT,Cadillac,19,22,3.01,55,Lapped,18
+4,Miami Grand Prix,Miami Gardens,HUL,Audi,10,22,0.096,7,Retired,19
+4,Miami Grand Prix,Miami Gardens,LAW,Racing Bulls,11,22,0.368,6,Retired,20
+4,Miami Grand Prix,Miami Gardens,GAS,Alpine,9,22,0.32,5,Retired,21
+4,Miami Grand Prix,Miami Gardens,HAD,Red Bull Racing,22,22,0.38,5,Retired,22
+5,Canadian Grand Prix,Montréal,ANT,Mercedes,2,22,-1.69,68,Finished,1
+5,Canadian Grand Prix,Montréal,HAM,Ferrari,5,22,-1.29,68,Finished,2
+5,Canadian Grand Prix,Montréal,VER,Red Bull Racing,6,22,-1.178,68,Finished,3
+5,Canadian Grand Prix,Montréal,LEC,Ferrari,8,22,-0.892,68,Finished,4
+5,Canadian Grand Prix,Montréal,HAD,Red Bull Racing,7,22,-0.856,67,Lapped,5
+5,Canadian Grand Prix,Montréal,COL,Alpine,10,22,-0.139,67,Lapped,6
+5,Canadian Grand Prix,Montréal,LAW,Racing Bulls,12,22,0.316,67,Lapped,7
+5,Canadian Grand Prix,Montréal,GAS,Alpine,14,22,0.163,67,Lapped,8
+5,Canadian Grand Prix,Montréal,SAI,Williams,15,22,-0.02,67,Lapped,9
+5,Canadian Grand Prix,Montréal,BEA,Haas F1 Team,16,22,0.241,67,Lapped,10
+5,Canadian Grand Prix,Montréal,PIA,McLaren,4,22,-0.159,66,Lapped,11
+5,Canadian Grand Prix,Montréal,HUL,Audi,11,22,0.0,66,Lapped,12
+5,Canadian Grand Prix,Montréal,BOR,Audi,13,22,0.352,66,Lapped,13
+5,Canadian Grand Prix,Montréal,OCO,Haas F1 Team,17,22,1.373,66,Lapped,14
+5,Canadian Grand Prix,Montréal,STR,Aston Martin,22,22,3.383,64,Lapped,15
+5,Canadian Grand Prix,Montréal,BOT,Cadillac,21,22,2.318,64,Lapped,16
+5,Canadian Grand Prix,Montréal,PER,Cadillac,20,22,1.412,40,Retired,17
+5,Canadian Grand Prix,Montréal,NOR,McLaren,3,22,-0.182,39,Retired,18
+5,Canadian Grand Prix,Montréal,RUS,Mercedes,1,22,-0.883,30,Retired,19
+5,Canadian Grand Prix,Montréal,ALO,Aston Martin,19,22,3.27,24,Retired,20
+5,Canadian Grand Prix,Montréal,ALB,Williams,18,22,1.903,12,Retired,21
+5,Canadian Grand Prix,Montréal,LIN,Racing Bulls,9,22,,0,Did not start,22
+6,Monaco Grand Prix,Monte Carlo,ANT,Mercedes,1,22,-2.495,78,Finished,1
+6,Monaco Grand Prix,Monte Carlo,HAM,Ferrari,3,22,-2.128,78,Finished,2
+6,Monaco Grand Prix,Monte Carlo,GAS,Alpine,9,22,-0.74,78,Finished,3
+6,Monaco Grand Prix,Monte Carlo,HAD,Red Bull Racing,5,22,-1.341,78,Finished,4
+6,Monaco Grand Prix,Monte Carlo,PIA,McLaren,7,22,-0.906,78,Finished,5
+6,Monaco Grand Prix,Monte Carlo,LAW,Racing Bulls,10,22,-0.459,78,Finished,6
+6,Monaco Grand Prix,Monte Carlo,LIN,Racing Bulls,15,22,0.075,78,Finished,7
+6,Monaco Grand Prix,Monte Carlo,ALB,Williams,11,22,0.0,78,Finished,8
+6,Monaco Grand Prix,Monte Carlo,OCO,Haas F1 Team,17,22,0.198,78,Finished,9
+6,Monaco Grand Prix,Monte Carlo,ALO,Aston Martin,21,22,0.162,78,Finished,10
+6,Monaco Grand Prix,Monte Carlo,BOR,Audi,16,22,-0.228,78,Finished,11
+6,Monaco Grand Prix,Monte Carlo,RUS,Mercedes,6,22,-1.234,78,Finished,12
+6,Monaco Grand Prix,Monte Carlo,HUL,Audi,13,22,0.378,78,Finished,13
+6,Monaco Grand Prix,Monte Carlo,COL,Alpine,14,22,0.279,78,Finished,14
+6,Monaco Grand Prix,Monte Carlo,PER,Cadillac,18,22,0.441,78,Finished,15
+6,Monaco Grand Prix,Monte Carlo,SAI,Williams,12,22,0.004,71,Retired,16
+6,Monaco Grand Prix,Monte Carlo,LEC,Ferrari,4,22,-2.105,65,Retired,17
+6,Monaco Grand Prix,Monte Carlo,STR,Aston Martin,22,22,0.197,57,Retired,18
+6,Monaco Grand Prix,Monte Carlo,NOR,McLaren,8,22,-0.662,44,Retired,19
+6,Monaco Grand Prix,Monte Carlo,BEA,Haas F1 Team,19,22,1.359,28,Retired,20
+6,Monaco Grand Prix,Monte Carlo,BOT,Cadillac,20,22,2.168,16,Retired,21
+6,Monaco Grand Prix,Monte Carlo,VER,Red Bull Racing,2,22,,1,Retired,22
+7,Barcelona Grand Prix,Barcelona,HAM,Ferrari,2,22,-2.906,66,Finished,1
+7,Barcelona Grand Prix,Barcelona,RUS,Mercedes,1,22,-2.025,66,Finished,2
+7,Barcelona Grand Prix,Barcelona,NOR,McLaren,4,22,-1.942,66,Finished,3
+7,Barcelona Grand Prix,Barcelona,VER,Red Bull Racing,5,22,-2.198,66,Finished,4
+7,Barcelona Grand Prix,Barcelona,PIA,McLaren,7,22,-1.445,66,Finished,5
+7,Barcelona Grand Prix,Barcelona,HAD,Red Bull Racing,6,22,-1.313,65,Lapped,6
+7,Barcelona Grand Prix,Barcelona,GAS,Alpine,14,22,-0.077,65,Lapped,7
+7,Barcelona Grand Prix,Barcelona,LAW,Racing Bulls,8,22,0.078,65,Lapped,8
+7,Barcelona Grand Prix,Barcelona,LIN,Racing Bulls,11,22,-0.037,65,Lapped,9
+7,Barcelona Grand Prix,Barcelona,COL,Alpine,13,22,0.037,65,Lapped,10
+7,Barcelona Grand Prix,Barcelona,BOR,Audi,12,22,-0.113,64,Lapped,11
+7,Barcelona Grand Prix,Barcelona,SAI,Williams,16,22,0.257,64,Lapped,12
+7,Barcelona Grand Prix,Barcelona,OCO,Haas F1 Team,17,22,0.686,64,Lapped,13
+7,Barcelona Grand Prix,Barcelona,PER,Cadillac,19,22,1.424,63,Lapped,14
+7,Barcelona Grand Prix,Barcelona,LEC,Ferrari,10,22,-1.576,62,Retired,15
+7,Barcelona Grand Prix,Barcelona,ANT,Mercedes,3,22,-2.156,62,Retired,16
+7,Barcelona Grand Prix,Barcelona,BEA,Haas F1 Team,15,22,0.346,60,Retired,17
+7,Barcelona Grand Prix,Barcelona,ALB,Williams,18,22,0.917,55,Lapped,18
+7,Barcelona Grand Prix,Barcelona,ALO,Aston Martin,22,22,2.037,38,Retired,19
+7,Barcelona Grand Prix,Barcelona,HUL,Audi,9,22,0.426,29,Retired,20
+7,Barcelona Grand Prix,Barcelona,BOT,Cadillac,20,22,2.874,15,Retired,21
+7,Barcelona Grand Prix,Barcelona,STR,Aston Martin,21,22,1.871,5,Retired,22
+8,Austrian Grand Prix,Spielberg,RUS,Mercedes,1,22,-1.359,71,Finished,1
+8,Austrian Grand Prix,Spielberg,VER,Red Bull Racing,5,22,-1.225,71,Finished,2
+8,Austrian Grand Prix,Spielberg,ANT,Mercedes,4,22,-1.294,71,Finished,3
+8,Austrian Grand Prix,Spielberg,PIA,McLaren,7,22,-1.085,71,Finished,4
+8,Austrian Grand Prix,Spielberg,HAM,Ferrari,3,22,-1.101,71,Finished,5
+8,Austrian Grand Prix,Spielberg,HAD,Red Bull Racing,8,22,-1.099,71,Finished,6
+8,Austrian Grand Prix,Spielberg,NOR,McLaren,6,22,-1.046,71,Finished,7
+8,Austrian Grand Prix,Spielberg,LEC,Ferrari,2,22,-1.033,71,Finished,8
+8,Austrian Grand Prix,Spielberg,LAW,Racing Bulls,9,22,0.05,70,Lapped,9
+8,Austrian Grand Prix,Spielberg,LIN,Racing Bulls,10,22,-0.116,70,Lapped,10
+8,Austrian Grand Prix,Spielberg,BOR,Audi,12,22,0.207,70,Lapped,11
+8,Austrian Grand Prix,Spielberg,HUL,Audi,14,22,-0.02,70,Lapped,12
+8,Austrian Grand Prix,Spielberg,GAS,Alpine,11,22,0.0,70,Lapped,13
+8,Austrian Grand Prix,Spielberg,BEA,Haas F1 Team,13,22,0.454,70,Lapped,14
+8,Austrian Grand Prix,Spielberg,COL,Alpine,16,22,0.587,70,Lapped,15
+8,Austrian Grand Prix,Spielberg,OCO,Haas F1 Team,15,22,0.881,69,Lapped,16
+8,Austrian Grand Prix,Spielberg,ALB,Williams,18,22,1.092,69,Lapped,17
+8,Austrian Grand Prix,Spielberg,ALO,Aston Martin,21,22,2.033,68,Lapped,18
+8,Austrian Grand Prix,Spielberg,STR,Aston Martin,22,22,2.261,45,Retired,19
+8,Austrian Grand Prix,Spielberg,SAI,Williams,17,22,1.272,24,Retired,20
+8,Austrian Grand Prix,Spielberg,PER,Cadillac,19,22,1.463,4,Retired,21
+8,Austrian Grand Prix,Spielberg,BOT,Cadillac,20,22,,2,Retired,22
+9,British Grand Prix,Silverstone,LEC,Ferrari,2,22,-1.803,52,Finished,1
+9,British Grand Prix,Silverstone,RUS,Mercedes,4,22,-1.184,52,Finished,2
+9,British Grand Prix,Silverstone,HAM,Ferrari,3,22,-1.603,52,Finished,3
+9,British Grand Prix,Silverstone,NOR,McLaren,6,22,-0.931,52,Finished,4
+9,British Grand Prix,Silverstone,HAD,Red Bull Racing,5,22,-0.908,52,Finished,5
+9,British Grand Prix,Silverstone,LAW,Racing Bulls,10,22,-0.018,52,Finished,6
+9,British Grand Prix,Silverstone,LIN,Racing Bulls,9,22,-0.071,52,Finished,7
+9,British Grand Prix,Silverstone,BOR,Audi,11,22,0.009,52,Finished,8
+9,British Grand Prix,Silverstone,COL,Alpine,19,22,0.053,52,Finished,9
+9,British Grand Prix,Silverstone,GAS,Alpine,15,22,-0.009,52,Finished,10
+9,British Grand Prix,Silverstone,PIA,McLaren,8,22,-0.66,52,Finished,11
+9,British Grand Prix,Silverstone,BEA,Haas F1 Team,13,22,1.145,52,Finished,12
+9,British Grand Prix,Silverstone,OCO,Haas F1 Team,17,22,0.854,52,Finished,13
+9,British Grand Prix,Silverstone,PER,Cadillac,20,22,1.322,52,Finished,14
+9,British Grand Prix,Silverstone,ANT,Mercedes,1,22,-1.603,52,Finished,15
+9,British Grand Prix,Silverstone,BOT,Cadillac,18,22,2.017,52,Finished,16
+9,British Grand Prix,Silverstone,SAI,Williams,14,22,0.817,52,Lapped,17
+9,British Grand Prix,Silverstone,ALO,Aston Martin,21,22,3.076,51,Lapped,18
+9,British Grand Prix,Silverstone,STR,Aston Martin,22,22,3.254,51,Lapped,19
+9,British Grand Prix,Silverstone,VER,Red Bull Racing,7,22,-1.51,47,Retired,20
+9,British Grand Prix,Silverstone,ALB,Williams,16,22,0.767,43,Retired,21
+9,British Grand Prix,Silverstone,HUL,Audi,12,22,0.309,37,Retired,22
+10,Belgian Grand Prix,Spa-Francorchamps,ANT,Mercedes,1,22,-1.998,44,Finished,1
+10,Belgian Grand Prix,Spa-Francorchamps,LEC,Ferrari,4,22,-1.727,44,Finished,2
+10,Belgian Grand Prix,Spa-Francorchamps,VER,Red Bull Racing,2,22,-1.578,44,Finished,3
+10,Belgian Grand Prix,Spa-Francorchamps,HAM,Ferrari,5,22,-1.721,44,Finished,4
+10,Belgian Grand Prix,Spa-Francorchamps,PIA,McLaren,6,22,-1.237,44,Finished,5
+10,Belgian Grand Prix,Spa-Francorchamps,HAD,Red Bull Racing,21,22,-1.685,44,Finished,6
+10,Belgian Grand Prix,Spa-Francorchamps,NOR,McLaren,13,22,-1.133,44,Finished,7
+10,Belgian Grand Prix,Spa-Francorchamps,BOR,Audi,8,22,-0.658,44,Finished,8
+10,Belgian Grand Prix,Spa-Francorchamps,LIN,Racing Bulls,7,22,-0.824,44,Finished,9
+10,Belgian Grand Prix,Spa-Francorchamps,COL,Alpine,11,22,0.0,44,Finished,10
+10,Belgian Grand Prix,Spa-Francorchamps,GAS,Alpine,10,22,-0.036,44,Finished,11
+10,Belgian Grand Prix,Spa-Francorchamps,LAW,Racing Bulls,9,22,0.085,44,Finished,12
+10,Belgian Grand Prix,Spa-Francorchamps,HUL,Audi,12,22,0.197,44,Finished,13
+10,Belgian Grand Prix,Spa-Francorchamps,BEA,Haas F1 Team,14,22,0.201,44,Finished,14
+10,Belgian Grand Prix,Spa-Francorchamps,ALB,Williams,15,22,0.775,44,Finished,15
+10,Belgian Grand Prix,Spa-Francorchamps,SAI,Williams,19,22,0.305,44,Finished,16
+10,Belgian Grand Prix,Spa-Francorchamps,OCO,Haas F1 Team,16,22,0.558,44,Finished,17
+10,Belgian Grand Prix,Spa-Francorchamps,BOT,Cadillac,17,22,2.67,43,Lapped,18
+10,Belgian Grand Prix,Spa-Francorchamps,ALO,Aston Martin,22,22,3.926,42,Lapped,19
+10,Belgian Grand Prix,Spa-Francorchamps,STR,Aston Martin,20,22,4.143,25,Retired,20
+10,Belgian Grand Prix,Spa-Francorchamps,PER,Cadillac,18,22,2.158,13,Retired,21
+10,Belgian Grand Prix,Spa-Francorchamps,RUS,Mercedes,3,22,,1,Retired,22
+11,Hungarian Grand Prix,Budapest,NOR,McLaren,1,22,-2.142,70,Finished,1
+11,Hungarian Grand Prix,Budapest,VER,Red Bull Racing,4,22,-1.569,70,Finished,2
+11,Hungarian Grand Prix,Budapest,ANT,Mercedes,7,22,-1.629,70,Finished,3
+11,Hungarian Grand Prix,Budapest,LEC,Ferrari,2,22,-1.74,70,Finished,4
+11,Hungarian Grand Prix,Budapest,HAM,Ferrari,5,22,-1.892,70,Finished,5
+11,Hungarian Grand Prix,Budapest,HAD,Red Bull Racing,8,22,-1.173,70,Finished,6
+11,Hungarian Grand Prix,Budapest,RUS,Mercedes,6,22,-1.421,70,Finished,7
+11,Hungarian Grand Prix,Budapest,LAW,Racing Bulls,11,22,-0.365,69,Lapped,8
+11,Hungarian Grand Prix,Budapest,HUL,Audi,10,22,-0.331,69,Lapped,9
+11,Hungarian Grand Prix,Budapest,LIN,Racing Bulls,9,22,0.068,69,Lapped,10
+11,Hungarian Grand Prix,Budapest,BOR,Audi,14,22,0.49,69,Lapped,11
+11,Hungarian Grand Prix,Budapest,GAS,Alpine,12,22,-0.068,69,Lapped,12
+11,Hungarian Grand Prix,Budapest,STR,Aston Martin,20,22,0.237,69,Lapped,13
+11,Hungarian Grand Prix,Budapest,ALO,Aston Martin,16,22,0.624,69,Lapped,14
+11,Hungarian Grand Prix,Budapest,COL,Alpine,13,22,0.607,68,Lapped,15
+11,Hungarian Grand Prix,Budapest,OCO,Haas F1 Team,15,22,0.626,68,Lapped,16
+11,Hungarian Grand Prix,Budapest,ALB,Williams,19,22,1.209,68,Lapped,17
+11,Hungarian Grand Prix,Budapest,SAI,Williams,18,22,1.046,68,Lapped,18
+11,Hungarian Grand Prix,Budapest,BEA,Haas F1 Team,17,22,1.316,68,Lapped,19
+11,Hungarian Grand Prix,Budapest,PIA,McLaren,3,22,-1.681,56,Retired,20
+11,Hungarian Grand Prix,Budapest,PER,Cadillac,22,22,2.445,48,Retired,21
+11,Hungarian Grand Prix,Budapest,BOT,Cadillac,21,22,2.297,14,Retired,22
+12,Dutch Grand Prix,Zandvoort,NOR,McLaren,1,22,-1.933,72,Finished,1
+12,Dutch Grand Prix,Zandvoort,ANT,Mercedes,3,22,-2.073,72,Finished,2
+12,Dutch Grand Prix,Zandvoort,RUS,Mercedes,2,22,-1.712,72,Finished,3
+12,Dutch Grand Prix,Zandvoort,HAM,Ferrari,5,22,-1.93,72,Finished,4
+12,Dutch Grand Prix,Zandvoort,LEC,Ferrari,6,22,-2.014,72,Finished,5
+12,Dutch Grand Prix,Zandvoort,PIA,McLaren,4,22,-1.53,72,Finished,6
+12,Dutch Grand Prix,Zandvoort,LAW,Red Bull Racing,8,22,-1.052,72,Finished,7
+12,Dutch Grand Prix,Zandvoort,HUL,Audi,13,22,-0.293,71,Lapped,8
+12,Dutch Grand Prix,Zandvoort,ALO,Aston Martin,18,22,0.518,71,Lapped,9
+12,Dutch Grand Prix,Zandvoort,GAS,Alpine,11,22,0.059,71,Lapped,10
+12,Dutch Grand Prix,Zandvoort,TSU,Racing Bulls,12,22,-0.223,71,Lapped,11
+12,Dutch Grand Prix,Zandvoort,LIN,Racing Bulls,10,22,0.477,71,Lapped,12
+12,Dutch Grand Prix,Zandvoort,BOR,Audi,9,22,-0.059,71,Lapped,13
+12,Dutch Grand Prix,Zandvoort,COL,Alpine,14,22,0.187,70,Lapped,14
+12,Dutch Grand Prix,Zandvoort,PER,Cadillac,22,22,1.451,70,Lapped,15
+12,Dutch Grand Prix,Zandvoort,SAI,Williams,17,22,1.081,70,Lapped,16
+12,Dutch Grand Prix,Zandvoort,ALB,Williams,16,22,0.851,66,Retired,17
+12,Dutch Grand Prix,Zandvoort,BOT,Cadillac,21,22,1.731,61,Retired,18
+12,Dutch Grand Prix,Zandvoort,OCO,Haas F1 Team,15,22,0.537,53,Retired,19
+12,Dutch Grand Prix,Zandvoort,STR,Aston Martin,19,22,0.845,45,Retired,20
+12,Dutch Grand Prix,Zandvoort,BEA,Haas F1 Team,20,22,,2,Retired,21
+12,Dutch Grand Prix,Zandvoort,VER,Red Bull Racing,7,22,,1,Retired,22

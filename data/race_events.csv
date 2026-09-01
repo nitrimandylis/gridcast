@@ -159,3 +159,73 @@ season,round,event,circuit,kind,start_lap,end_lap,laps
 2022,17,Singapore Grand Prix,Marina Bay,SC,36,39,4
 2022,18,Japanese Grand Prix,Suzuka,SC,1,2,2
 2022,18,Japanese Grand Prix,Suzuka,RED,2,2,1
+2022,19,United States Grand Prix,Austin,SC,18,21,4
+2022,19,United States Grand Prix,Austin,SC,22,25,4
+2022,20,Mexico City Grand Prix,Mexico City,VSC,65,66,2
+2022,21,São Paulo Grand Prix,São Paulo,SC,1,6,6
+2022,21,São Paulo Grand Prix,São Paulo,VSC,53,54,2
+2022,21,São Paulo Grand Prix,São Paulo,SC,54,59,6
+2023,1,Bahrain Grand Prix,Sakhir,VSC,41,42,2
+2023,2,Saudi Arabian Grand Prix,Jeddah,SC,18,20,3
+2023,3,Australian Grand Prix,Melbourne,SC,1,3,3
+2023,3,Australian Grand Prix,Melbourne,SC,7,8,2
+2023,3,Australian Grand Prix,Melbourne,RED,8,8,1
+2023,3,Australian Grand Prix,Melbourne,VSC,18,19,2
+2023,3,Australian Grand Prix,Melbourne,SC,54,55,2
+2023,3,Australian Grand Prix,Melbourne,RED,55,55,1
+2023,3,Australian Grand Prix,Melbourne,RED,57,57,1
+2023,3,Australian Grand Prix,Melbourne,RED,58,58,1
+2023,4,Azerbaijan Grand Prix,Baku,SC,11,13,3
+2023,8,Canadian Grand Prix,Montréal,VSC,8,8,1
+2023,8,Canadian Grand Prix,Montréal,SC,12,16,5
+2023,9,Austrian Grand Prix,Spielberg,SC,1,3,3
+2023,9,Austrian Grand Prix,Spielberg,VSC,14,16,3
+2023,10,British Grand Prix,Silverstone,VSC,33,33,1
+2023,10,British Grand Prix,Silverstone,SC,33,38,6
+2023,13,Dutch Grand Prix,Zandvoort,SC,16,21,6
+2023,13,Dutch Grand Prix,Zandvoort,VSC,64,64,1
+2023,13,Dutch Grand Prix,Zandvoort,RED,64,64,1
+2023,13,Dutch Grand Prix,Zandvoort,SC,65,66,2
+2023,15,Singapore Grand Prix,Marina Bay,SC,20,22,3
+2023,15,Singapore Grand Prix,Marina Bay,VSC,44,45,2
+2023,16,Japanese Grand Prix,Suzuka,SC,1,4,4
+2023,16,Japanese Grand Prix,Suzuka,VSC,14,14,1
+2023,17,Qatar Grand Prix,Lusail,SC,1,4,4
+2023,19,Mexico City Grand Prix,Mexico City,VSC,5,5,1
+2023,19,Mexico City Grand Prix,Mexico City,SC,33,34,2
+2023,19,Mexico City Grand Prix,Mexico City,RED,34,34,1
+2023,19,Mexico City Grand Prix,Mexico City,SC,35,35,1
+2023,20,São Paulo Grand Prix,São Paulo,SC,1,2,2
+2023,20,São Paulo Grand Prix,São Paulo,RED,2,2,1
+2023,21,Las Vegas Grand Prix,Las Vegas,VSC,1,2,2
+2023,21,Las Vegas Grand Prix,Las Vegas,SC,3,6,4
+2023,21,Las Vegas Grand Prix,Las Vegas,SC,26,28,3
+2024,2,Saudi Arabian Grand Prix,Jeddah,SC,7,9,3
+2024,3,Australian Grand Prix,Melbourne,VSC,17,18,2
+2024,3,Australian Grand Prix,Melbourne,VSC,58,58,1
+2024,4,Japanese Grand Prix,Suzuka,RED,1,1,1
+2024,5,Chinese Grand Prix,Shanghai,VSC,22,23,2
+2024,5,Chinese Grand Prix,Shanghai,SC,23,26,4
+2024,5,Chinese Grand Prix,Shanghai,SC,27,31,5
+2024,6,Miami Grand Prix,Miami,VSC,23,23,1
+2024,6,Miami Grand Prix,Miami,SC,28,32,5
+2024,8,Monaco Grand Prix,Monaco,RED,1,1,1
+2024,8,Monaco Grand Prix,Monaco,SC,2,2,1
+2024,9,Canadian Grand Prix,Montréal,SC,25,29,5
+2024,9,Canadian Grand Prix,Montréal,SC,54,58,5
+2024,11,Austrian Grand Prix,Spielberg,VSC,66,66,1
+2024,17,Azerbaijan Grand Prix,Baku,VSC,51,51,1
+2024,19,United States Grand Prix,Austin,SC,3,5,3
+2024,20,Mexico City Grand Prix,Mexico City,SC,1,6,6
+2024,21,São Paulo Grand Prix,São Paulo,VSC,28,28,1
+2024,21,São Paulo Grand Prix,São Paulo,SC,30,32,3
+2024,21,São Paulo Grand Prix,São Paulo,RED,32,32,1
+2024,21,São Paulo Grand Prix,São Paulo,SC,39,42,4
+2024,23,Qatar Grand Prix,Lusail,SC,1,4,4
+2024,23,Qatar Grand Prix,Lusail,SC,35,39,5
+2024,23,Qatar Grand Prix,Lusail,VSC,40,40,1
+2024,23,Qatar Grand Prix,Lusail,SC,40,42,3
+2024,24,Abu Dhabi Grand Prix,Yas Island,VSC,2,3,2
+2025,1,Australian Grand Prix,Melbourne,SC,1,7,7
+2025,1,Australian Grand Prix,Melbourne,SC,34,41,8
+2025,1,Australian Grand Prix,Melbourne,SC,47,51,5
