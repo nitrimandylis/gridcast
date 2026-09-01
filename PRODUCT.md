@@ -11,13 +11,18 @@ Two calls per race weekend:
   for a predicted grid until the real qualifying model exists.
 - **Saturday**, from the actual grid after qualifying.
 
-Each call is committed to this repo as JSON before the race starts: the full
-P(driver, position) matrix, the derived P(win), P(podium), P(points) per
-driver, and run metadata. The commit history is the timestamp proof: every
-prediction demonstrably existed before the result.
+Each call is committed to this repo as JSON before the race starts, once per
+model: the full P(driver, position) matrix, the derived P(win), P(podium),
+P(points) per driver, and run metadata. The commit history is the timestamp
+proof: every prediction demonstrably existed before the result.
 
-The scorecard page is generated from the accumulated JSON and gets more
-convincing every fortnight without further work.
+Two models run side by side and both publish every weekend: the direct
+Plackett-Luce model and the Monte Carlo race simulator. The live season is
+their out-of-sample head-to-head.
+
+The scorecard is a static page in `docs/`, served by GitHub Pages. `score.py`
+computes RPS for every prediction with a result and writes JSON; the page only
+renders it, and gets more convincing every fortnight without further work.
 
 ## Why it exists
 
@@ -28,22 +33,36 @@ Two reasons, both real:
 
 ## Where it is headed
 
-**Phase 1, built. First public target 26 September 2026 (Azerbaijan GP).**
-A direct statistical model: Plackett-Luce, each driver's strength a linear
-function of grid position and season pace history. No simulation. Walk-forward
-backtest over rounds 4-12 scores 0.1340 mean RPS (Saturday call) against
-0.1655 for the grid-order baseline. First live call made for Monza, round 13.
-This is the benchmark everything later has to beat.
+**Phase 1, built.** A direct statistical model: Plackett-Luce, each driver's
+strength a linear function of grid position and season pace history. No
+simulation. Walk-forward backtest over rounds 4-12 scores 0.1340 mean RPS
+(Saturday call) and 0.1390 (Thursday call) against 0.1655 for the grid-order
+baseline. First live call made for Monza, round 13.
 
-**Phase 2, October 2026.**
-A Monte Carlo race simulator: per-driver pace and tyre degradation, a
-cost-based pit strategy optimiser, safety cars, retirements. It ships only if
-it beats Phase 1 on ranked probability score. If it does not, that is a real
-result and worth knowing.
+**Phase 2, built 1 September 2026.** A Monte Carlo race simulator: per-driver
+pace with a per-race form draw, per-driver per-compound tyre degradation, a
+minimum-race-time pit strategy search, safety cars, VSCs and red flags sampled
+per circuit, retirements split by owner, and one track-position parameter
+standing in for overtaking. Same walk-forward backtest: **0.1220** (Saturday)
+and **0.1271** (Thursday), so it beats the direct model on both calls. The
+real-strategy replay control scores 0.1211, which says strategy error is
+small and the remaining gap is pace and event error. Monaco is the one race
+the sim loses, as expected with no overtaking model. Two caveats on the
+number: the backtest is nine races, and two constants (pass pace, pooled form
+scatter) were tuned on those same races.
+
+**MVP publication, target 5 September 2026 (Monza qualifying).** Repo public
+under MIT, both models' JSON per call, GitHub Pages scorecard. The Monza
+Saturday call is the acceptance test.
+
+**Refinement, after publication.** Both models, judged on the live scorecard:
+per-circuit pass pace and pit loss, compound offsets from practice long runs,
+a real qualifying model for the Thursday call, a bookmaker baseline if odds
+can be collected.
 
 **Phase 3, if the residuals ask for it.**
-A pairwise overtaking model, P(pass | pace delta, circuit, DRS). Until then a
-single per-circuit grid-persistence parameter stands in.
+A pairwise overtaking model, P(pass | pace delta, circuit, DRS). Until then
+the single track-position parameter stands in.
 
 ## How it is judged
 
@@ -54,13 +73,13 @@ ranked probability score on driver-race rows, against two baselines:
 - the Phase 1 direct model
 
 The backtest is a smoke test. The real evidence is the live season: every race
-from Azerbaijan to Abu Dhabi is a genuine out-of-sample prediction, published
-before the event.
+from Monza to Abu Dhabi is a genuine out-of-sample prediction, published
+before the event, from both models.
 
 ## Not doing
 
 - A race game or a live timing viewer.
-- Red flag modelling in v1.
+- Car interaction: no dirty air, DRS or blocking. One calibration term stands in.
 - Packaging as an installable CLI. This is a personal pipeline.
 - Any claim of accuracy that a backtest alone supports.
 

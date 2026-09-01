@@ -3,47 +3,28 @@
 F1 race outcome prediction. Read PRODUCT.md for what it is. This file is the
 set of decisions that are already made, and the traps that cost time to find.
 
-## READ FIRST: unresolved decisions, grill Nick before building
+## READ FIRST: what is open, what is closed
 
-Thirteen decisions are locked (below; 11-13 resolved the former Phase 1
-blockers in the 2026-08-31 grill). The rest are NOT, and they were
-deliberately left open rather than forgotten.
+Eighteen decisions are locked (below). The 2026-09-01 grill closed the Phase 2
+blockers (4, 5, 6, 8, 11) and set the MVP bar: the simulator works end to end,
+every weekend publishes BOTH models, the repo is public with a GitHub Pages
+scorecard. Refinement of both models is a separate project after that.
 
-Run each as a grill, one question at a time, in the format he expects: the
-full written case first, then options, then your recommendation. Options
-without the case get rejected. Do not ask them all at once, and do not answer
-them yourself and proceed.
+Two decisions stay open on purpose. Run each as a grill, one question at a
+time, in the format he expects: the full written case first, then options,
+then your recommendation. Options without the case get rejected.
 
-### Resolve before Phase 2 (October)
-
-4. **Fork TUMFTM/race-simulation, or reimplement?** See the prior-art section.
-   Forking imports a validated engine and imposes LGPL on gridcast. That
-   collides with his default of MIT for public repos, and the licence has to
-   be chosen before the repo is published, not after.
-5. **Build the "real strategy replay" backtest control?** Replaying the
-   strategy teams actually used isolates strategy error from pace error. It is
-   the single most useful validation tool we do not have, and it is not free.
-6. **Do red flags go into the model?** v1 omits them, but the gate scan found
-   two in four sampled 2026 races. That is far commoner than the omission
-   assumed. See gate results below.
-7. **What is the real qualifying model?** October scope, entirely unspecified.
-   One-lap pace is not race pace and track evolution matters.
-
-### Housekeeping, but blocking publication
-
-8. **Licence.** Not chosen, and gated by question 4.
-9. **Publishing.** Repo is local only. `publish-repo` requires a README and a
-   LICENSE first, and neither exists. The scorecard depends on the repo being
-   public, so this cannot slip past the first live prediction.
+7. **What is the real qualifying model?** Refinement scope, unspecified.
+   One-lap pace is not race pace and track evolution matters. Until it
+   exists the Thursday grid is the season-average proxy (decision 12) and the
+   simulator draws the grid from each driver's scatter (decision 16).
 10. **A third baseline from bookmaker implied probabilities?** Proposed, never
     decided. Betting markets are the honest hard benchmark since no public F1
     forecast carries a track record. Needs an odds source that can be
     collected before each race, and if that is not practical the idea dies.
 
-### Scorecard, low urgency
-
-11. **What the results page actually shows.** Undesigned. It only matters once
-    there are two or three predictions to display.
+The race-weekend ritual (Thursday call, Saturday call, score after the race)
+is deliberately NOT tracked in Things. Only build work goes there.
 
 ## Environment
 
@@ -88,17 +69,25 @@ Before using any historical data, decide which of the two it is.
    lap and the Monte Carlo loses its variance.
 6. **Safety car: per-circuit rate from 2018-2026**, shrunk toward a
    street/permanent base rate. Sample occurrence, lap timing AND duration.
-   Model VSC separately from full SC. Red flags omitted from v1, but see
-   the gate results below: they are commoner in 2026 than assumed, so revisit
-   before Phase 2 ships.
+   Model VSC separately from full SC. **Red flags are in** (grilled
+   2026-09-01): ONE pooled rate, never per circuit (16 in 98 races is noise
+   per circuit), a free tyre change, gaps to zero, and the standing restart
+   re-draws the first-lap incident. `scripts/hazards.py`.
 7. **DNFs split by cause**, because the causes have different owners:
    mechanical (team; weak 2025 operational-quality prior, updated by 2026),
    first-lap incident (grid position and circuit, from long history, pools
-   across teams), mid-race collision (pooled across drivers).
-8. **Track position: one per-circuit grid-persistence parameter** blending
-   pace-derived order toward grid order. This is a calibration term, not an
-   overtaking model. Its job is to cancel the strategy optimiser's undercut
-   optimism. Mark it in code with its ceiling.
+   across teams), mid-race collision (pooled across drivers). As built: 2026
+   status strings say only "Retired", so mechanical and collision are one
+   per-team per-lap hazard; first-lap rate was flat across grid quartiles
+   (2.4-3.0%) so it is pooled by circuit only. `scripts/hazards.py`.
+8. **Track position: one grid-persistence parameter.** This is a calibration
+   term, not an overtaking model. Its job is to cancel the strategy
+   optimiser's undercut optimism. Mark it in code with its ceiling. As built
+   (2026-09-01) it is `PASS_PACE` in `sim.py`: each grid slot costs 1.0 s per
+   lap of race distance, re-issued by current order whenever a safety car
+   bunches the field. A rank blend was tried first and rejected: it hard-caps
+   a fast car's ceiling at its grid rank and zeroes probabilities. Backtest
+   RPS is flat from 0.6 s/lap up. Per-circuit values are the next step.
 9. **Predictions are committed as JSON before lights out.** Git history is the
    timestamp proof. No database, no timestamping service.
 10. **Not a CLI.** Personal pipeline. Do not package it.
@@ -113,12 +102,31 @@ Before using any historical data, decide which of the two it is.
     and the Thursday model is trained as its own fit with that feature
     (grilled 2026-08-31). Never feed a guessed grid into the Saturday-trained
     model: it learned the weight of a KNOWN grid and would be overconfident.
-    Upgrades in October when the real qualifying model replaces the proxy.
+    Upgrades when the real qualifying model replaces the proxy (decision 7).
 13. **The prediction JSON stores the full P(driver, position) matrix, the
     derived P(win)/P(podium)/P(points), and run metadata** (event, call type,
     model version, races trained on, timestamp) (grilled 2026-08-31).
     Headlines-only was rejected: RPS can never be computed from data that was
     never written, and git history means no regeneration after the race.
+14. **Reimplement, do not fork TUMFTM** (closed 2026-09-01). The simulator is
+    our own code, nothing LGPL is in the tree, so the licence is MIT per
+    Nick's default.
+15. **The real-strategy replay control exists** (`observed_plan` in `sim.py`,
+    the `replay` column in the backtest). Sim minus replay is strategy error;
+    replay minus truth is pace and event error. Replay reads the race being
+    scored, so it is a control, never a predictor.
+16. **Both models publish every weekend** (grilled 2026-09-01). `predict.py`
+    writes `-direct.json` and `-sim.json` per call, same schema, `model`
+    field says which. The live season is the out-of-sample head-to-head. The
+    Thursday sim draws each driver's grid from their own season scatter, the
+    simulator's version of decision 12.
+17. **The scorecard is a static page in `docs/` on GitHub Pages.** JS fetches
+    `docs/manifest.json`, `docs/results.json` and `predictions/*.json` and
+    only renders. RPS is computed in Python by `score.py`, never in JS. No
+    framework, no build.
+18. **MVP means it works and publishes.** The sim is not gated on beating the
+    direct model; the number is published either way (it did beat it: see
+    PRODUCT.md). Refinement of both models is the next project.
 
 ## Gate results, verified 2026-08-31
 
@@ -164,8 +172,8 @@ Do not fork it for Phase 1. Read it before Phase 2 and steal two things:
   as a backtest control. That isolates strategy error from pace error, and we
   do not currently have that.
 
-Note if forking is ever considered: LGPL is copyleft, so gridcast would have
-to be LGPL rather than MIT.
+Forking was ruled out on 2026-09-01 (decision 14); this section stays as the
+record of why.
 
 **Published accuracy numbers in this space are mostly not real.** Two patterns
 to never reproduce:
