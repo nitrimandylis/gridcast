@@ -120,10 +120,14 @@ Before using any historical data, decide which of the two it is.
     field says which. The live season is the out-of-sample head-to-head. The
     Thursday sim draws each driver's grid from their own season scatter, the
     simulator's version of decision 12.
-17. **The scorecard is a static page in `docs/` on GitHub Pages.** JS fetches
-    `docs/manifest.json`, `docs/results.json` and `predictions/*.json` and
-    only renders. RPS is computed in Python by `score.py`, never in JS. No
-    framework, no build.
+17. **The scorecard is a static page in `site/` on GitHub Pages** (renamed
+    from `docs/` 2026-09-01). Deployed by the official Pages Actions workflow,
+    which uploads `site/` plus `predictions/` as one artifact, so the page
+    fetches the very JSON files git timestamps. Branch-based `/docs` serving
+    was rejected: it cannot see `predictions/`. JS fetches `site/manifest.json`,
+    `site/results.json` and `predictions/*.json` and only renders. RPS is
+    computed in Python by `score.py`, never in JS. No framework, no build
+    step; the workflow only uploads.
 18. **MVP means it works and publishes.** The sim is not gated on beating the
     direct model; the number is published either way (it did beat it: see
     PRODUCT.md). Refinement of both models is the next project.

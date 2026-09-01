@@ -3,10 +3,10 @@
 Reads predictions/*.json, joins each to the finishing order in
 data/driver_races.csv, and writes two files the static page fetches:
 
-    docs/results.json    RPS per prediction file, per driver and averaged,
+    site/results.json    RPS per prediction file, per driver and averaged,
                          next to the grid-order baseline on the same race,
                          plus a running mean per model and call
-    docs/manifest.json   every prediction file with its metadata, scored or
+    site/manifest.json   every prediction file with its metadata, scored or
                          not, because a browser cannot list a directory
 
 All the arithmetic is here, in Python, reusing backtest.rps. The page only
@@ -26,7 +26,7 @@ from backtest import rps
 ROOT = Path(__file__).resolve().parent.parent
 PREDICTIONS = ROOT / "predictions"
 RACES = ROOT / "data" / "driver_races.csv"
-DOCS = ROOT / "docs"
+SITE = ROOT / "site"
 
 
 def score_prediction(pred: dict, race: pd.DataFrame) -> dict:
@@ -87,9 +87,9 @@ def main() -> None:
         s["rps"] = round(s["rps"] / s["n"], 4)
         s["baseline_rps"] = round(s["baseline_rps"] / s["n"], 4)
 
-    DOCS.mkdir(exist_ok=True)
-    (DOCS / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
-    (DOCS / "results.json").write_text(json.dumps(
+    SITE.mkdir(exist_ok=True)
+    (SITE / "manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
+    (SITE / "results.json").write_text(json.dumps(
         {"summary": sorted(summary.values(), key=lambda s: (s["call"], s["model"])),
          "results": results}, indent=1) + "\n")
     print(f"{len(manifest)} predictions, {len(results)} scored")

@@ -43,7 +43,7 @@ nick@gridcast:~$ python scripts/predict.py "Italian Grand Prix" thursday
 | 04 | **race simulator** | lap by lap: form draw, degradation fit on 11,000 lap rows, pit plan search over 80,000 candidates, safety cars, red flags, retirements. cars do not interact, on purpose |
 | 05 | **walk-forward backtest** | every test race predicted only from races before it, scored with ranked probability score against the grid-order baseline. a replay column runs the strategies teams actually used, to separate strategy error from pace error |
 | 06 | **prediction json** | the full P(driver, position) matrix plus headlines and metadata, one file per model, committed before the race. what was never written cannot be scored |
-| 07 | **scorecard** | `score.py` scores every prediction with a result and writes json; a static page in `docs/` renders it |
+| 07 | **scorecard** | `score.py` scores every prediction with a result and writes json; a static page in `site/` renders it |
 
 ## 🚀 Run it
 
@@ -76,7 +76,7 @@ The backtest prints per-race and mean RPS for the baseline, both direct calls, b
 | simulator | `scripts/sim.py` | pit plan search, the lap loop, events, retirements, the track-position term |
 | backtest | `scripts/backtest.py` | walk-forward scoring of everything, including the replay control |
 | predict | `scripts/predict.py` | trains both models fresh and writes two prediction files for a named event |
-| score | `scripts/score.py` | RPS for every committed prediction with a result, written to `docs/` for the page |
+| score | `scripts/score.py` | RPS for every committed prediction with a result, written to `site/` for the page |
 | predictions | `predictions/` | the record. two json files per call, committed before each race |
 
 Every script with non-trivial logic carries a self-check under `__main__` (`score.py --check`).
