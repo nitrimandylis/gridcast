@@ -5,7 +5,7 @@
 // Four pages share this file. `document.body.dataset.page` picks which
 // renderer runs, so each page only fetches what it needs.
 
-const REPO_URL = "";  // filled in at publication, e.g. "https://github.com/nitrimandylis/gridcast"
+const REPO_URL = "https://github.com/nitrimandylis/gridcast";
 
 // Team palette from apex (lib/colors.ts), keyed by FastF1 team name. These are
 // each constructor's own colours, so they are data, not design tokens.
