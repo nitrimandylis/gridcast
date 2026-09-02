@@ -1,0 +1,104 @@
+/* Hallmark · tokens · theme: studied-DNA (source: https://centralhq.com/)
+ * paper band: dark (16.4%) · display style: condensed-caps-grotesk · accent hue: warm-red (29deg)
+ *
+ * Every value here was measured off the source's served CSS and converted to
+ * OKLCH. The greys are a warm ladder, not neutral: the paper is a warm black
+ * and the ink is cream, never white. That single choice is most of the look.
+ *
+ * Every colour and every font on this site comes through a name in this file.
+ */
+:root {
+  /* ---- paper: warm near-black, twelve steps up to a mid grey ---- */
+  --color-paper:    oklch(16.4% 0.005  85);   /* #0e0e0e page, tinted to the 0.005 chroma floor */
+  --color-paper-2:  oklch(21.3% 0.005  85);   /* #191918 raised surface, same */
+  --color-paper-3:  oklch(24.8% 0.004  85);   /* #22211f card */
+  --color-paper-4:  oklch(30.2% 0.006  78);   /* #302e2b hover */
+
+  /* ---- rules ---- */
+  --color-rule:      oklch(27.7% 0.006  92);  /* #292825 hairline */
+  --color-rule-firm: oklch(38.7% 0.010  92);  /* #46443e visible divider */
+
+  /* ---- ink: cream, not white. Contrast vs paper noted per token. ---- */
+  --color-ink:     oklch(89.0% 0.033  87);    /* #e4dac3  13.9:1 */
+  --color-ink-2:   oklch(79.0% 0.029  89);    /* #c2baa6  10.0:1 */
+  --color-muted:   oklch(65.1% 0.023  89);    /* #958f80   6.0:1, AA body */
+  --color-dim:     oklch(50.4% 0.016  89);    /* #68645a   3.3:1, large type only */
+
+  /* ---- accent. Two reds on purpose: the fill is the source's #e50000,
+         which is 4.0:1 and fails AA as text, so accent text uses the
+         brighter one at 4.5:1. Never swap them. ---- */
+  --color-accent:      oklch(57.9% 0.238  29); /* #e50000 fills, marks, bars */
+  --color-accent-text: oklch(61.1% 0.248  29); /* #f50a0a links and accent text */
+  --color-accent-ink:  oklch(98.0% 0.025  89); /* #fff8e6 on an accent fill, 4.6:1 */
+  --color-good:        oklch(88.2% 0.201 159); /* #03ffa7 the source's mint, used for wins */
+  --color-focus:       oklch(88.2% 0.201 159);
+
+  /* ---- type: one family split by width, plus a mono outlier.
+         Archivo at wdth 62 / wght 700 uppercase plays the condensed-display
+         role; Archivo at wdth 100 plays the body role; Geist Mono carries
+         every machine-written number and label. The source uses commercial
+         Klim faces (American Grotesk Condensed, Söhne, Söhne Mono); these
+         are the free equivalents by role, not lookalikes. ---- */
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-data:    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --width-condensed: 62;
+  --width-normal: 100;
+
+  /* ---- scale ---- */
+  --text-xs:   0.6875rem;
+  --text-sm:   0.8125rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.375rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  2.25rem;
+  --text-display:   clamp(2.75rem, 9.5vw, 6.25rem);   /* 100px cap, as measured */
+  --text-display-s: clamp(2rem, 6vw, 3.5rem);
+
+  /* ---- space: the source's own gap ladder, measured off the live page ---- */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;    /* 24 */
+  --space-xl:  2.25rem;   /* 36 */
+  --space-2xl: 3rem;      /* 48 */
+  --space-3xl: 4rem;      /* 64 */
+  --space-4xl: 7rem;      /* 112 */
+  --space-5xl: 9rem;      /* 144 */
+
+  /* The source separates major blocks with a fixed 200px void rather than
+     section padding. That is the page's whole rhythm. */
+  --void: clamp(4rem, 13vw, 12.5rem);
+  /* The source runs an 800px column because its content is marketing copy.
+     Ours is 20x20 probability matrices and a ledger, so the spine is wider;
+     prose is held back to --measure instead. */
+  --spine: 72rem;         /* 1152px content column */
+  /* The reading column. The frame above stays 1152px so the nav, the footer
+     and every block share one left edge, but only the probability matrices
+     actually need that width. Everything else stops here and leaves the right
+     margin empty on purpose. This is the source's own 800px column. */
+  --column: 50rem;        /* 800px */
+  --page-gutter: clamp(1rem, 4vw, 2rem);
+  --measure: 62ch;
+
+  /* ---- rules and radii: small on surfaces, full pill on buttons ---- */
+  --rule-hair: 1px;
+  --rule-firm: 2px;
+  --radius-cell: 3px;
+  --radius-card: 8px;
+  --radius-pill: 999px;
+
+  /* ---- motion ---- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  /* ---- N12 nav geometry ---- */
+  --banner-h: 40px;
+  --bar-h: 60px;
+  --z-nav: 500;
+}

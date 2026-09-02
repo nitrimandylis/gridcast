@@ -1,17 +1,21 @@
-// gridcast scorecard. Fetches JSON written by scripts/score.py and
-// scripts/predict.py and renders it. No maths here beyond formatting: every
-// score on this page was computed in Python and committed.
+// gridcast. Fetches JSON written by scripts/score.py and scripts/predict.py
+// and renders it. No maths here beyond formatting: every score on this site
+// was computed in Python and committed.
+//
+// Four pages share this file. `document.body.dataset.page` picks which
+// renderer runs, so each page only fetches what it needs.
 
 const REPO_URL = "";  // filled in at publication, e.g. "https://github.com/nitrimandylis/gridcast"
 
-// Team palette from apex (lib/colors.ts), keyed by FastF1 team name.
+// Team palette from apex (lib/colors.ts), keyed by FastF1 team name. These are
+// each constructor's own colours, so they are data, not design tokens.
 const TEAM_COLORS = {
   "Mercedes": "#00D2BE", "Ferrari": "#E8002D", "McLaren": "#FF8000",
   "Red Bull Racing": "#3671C6", "Alpine": "#0090FF", "Racing Bulls": "#6692FF",
   "Haas F1 Team": "#B6BABD", "Williams": "#64C4FF", "Audi": "#F50537",
   "Aston Martin": "#229971", "Cadillac": "#C5A253",
 };
-const MODEL_LABEL = { direct: "DIRECT · PLACKETT-LUCE", sim: "SIM · MONTE CARLO" };
+const MODEL_LABEL = { direct: "Direct · Plackett-Luce", sim: "Sim · Monte Carlo" };
 // FastF1 location names that differ from the keys in circuits.json (apex's outlines).
 const CIRCUIT_ALIAS = { "Montréal": "Montreal", "Spa-Francorchamps": "Spa", "Yas Island": "Abu Dhabi",
   "Yas Marina": "Abu Dhabi", "Singapore": "Marina Bay", "Monaco": "Monte Carlo", "Sakhir": "Bahrain" };
@@ -34,7 +38,29 @@ async function getJSON(path) {
   return res.json();
 }
 
-// ---- circuit outline and countdown ----------------------------------------
+// The latest call is the highest round, and within it Saturday beats Thursday.
+function latestCall(manifest) {
+  const order = { thursday: 0, saturday: 1 };
+  let best = null;
+  for (const m of manifest) {
+    if (!best || m.round > best.round || (m.round === best.round && order[m.call] > order[best.call])) best = m;
+  }
+  return best ? manifest.filter(m => m.round === best.round && m.call === best.call) : [];
+}
+
+// Both the home page and the probabilities page need the same bundle.
+async function loadCall(withCircuits) {
+  const [manifest, circuits] = await Promise.all([
+    getJSON("manifest.json"),
+    withCircuits ? getJSON("circuits.json").catch(() => ({})) : Promise.resolve({}),
+  ]);
+  const entries = latestCall(manifest);
+  const preds = {};
+  await Promise.all(entries.map(async e => { preds[modelKey(e.model)] = await getJSON(`predictions/${e.file}`); }));
+  return { entries, preds, circuits };
+}
+
+// ---- shared fragments ------------------------------------------------------
 
 // One lap of real car position data, fitted into a 100x100 box (apex's TrackMap).
 function circuitSvg(points) {
@@ -50,31 +76,27 @@ function circuitSvg(points) {
 
 function countdown(iso) {
   const target = new Date(iso).getTime();
-  const box = (v, l, accent) => `<div class="box ${accent ? "accent" : ""}"><div class="v">${String(v).padStart(2, "0")}</div><div class="l">${l}</div></div>`;
+  const unit = (v, l) => `<div class="unit"><div class="v">${String(v).padStart(2, "0")}</div><div class="l">${l}</div></div>`;
   return () => {
     let left = Math.floor((target - Date.now()) / 1000);
-    if (left <= 0) return `<div class="done">Lights out has passed. The result is scored the evening after the race.</div>`;
+    if (left <= 0) return `<p class="done">Lights out has passed. The result is scored the evening after the race.</p>`;
     const d = Math.floor(left / 86400); left -= d * 86400;
     const h = Math.floor(left / 3600); left -= h * 3600;
     const m = Math.floor(left / 60), s = left - m * 60;
-    return box(d, "DAYS") + box(h, "HRS") + box(m, "MIN") + box(s, "SEC", true);
+    return unit(d, "days") + unit(h, "hrs") + unit(m, "min") + unit(s, "sec");
   };
 }
 
-// ---- hero -----------------------------------------------------------------
-
-// The latest call is the highest round, and within it Saturday beats Thursday.
-function latestCall(manifest) {
-  const order = { thursday: 0, saturday: 1 };
-  let best = null;
-  for (const m of manifest) {
-    if (!best || m.round > best.round || (m.round === best.round && order[m.call] > order[best.call])) best = m;
-  }
-  return best ? manifest.filter(m => m.round === best.round && m.call === best.call) : [];
+function startClock(iso) {
+  const clock = document.getElementById("clock");
+  if (!clock || !iso) return;
+  const tick = countdown(iso);
+  clock.innerHTML = tick();
+  setInterval(() => { clock.innerHTML = tick(); }, 1000);
 }
 
 function stamp(entry) {
-  if (!entry) return `<li><b>${MODEL_LABEL.direct.split(" ")[0]}</b> no file</li>`;
+  if (!entry) return "";
   const key = modelKey(entry.model);
   if (!entry.commit) return `<li><b>${key}</b> <span class="bad">not yet committed</span></li>`;
   const short = entry.commit.slice(0, 7);
@@ -82,21 +104,102 @@ function stamp(entry) {
   return `<li><b>${key}</b> committed ${when(entry.committed_at)} · ${link}</li>`;
 }
 
+function entryHead(any, circuits) {
+  const outline = circuitSvg(circuits[CIRCUIT_ALIAS[any.circuit] || any.circuit]);
+  const at = any.race_start ? new Date(any.race_start).toLocaleString("en-GB",
+    { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit", timeZoneName: "short" }) : "";
+  const trained = any.trained_on_rounds;
+  // The title leads. Putting the outline in a left column ahead of the heading
+  // is the tag-left/heading-right silhouette, so it sits at the far end instead.
+  return `<div class="entry-head">
+    <div>
+      <h2 class="entry-title">${esc(any.event)}</h2>
+      <p class="entry-sub">${esc(any.circuit)}${at ? " · lights out " + at : ""} · both models trained on rounds ${trained[0]}–${trained[trained.length - 1]}</p>
+    </div>
+    <div class="clock" id="clock" aria-hidden="true"></div>
+    ${outline || "<span></span>"}
+  </div>`;
+}
+
+// ---- home ------------------------------------------------------------------
+
+// Top five by combined P(win), so the home page shows who both models like
+// without repeating the whole matrix.
+function leaders(preds) {
+  const both = preds.direct && preds.sim;
+  const rows = (preds.direct || preds.sim).drivers.map(d => d.driver);
+  const get = (key, code) => preds[key]?.drivers.find(x => x.driver === code);
+  const score = code => (get("direct", code)?.p_win ?? 0) + (get("sim", code)?.p_win ?? 0);
+  const top = [...rows].sort((a, b) => score(b) - score(a)).slice(0, 5);
+  let h = `<table><caption>Probability of winning. The full matrix, and podium and points, are on the probabilities page.</caption>
+    <thead><tr><th>Driver</th>${both ? "<th>Direct</th><th>Sim</th>" : "<th>P(win)</th>"}</tr></thead><tbody>`;
+  for (const code of top) {
+    const d = get("direct", code), s = get("sim", code);
+    const team = (d || s).team;
+    h += `<tr><td><i class="stripe" style="--team:${teamColor(team)}"></i>${esc(code)}</td>`;
+    h += both ? `<td>${pct(d.p_win)}</td><td>${pct(s.p_win)}</td>` : `<td>${pct((d || s).p_win)}</td>`;
+    h += `</tr>`;
+  }
+  return h + `</tbody></table>`;
+}
+
+// One line per call: who is ahead so far, and by how much. No number is
+// invented — with nothing scored, the slot says so.
+function tally(summary) {
+  if (!summary.length) {
+    return `<p class="empty">No race scored yet. The record opens the evening after the next Grand Prix.</p>`;
+  }
+  let h = `<div class="tally">`;
+  for (const call of ["thursday", "saturday"]) {
+    const rows = summary.filter(s => s.call === call);
+    if (!rows.length) continue;
+    const by = Object.fromEntries(rows.map(s => [modelKey(s.model), s]));
+    const base = rows[0].baseline_rps;
+    const best = Math.min(...rows.map(s => s.rps));
+    for (const key of ["direct", "sim"]) {
+      if (!by[key]) continue;
+      const cls = by[key].rps > base ? "bad" : by[key].rps === best ? "win" : "";
+      h += `<div><span class="n ${cls}">${rps(by[key].rps)}</span><span class="k">${key}, ${call}, ${by[key].n} race${by[key].n === 1 ? "" : "s"}</span></div>`;
+    }
+    h += `<div><span class="n">${rps(base)}</span><span class="k">baseline, ${call}</span></div>`;
+  }
+  return h + `</div>`;
+}
+
+async function renderHome() {
+  const el = document.getElementById("next");
+  const [{ entries, preds, circuits }, scores] = await Promise.all([loadCall(true), getJSON("results.json")]);
+  if (!entries.length) {
+    el.innerHTML = `<p class="empty">No prediction committed yet. The first call lands the Thursday before the next Grand Prix.</p>`;
+    return;
+  }
+  const any = preds.direct || preds.sim;
+  el.innerHTML = `<p class="strap"><span class="accent">Next up</span><span>Round ${any.round}</span><span>${esc(any.call)} call</span></p>
+    ${entryHead(any, circuits)}
+    <div class="leaders">${leaders(preds)}</div>
+    ${tally(scores.summary)}
+    <a class="more" href="probabilities.html">Full probability matrices &rarr;</a>`;
+  startClock(any.race_start);
+}
+
+// ---- probabilities ---------------------------------------------------------
+
 function heatmap(pred, key) {
   const rows = [...pred.drivers].sort((a, b) => b.p_win - a.p_win);
   const max = Math.max(...rows.flatMap(d => d.p_position));
   const n = rows[0].p_position.length;
-  let h = `<div class="heat"><p class="label">${MODEL_LABEL[key]}</p><div class="scroll"><table><thead><tr><th></th>`;
+  let h = `<figure class="fig"><p class="fig-title">${MODEL_LABEL[key]}</p><div class="scroll"><table><thead><tr><th></th>`;
   for (let p = 1; p <= n; p++) h += `<th>${p}</th>`;
-  h += `<th class="n first">WIN</th><th class="n">PODIUM</th><th class="n">POINTS</th></tr></thead><tbody>`;
+  h += `<th class="n first">win</th><th class="n">podium</th><th class="n">points</th></tr></thead><tbody>`;
   for (const d of rows) {
-    h += `<tr><td class="d"><i class="stripe" style="background:${teamColor(d.team)}"></i>${esc(d.driver)}</td>`;
-    for (const p of d.p_position) {
-      h += `<td class="c" title="${esc(d.driver)} P${d.p_position.indexOf(p) + 1}: ${(p * 100).toFixed(1)}%"><div style="background:rgba(225,6,0,${(p / max).toFixed(3)})"></div></td>`;
-    }
+    h += `<tr><td class="d"><i class="stripe" style="--team:${teamColor(d.team)}"></i>${esc(d.driver)}</td>`;
+    // The cell's ink is a fraction of the accent token; CSS does the mixing.
+    d.p_position.forEach((p, i) => {
+      h += `<td class="c" title="${esc(d.driver)} P${i + 1}: ${(p * 100).toFixed(1)}%"><div style="--f:${(p / max).toFixed(3)}"></div></td>`;
+    });
     h += `<td class="n first">${pct(d.p_win)}</td><td class="n">${pct(d.p_podium)}</td><td class="n">${pct(d.p_points)}</td></tr>`;
   }
-  h += `</tbody></table></div><p class="scale">rows sorted by P(win) · brightest cell ${pct(max)}</p></div>`;
+  h += `</tbody></table></div><figcaption>Rows sorted by P(win). The darkest cell on this table is ${pct(max)}.</figcaption></figure>`;
   return h;
 }
 
@@ -110,7 +213,7 @@ function bars(preds, metric) {
   for (const c of codes) {
     const d = direct[c], s = sim[c];
     h += `<div class="bar-row">
-      <span class="code"><i class="stripe" style="background:${teamColor(d.team)}"></i>${esc(c)}</span>
+      <span class="code"><i class="stripe" style="--team:${teamColor(d.team)}"></i>${esc(c)}</span>
       <span class="track">
         <span class="bar direct" style="width:${(100 * d[metric] / max).toFixed(1)}%"></span>
         <span class="bar sim" style="width:${(100 * s[metric] / max).toFixed(1)}%"></span>
@@ -121,81 +224,66 @@ function bars(preds, metric) {
   return h;
 }
 
-function renderHero(entries, preds, circuits) {
-  const hero = document.getElementById("hero");
-  if (!entries.length) { hero.innerHTML = `<p class="muted">No prediction committed yet.</p>`; return; }
+async function renderProbabilities() {
+  const el = document.getElementById("matrices");
+  const { entries, preds, circuits } = await loadCall(true);
+  if (!entries.length) {
+    el.innerHTML = `<p class="empty">No prediction committed yet. The first call lands the Thursday before the next Grand Prix.</p>`;
+    return;
+  }
   const any = preds.direct || preds.sim;
-  const trained = any.trained_on_rounds;
   const byKey = Object.fromEntries(entries.map(e => [modelKey(e.model), e]));
-  const outline = circuitSvg(circuits[CIRCUIT_ALIAS[any.circuit] || any.circuit]);
-  const when = any.race_start ? new Date(any.race_start).toLocaleString("en-GB",
-    { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit", timeZoneName: "short" }) : "";
-  let h = `<div class="event">
-      ${outline || "<span></span>"}
-      <div>
-        <p class="kicker">NEXT UP · ROUND ${any.round} · ${any.call.toUpperCase()} CALL</p>
-        <h2>${esc(any.event)}</h2>
-        <p class="sub">${esc(any.circuit)}${when ? " · lights out " + when : ""} · both models trained on rounds ${trained[0]}–${trained[trained.length - 1]}</p>
-      </div>
-      <div class="clock" id="clock"></div>
-    </div>
+  let h = `<p class="strap"><span class="accent">Round ${any.round}</span><span>${esc(any.call)} call</span></p>
+    ${entryHead(any, circuits)}
     <ul class="stamps">${stamp(byKey.direct)}${stamp(byKey.sim)}</ul>`;
   if (preds.direct && preds.sim) {
-    h += `<div class="heatmaps">${heatmap(preds.direct, "direct")}${heatmap(preds.sim, "sim")}</div>`;
-    h += `<div class="bars">
-      <div class="seg" role="group" aria-label="Metric">${Object.entries(METRICS).map(([k, v]) =>
-        `<button type="button" data-metric="${k}" aria-pressed="${k === "p_win"}">${v}</button>`).join("")}</div>
-      <div class="legend"><span class="direct"><i></i>direct</span><span class="sim"><i></i>sim</span></div>
-      <div id="bar-list">${bars(preds, "p_win")}</div></div>`;
+    h += `<div class="figs">${heatmap(preds.direct, "direct")}${heatmap(preds.sim, "sim")}</div>
+      <div class="bars">
+        <div class="seg" role="group" aria-label="Metric">${Object.entries(METRICS).map(([k, v]) =>
+          `<button type="button" data-metric="${k}" aria-pressed="${k === "p_win"}">${v}</button>`).join("")}</div>
+        <div class="legend"><span class="direct"><i></i>direct</span><span class="sim"><i></i>sim</span></div>
+        <div id="bar-list">${bars(preds, "p_win")}</div>
+      </div>`;
   } else {
     const key = preds.direct ? "direct" : "sim";
-    h += `<div class="heatmaps" style="grid-template-columns:1fr">${heatmap(preds[key], key)}</div>`;
+    h += `<div class="figs">${heatmap(preds[key], key)}</div>`;
   }
-  hero.innerHTML = h;
-  if (any.race_start) {
-    const tick = countdown(any.race_start), clock = document.getElementById("clock");
-    clock.innerHTML = tick();
-    setInterval(() => { clock.innerHTML = tick(); }, 1000);
-  }
-  for (const btn of hero.querySelectorAll(".seg button")) {
+  el.innerHTML = h;
+  startClock(any.race_start);
+  for (const btn of el.querySelectorAll(".seg button")) {
     btn.addEventListener("click", () => {
-      for (const b of hero.querySelectorAll(".seg button")) b.setAttribute("aria-pressed", b === btn);
+      for (const b of el.querySelectorAll(".seg button")) b.setAttribute("aria-pressed", b === btn);
       document.getElementById("bar-list").innerHTML = bars(preds, btn.dataset.metric);
     });
   }
 }
 
-// ---- record strip ---------------------------------------------------------
+// ---- record ----------------------------------------------------------------
 
-function renderRecord(summary) {
-  const el = document.getElementById("record");
+function standings(summary) {
   if (!summary.length) {
-    el.innerHTML = `<div class="empty">No race scored yet. The record starts the evening after the next Grand Prix, and it only ever grows.</div>`;
-    return;
+    return `<p class="empty">No race scored yet. The record opens the evening after the next Grand Prix, and from then on it only grows.</p>`;
   }
-  let h = "";
+  let h = `<div class="standings">`;
   for (const call of ["thursday", "saturday"]) {
     const rows = summary.filter(s => s.call === call);
     if (!rows.length) continue;
     const by = Object.fromEntries(rows.map(s => [modelKey(s.model), s]));
     const n = rows[0].n, base = rows[0].baseline_rps;
     const best = Math.min(...rows.map(s => s.rps));
-    h += `<div class="cell"><p class="label">${call.toUpperCase()} CALL · ${n} RACE${n === 1 ? "" : "S"}</p>`;
+    h += `<div class="col"><p class="col-h">${call} call · ${n} race${n === 1 ? "" : "s"}</p>`;
     for (const key of ["direct", "sim"]) {
       if (!by[key]) continue;
       const cls = (by[key].rps === best ? "win " : "") + (by[key].rps > base ? "bad" : "");
       h += `<div class="row ${cls}"><span>${key}</span><b>${rps(by[key].rps)}</b></div>`;
     }
-    h += `<div class="row"><span>baseline, grid order</span><b>${rps(base)}</b></div></div>`;
+    h += `<div class="row base"><span>baseline, grid order</span><b>${rps(base)}</b></div></div>`;
   }
-  el.innerHTML = h;
+  return h + `</div>`;
 }
 
-// ---- race table -----------------------------------------------------------
-
-function renderRaces(results, summary) {
-  const el = document.getElementById("races");
-  if (!results.length) { el.innerHTML = ""; el.hidden = true; return; }
+function ledger(results, summary) {
+  if (!results.length) return "";
   // One row per round and call, with the two model files folded in.
   const groups = {};
   for (const r of results) {
@@ -213,19 +301,18 @@ function renderRaces(results, summary) {
 
   const mark = (x, base, best) => x == null ? `<span>–</span>`
     : `<span class="${x > base ? "bad" : ""} ${x === best ? "win" : ""}">${rps(x)}</span>`;
-  let h = `<p class="label">SCORED RACES · RPS, LOWER IS BETTER</p>
-    <div class="head"><span>RND</span><span>RACE</span><span>DIRECT</span><span>SIM</span><span>BASELINE</span></div>`;
+  let h = `<div class="ledger-head"><span>rnd</span><span>race</span><span>direct</span><span>sim</span><span>baseline</span></div>`;
   for (const g of rows) {
     const best = Math.min(...[g.direct, g.sim].filter(x => x != null));
     h += `<details class="race"><summary>
       <span class="rnd">${g.round}</span>
-      <span>${esc(g.event)}<span class="call">${g.call}</span></span>
+      <span><span class="ev">${esc(g.event)}</span><span class="call">${esc(g.call)} call</span></span>
       ${mark(g.direct, g.baseline, best)}${mark(g.sim, g.baseline, best)}<span>${rps(g.baseline)}</span>
     </summary><div class="drivers">
-      <div class="drv hd"><span class="code">DRIVER</span><span>GRID</span><span>FINISH</span><span>DIRECT</span><span>SIM</span></div>`;
+      <div class="drv hd"><span class="code">driver</span><span>grid</span><span>finish</span><span>direct</span><span>sim</span></div>`;
     const drivers = Object.entries(g.drivers).sort((a, b) => a[1].finish - b[1].finish);
     for (const [code, d] of drivers) {
-      h += `<div class="drv"><span class="code"><i class="stripe" style="background:${teamColor(d.team)}"></i>${esc(code)}</span>
+      h += `<div class="drv"><span class="code"><i class="stripe" style="--team:${teamColor(d.team)}"></i>${esc(code)}</span>
         <span>P${d.grid}</span><span>P${d.finish}</span><span>${rps(d.direct)}</span><span>${rps(d.sim)}</span></div>`;
     }
     h += `</div></details>`;
@@ -236,31 +323,81 @@ function renderRaces(results, summary) {
     const by = Object.fromEntries(rowsFor.map(s => [modelKey(s.model), s.rps]));
     const best = Math.min(...Object.values(by));
     const base = rowsFor[0].baseline_rps;
-    h += `<div class="total"><span></span><span>mean, ${call} call, ${rowsFor[0].n} races</span>
+    h += `<div class="ledger-total"><span></span><span>mean, ${call} call, ${rowsFor[0].n} races</span>
       ${mark(by.direct, base, best)}${mark(by.sim, base, best)}<span>${rps(base)}</span></div>`;
   }
-  el.hidden = false;
-  el.innerHTML = h;
+  return h;
 }
 
-// ---- boot -----------------------------------------------------------------
+async function renderRecord() {
+  const scores = await getJSON("results.json");
+  document.getElementById("standings").innerHTML = standings(scores.summary);
+  document.getElementById("ledger").innerHTML = ledger(scores.results, scores.summary);
+}
+
+// ---- nav (N12: status banner over a retracting bar) ------------------------
+
+// The banner is not decoration: it carries the live state of the pipeline,
+// which is the one genuinely time-bound thing on the site.
+async function fillBanner() {
+  const el = document.getElementById("banner-text");
+  if (!el) return;
+  try {
+    const entries = latestCall(await getJSON("manifest.json"));
+    if (!entries.length) { el.textContent = "No call committed yet"; return; }
+    const e = entries[0];
+    const models = entries.length > 1 ? "both models" : modelKey(e.model);
+    el.innerHTML = `Round ${e.round} <span class="sep">/</span> <b>${esc(e.event)}</b>
+      <span class="sep">/</span> ${esc(e.call)} call committed, ${models}`;
+  } catch {
+    el.textContent = "gridcast";
+  }
+}
+
+function wireNav() {
+  const nav = document.getElementById("nav");
+  if (!nav) return;
+  let last = window.scrollY;
+  addEventListener("scroll", () => {
+    const y = window.scrollY;
+    // near the top the banner is always shown; otherwise scroll direction decides
+    if (y < 48) nav.classList.remove("is-compact");
+    else if (y > last) nav.classList.add("is-compact");
+    else nav.classList.remove("is-compact");
+    last = y;
+  }, { passive: true });
+
+  document.getElementById("banner-x").addEventListener("click", () => {
+    // zero the height rather than animating it, so main's padding calc reflows
+    // with no leftover gap
+    document.documentElement.style.setProperty("--banner-h", "0px");
+    nav.classList.add("is-dismissed");
+  });
+}
+
+// ---- boot ------------------------------------------------------------------
+
+const PAGES = { home: renderHome, probabilities: renderProbabilities, record: renderRecord };
+
+function wireRepoLink() {
+  if (!REPO_URL) return;
+  const link = document.getElementById("repo-link");
+  link.href = REPO_URL;
+  link.hidden = false;
+  document.getElementById("foot-repo").innerHTML =
+    `<a href="${REPO_URL}">${REPO_URL.replace("https://", "")}</a>`;
+}
 
 async function main() {
-  if (REPO_URL) {
-    const link = document.getElementById("repo-link");
-    link.href = REPO_URL; link.hidden = false;
-    document.getElementById("foot-repo").innerHTML = `Code and every prediction file: <a href="${REPO_URL}">${REPO_URL.replace("https://", "")}</a>.`;
-  }
-  const [manifest, scores, circuits] = await Promise.all([
-    getJSON("manifest.json"), getJSON("results.json"), getJSON("circuits.json").catch(() => ({}))]);
-  const entries = latestCall(manifest);
-  const preds = {};
-  await Promise.all(entries.map(async e => { preds[modelKey(e.model)] = await getJSON(`predictions/${e.file}`); }));
-  renderHero(entries, preds, circuits);
-  renderRecord(scores.summary);
-  renderRaces(scores.results, scores.summary);
+  wireRepoLink();
+  wireNav();
+  fillBanner();
+  const render = PAGES[document.body.dataset.page];
+  if (render) await render();
 }
 
 main().catch(err => {
-  document.getElementById("hero").innerHTML = `<p class="muted bad">Could not load the data: ${esc(err.message)}</p>`;
+  const slot = document.getElementById("next") || document.getElementById("matrices")
+    || document.getElementById("standings");
+  if (slot) slot.innerHTML = `<p class="empty bad">Could not load the data: ${esc(err.message)}</p>`;
 });

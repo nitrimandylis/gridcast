@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · gridcast</title>
+<meta name="description" content="How gridcast predicts Formula 1 races: two models, the 2026 data rules, and how the scoring works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e0e'/%3E%3Cpath d='M6 24 L16 8 L26 24' stroke='%23e50000' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="about">
+
+<header class="nav" id="nav">
+  <div class="nav-banner" id="banner">
+    <p id="banner-text">Reading the latest call</p>
+    <button class="nav-x" id="banner-x" type="button" aria-label="Dismiss announcement">&times;</button>
+  </div>
+  <div class="nav-bar">
+    <div class="nav-inner">
+      <a class="wordmark" href="index.html">gridcast</a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="probabilities.html">Probabilities</a></li>
+          <li><a href="record.html">Record</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="#" id="repo-link" hidden>Source</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band band-ink">
+    <div>
+      <p class="claim"><span class="dim">This is not a tip sheet.</span><br>It is a distribution,<br>written down first.</p>
+      <p class="after">gridcast publishes a probability for every driver in every finishing position, before every Formula&nbsp;1 race, and then scores itself in public. The commit history is the timestamp. Nothing here was written after the fact.</p>
+    </div>
+  </section>
+
+  <section class="band band-raised">
+    <div>
+      <p class="claim">Two models. <span class="dim">No favourite.</span></p>
+      <p class="after">The <strong>direct model</strong> is Plackett-Luce. Each driver gets a strength from grid position and season pace; the winner is drawn by softmax, removed, and the next place drawn again. Fit by maximum likelihood on observed finishing orders. Two weights, nothing to hide behind.</p>
+      <p class="after">The <strong>simulator</strong> runs ten thousand races lap by lap: a form draw per driver, tyre degradation fit on eleven thousand laps, a minimum-race-time pit strategy search, safety cars and red flags sampled at each circuit's historic rate, retirements split by owner. Cars do not interact, on purpose. One calibration term stands in for overtaking rather than pretending to model it.</p>
+      <p class="after">Both publish every weekend. The live season is their out-of-sample head-to-head, and the loser is on the record too.</p>
+    </div>
+  </section>
+
+  <section class="band band-ink">
+    <div>
+      <p class="claim">Two rules decide<br><span class="dim">what data counts.</span></p>
+      <div class="rules">
+        <div>
+          <h2>Car properties do not transfer</h2>
+          <p>Pace, degradation and power-unit reliability are fit on 2026 data only. The 2026 regulation change means those older cars no longer exist, so their numbers are worthless here.</p>
+        </div>
+        <div>
+          <h2>Track properties do transfer</h2>
+          <p>Safety car rates, first-lap incident rates and how much grid position persists are functions of barriers, run-off and layout, so they use 2018 to 2026 history. That is what rescues the model from having one observation per circuit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-accent">
+    <div>
+      <p class="claim">Ranked probability score.<br><span class="dim">Not accuracy.</span></p>
+      <p class="after">Finishing position is ordered, so predicting P4 when the answer was P12 should hurt more than predicting P4 when the answer was P5. Brier cannot tell those apart; RPS can. Every score is computed in Python on the committed JSON and printed next to the grid-order baseline, on driver-race rows rather than on races.</p>
+    </div>
+  </section>
+
+  <section class="band band-raised">
+    <div>
+      <p class="claim">Two calls<br>a weekend.</p>
+      <p class="after">The <strong>Thursday</strong> call runs on each driver's season-average grid position, standing in for a predicted grid until a real qualifying model exists. The <strong>Saturday</strong> call runs on the grid that actually came out of qualifying. The race model takes the grid as an input and never assumes it.</p>
+      <p class="after">Raw lap times are contaminated, so the cleaning matters more than the model on top: in-laps, out-laps, the first two racing laps and anything under a non-green track status all come out before a single parameter is fit.</p>
+    </div>
+  </section>
+
+  <section class="band band-ink">
+    <div>
+      <p class="claim">Not a product.<br><span class="dim">Not a package.</span><br>Not a bet.</p>
+      <p class="after">A personal pipeline in plain numpy and scipy. The scorecard exists so the misses are on the record alongside the hits, which is the only part of this that is hard to fake.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <p class="foot-line">Every forecast here <span class="dim">existed</span> before the race it describes.</p>
+    <div class="foot-meta">
+      <span>gridcast</span>
+      <span>numpy, scipy, FastF1</span>
+      <span>outlines from <a href="https://github.com/nitrimandylis/apex">apex</a></span>
+      <span>MIT</span>
+      <span id="foot-repo"></span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

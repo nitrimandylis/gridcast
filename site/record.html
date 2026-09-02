@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>gridcast · F1 race probabilities, committed before lights out</title>
-<meta name="description" content="Two models predict every Formula 1 race before it starts. Every prediction is committed to git first.">
+<title>Record · gridcast</title>
+<meta name="description" content="Ranked probability score for every gridcast prediction with a result, against the grid-order baseline.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="home">
+<body data-page="record">
 
 <header class="nav" id="nav">
   <div class="nav-banner" id="banner">
@@ -24,9 +24,9 @@
       <a class="wordmark" href="index.html">gridcast</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="probabilities.html">Probabilities</a></li>
-          <li><a href="record.html">Record</a></li>
+          <li><a href="record.html" aria-current="page">Record</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="#" id="repo-link" hidden>Source</a></li>
         </ul>
@@ -36,20 +36,13 @@
 </header>
 
 <main>
-  <section class="marquee">
-    <h1 style="--i:0"><span class="dim">Every race</span><br>called before<br>lights out</h1>
-    <p class="sub" style="--i:1">Two models, one probability for every driver in every finishing position, committed to git before the cars line up.</p>
-    <div class="cta" style="--i:2">
-      <a class="btn" href="#next-call">See the next call</a>
-      <a class="btn btn-quiet" href="about.html">How it works</a>
-    </div>
-  </section>
+  <header class="index-head">
+    <h1 style="--i:0">Record</h1>
+    <p style="--i:1">Every call that now has a result, scored against the baseline that says you finish where you start. Lower is better. Open a race for the per-driver scores behind it.</p>
+  </header>
 
-  <div class="void"></div>
-
-  <section id="next-call" aria-label="The next race">
-    <div id="next"><p class="waiting">Reading the next call.</p></div>
-  </section>
+  <div id="standings"></div>
+  <div id="ledger"></div>
 </main>
 
 <footer class="foot">
