@@ -174,9 +174,11 @@ async function renderHome() {
     return;
   }
   const any = preds.direct || preds.sim;
-  el.innerHTML = `<p class="strap"><span class="accent">Next up</span><span>Round ${any.round}</span><span>${esc(any.call)} call</span></p>
+  el.innerHTML = `<div class="panel">
+    <p class="strap"><span class="accent">Next up</span><span>Round ${any.round}</span><span>${esc(any.call)} call</span></p>
     ${entryHead(any, circuits)}
     <div class="leaders">${leaders(preds)}</div>
+    </div>
     ${tally(scores.summary)}
     <a class="more" href="probabilities.html">Full probability matrices &rarr;</a>`;
   startClock(any.race_start);
@@ -233,9 +235,11 @@ async function renderProbabilities() {
   }
   const any = preds.direct || preds.sim;
   const byKey = Object.fromEntries(entries.map(e => [modelKey(e.model), e]));
-  let h = `<p class="strap"><span class="accent">Round ${any.round}</span><span>${esc(any.call)} call</span></p>
+  let h = `<div class="panel">
+    <p class="strap"><span class="accent">Round ${any.round}</span><span>${esc(any.call)} call</span></p>
     ${entryHead(any, circuits)}
-    <ul class="stamps">${stamp(byKey.direct)}${stamp(byKey.sim)}</ul>`;
+    <ul class="stamps">${stamp(byKey.direct)}${stamp(byKey.sim)}</ul>
+    </div>`;
   if (preds.direct && preds.sim) {
     h += `<div class="figs">${heatmap(preds.direct, "direct")}${heatmap(preds.sim, "sim")}</div>
       <div class="bars">
