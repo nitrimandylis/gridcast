@@ -679,11 +679,13 @@ code { font-family: var(--font-data); }
 }
 .fig tbody tr:hover td.d { background: var(--color-paper-4); }
 .fig td.c div {
-  /* the cell takes whatever width the table hands it and stays square, so
-     twenty positions fill the spine at any window size */
+  /* the cell takes whatever width the table hands it, so twenty positions
+     fill the spine at any window size. The height is fixed and shorter than
+     the width on purpose: twenty-two square rows made the card taller than
+     the screen, and a heatmap reads the same from a rectangle. */
   width: 100%;
-  min-width: 22px;
-  aspect-ratio: 1;
+  min-width: 20px;
+  height: 22px;
   border-radius: var(--radius-cell);
   background: color-mix(in oklab, var(--color-accent) calc(var(--f) * 100%), var(--color-paper-3));
 }
