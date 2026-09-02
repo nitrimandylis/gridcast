@@ -70,16 +70,18 @@
   --space-5xl: 9rem;      /* 144 */
 
   /* The source separates major blocks with a fixed 200px void rather than
-     section padding. That is the page's whole rhythm. */
-  --void: clamp(4rem, 13vw, 12.5rem);
+     section padding. That is the page's whole rhythm. Ours is shorter: the
+     source is a marketing page with four screens of copy, this one has tables
+     that have to be comparable without a scroll between them. */
+  --void: clamp(3rem, 7vw, 6.5rem);
   /* The source runs an 800px column because its content is marketing copy.
      Ours is 20x20 probability matrices and a ledger, so the spine is wider;
      prose is held back to --measure instead. */
-  --spine: 72rem;         /* 1152px content column */
-  /* The reading column. The frame above stays 1152px so the nav, the footer
-     and every block share one left edge, but only the probability matrices
-     actually need that width. Everything else stops here and leaves the right
-     margin empty on purpose. This is the source's own 800px column. */
+  --spine: 78rem;         /* 1248px content column */
+  /* The narrow column, kept for the two places that genuinely want one: the
+     hero's call card and the record page's side rail. Blocks do NOT cap here
+     by default. Capping every block at 800px inside a 1248px frame left the
+     whole site leaning into its own left half. */
   --column: 50rem;        /* 800px */
   --page-gutter: clamp(1rem, 4vw, 2rem);
   --measure: 62ch;
@@ -101,4 +103,11 @@
   --banner-h: 40px;
   --bar-h: 60px;
   --z-nav: 500;
+}
+
+/* On a very wide monitor a 1248px frame reads as a strip down the middle.
+   One step up is enough: the matrices get the room and the prose stays held
+   at --measure inside it. */
+@media (min-width: 100rem) {
+  :root { --spine: 86rem; }
 }

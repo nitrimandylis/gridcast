@@ -166,21 +166,51 @@ function tally(summary) {
   return h + `</div>`;
 }
 
+// The fold's card. Stacked, not spread: it sits in a half-width column beside
+// the headline, and it carries the commit stamps because "committed before
+// lights out" is the claim the headline is making.
+function callCard(any, circuits, entries) {
+  const outline = circuitSvg(circuits[CIRCUIT_ALIAS[any.circuit] || any.circuit]);
+  const at = any.race_start ? new Date(any.race_start).toLocaleString("en-GB",
+    { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit", timeZoneName: "short" }) : "";
+  return `<div class="call">
+    <p class="strap"><span class="accent">Next up</span><span>Round ${any.round}</span><span>${esc(any.call)} call</span></p>
+    <div class="call-body">
+      <div>
+        <h2 class="entry-title">${esc(any.event)}</h2>
+        <p class="entry-sub">${esc(any.circuit)}${at ? " · lights out " + at : ""}</p>
+      </div>
+      ${outline}
+    </div>
+    <div class="clock" id="clock" aria-hidden="true"></div>
+    <ul class="stamps">${entries.map(stamp).join("")}</ul>
+  </div>`;
+}
+
 async function renderHome() {
-  const el = document.getElementById("next");
+  const fold = document.getElementById("next");
+  const board = document.getElementById("board");
   const [{ entries, preds, circuits }, scores] = await Promise.all([loadCall(true), getJSON("results.json")]);
   if (!entries.length) {
-    el.innerHTML = `<p class="empty">No prediction committed yet. The first call lands the Thursday before the next Grand Prix.</p>`;
+    fold.innerHTML = `<p class="empty">No prediction committed yet. The first call lands the Thursday before the next Grand Prix.</p>`;
+    board.innerHTML = "";
     return;
   }
   const any = preds.direct || preds.sim;
-  el.innerHTML = `<div class="panel">
-    <p class="strap"><span class="accent">Next up</span><span>Round ${any.round}</span><span>${esc(any.call)} call</span></p>
-    ${entryHead(any, circuits)}
-    <div class="leaders">${leaders(preds)}</div>
+  const byKey = Object.fromEntries(entries.map(e => [modelKey(e.model), e]));
+  fold.innerHTML = callCard(any, circuits, [byKey.direct, byKey.sim].filter(Boolean));
+  board.innerHTML = `<div class="board">
+    <div class="board-main">
+      <h2 class="sec-h">Who both models like · trained on rounds ${any.trained_on_rounds[0]}–${any.trained_on_rounds[any.trained_on_rounds.length - 1]}</h2>
+      <div class="leaders">${leaders(preds)}</div>
+      <a class="more" href="probabilities.html">Full probability matrices &rarr;</a>
     </div>
-    ${tally(scores.summary)}
-    <a class="more" href="probabilities.html">Full probability matrices &rarr;</a>`;
+    <aside class="board-side">
+      <h2 class="sec-h">The record so far</h2>
+      ${tally(scores.summary)}
+      <a class="more" href="record.html">Every race scored &rarr;</a>
+    </aside>
+  </div>`;
   startClock(any.race_start);
 }
 

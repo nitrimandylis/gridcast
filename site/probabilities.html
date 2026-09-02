@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e0e'/%3E%3Cpath d='M6 24 L16 8 L26 24' stroke='%23e50000' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e0e'/%3E%3Cg fill='%23c2baa6'%3E%3Crect x='17' y='6.5' width='9' height='5'/%3E%3Crect x='5' y='11' width='9' height='5'/%3E%3Crect x='17' y='15.5' width='9' height='5'/%3E%3Crect x='5' y='20' width='9' height='5'/%3E%3Crect x='17' y='24.5' width='9' height='5'/%3E%3C/g%3E%3Crect x='5' y='2' width='9' height='5' fill='%23e50000'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
   </div>
   <div class="nav-bar">
     <div class="nav-inner">
-      <a class="wordmark" href="index.html">gridcast</a>
+      <a class="wordmark" href="index.html"><svg class="mark" viewBox="0 0 13 23" aria-hidden="true"><rect class="pole" x="0" y="0" width="5" height="3"/><rect x="8" y="4" width="5" height="3"/><rect x="0" y="8" width="5" height="3"/><rect x="8" y="12" width="5" height="3"/><rect x="0" y="16" width="5" height="3"/><rect x="8" y="20" width="5" height="3"/></svg>gridcast</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
@@ -38,10 +38,58 @@
 <main>
   <header class="cat-head">
     <h1 style="--i:0">Probabilities</h1>
-    <p style="--i:1">Two models, one race, the same matrix from each. Twenty drivers against twenty finishing positions; the darker the cell, the more probability sits there.</p>
+    <p style="--i:1">Two models, one race, the same matrix from each. Twenty drivers against twenty finishing positions, committed to git before the cars line up. The darker the cell, the more probability sits there.</p>
   </header>
 
   <div id="matrices"><p class="waiting">Reading the next call.</p></div>
+
+  <section class="notes">
+    <div>
+      <h2>How to read a row</h2>
+      <p class="kicker">The matrix</p>
+    </div>
+    <div class="body">
+      <p>Every row is one driver and sums to one, because the driver finishes somewhere. A row with one dark cell and nineteen faint ones is a confident call. A row smeared evenly across ten cells is the model saying it does not know, which is a real answer and not a failure to produce one.</p>
+      <p>The three columns on the right are the same row added up in the ways people actually argue about: the first cell is <strong>win</strong>, the first three are <strong>podium</strong>, the first ten are <strong>points</strong>. They are not separate predictions and they cannot disagree with the matrix.</p>
+      <p>Nothing here is a tip. A driver at 8 percent to win is a driver who wins roughly one of these weekends in twelve, and the honest test of that number is a whole season of them, not this race.</p>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div>
+      <h2>Why the direct model looks flat</h2>
+      <p class="kicker">Plackett-Luce</p>
+    </div>
+    <div class="body">
+      <p>The direct model knows two things: where each driver starts and how they have gone this season. With that little information it will rarely put more than about a tenth of the probability on any one driver, so its rows spread wide and its favourites are separated by two or three points rather than by twenty.</p>
+      <p>Read it as a ranking with error bars rather than a prediction of a result. Its ordering is usually sensible and its confidence is deliberately low, which is what a two-feature model should look like. A model this simple that claimed 40 percent on a winner would be lying about how much it knows.</p>
+      <p>Where it fails is anything that is not in its features. It cannot see that a fast car starts out of position, because the only thing it knows about the grid is the number.</p>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div>
+      <h2>Why the simulator looks certain</h2>
+      <p class="kicker">Monte Carlo</p>
+    </div>
+    <div class="body">
+      <p>The simulator runs the race ten thousand times and counts. When the same driver wins four thousand of those runs, the number says forty percent, and it means it: pace, tyre wear, the pit stops each car chooses and the safety cars that reshuffle them all pointed the same way in most runs.</p>
+      <p>That sharpness is earned when the car really is quicker, and it is a liability when it is not. The simulator has no overtaking model, so it is at its worst where position is hard to change and its confidence should be discounted most: Monaco, Singapore, Hungary. It is at its best where a tyre advantage converts into a place, which is most of the calendar.</p>
+      <p>Its wide rows are informative too. A driver spread across P6 to P14 is usually a driver whose race hangs on one strategy branch or on whether a safety car falls in their window.</p>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div>
+      <h2>When the two disagree</h2>
+      <p class="kicker">The head-to-head</p>
+    </div>
+    <div class="body">
+      <p>Disagreement is the useful part of publishing both. The bars above put the two side by side per driver, and the gaps have a grammar worth learning.</p>
+      <p>The simulator far above the direct model on a driver usually means race pace the grid does not reflect: the sim watched them come through on tyre life in run after run. The direct model above the simulator usually means the sim has buried a driver whose recovery depends on passing cars it refuses to model. Both agreeing is the strongest signal on the page, because the two models share no machinery and almost no assumptions.</p>
+      <p>Neither is trusted in advance. Every race is scored against the other and against the grid-order baseline the evening after it runs, and the running total is on <a href="record.html">the record</a>. How both models are built, and where each one is known to break, is on <a href="about.html">the about page</a>.</p>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">

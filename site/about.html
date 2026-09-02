@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e0e'/%3E%3Cpath d='M6 24 L16 8 L26 24' stroke='%23e50000' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0e0e'/%3E%3Cg fill='%23c2baa6'%3E%3Crect x='17' y='6.5' width='9' height='5'/%3E%3Crect x='5' y='11' width='9' height='5'/%3E%3Crect x='17' y='15.5' width='9' height='5'/%3E%3Crect x='5' y='20' width='9' height='5'/%3E%3Crect x='17' y='24.5' width='9' height='5'/%3E%3C/g%3E%3Crect x='5' y='2' width='9' height='5' fill='%23e50000'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
   </div>
   <div class="nav-bar">
     <div class="nav-inner">
-      <a class="wordmark" href="index.html">gridcast</a>
+      <a class="wordmark" href="index.html"><svg class="mark" viewBox="0 0 13 23" aria-hidden="true"><rect class="pole" x="0" y="0" width="5" height="3"/><rect x="8" y="4" width="5" height="3"/><rect x="0" y="8" width="5" height="3"/><rect x="8" y="12" width="5" height="3"/><rect x="0" y="16" width="5" height="3"/><rect x="8" y="20" width="5" height="3"/></svg>gridcast</a>
       <nav aria-label="Primary">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
@@ -39,31 +39,70 @@
   <section class="band band-ink">
     <div>
       <p class="claim"><span class="dim">This is not a tip sheet.</span><br>It is a distribution,<br>written down first.</p>
-      <p class="after">gridcast publishes a probability for every driver in every finishing position, before every Formula&nbsp;1 race, and then scores itself in public. The commit history is the timestamp. Nothing here was written after the fact.</p>
+      <div class="body">
+        <p class="after">gridcast publishes a probability for every driver in every finishing position, before every Formula&nbsp;1 race, and then scores itself in public. The commit history is the timestamp. Nothing here was written after the fact.</p>
+        <p class="after">Two models run against each other all season. Neither is a favourite, both publish every weekend, and the one that loses stays on the page. The whole point is that the misses are as visible as the hits, which is the part of a forecasting project that is hard to fake.</p>
+        <p class="after">Everything below is how it actually works, including what it cannot do.</p>
+      </div>
     </div>
   </section>
 
   <section class="band band-raised">
     <div>
       <p class="claim">Two models. <span class="dim">No favourite.</span></p>
-      <p class="after">The <strong>direct model</strong> is Plackett-Luce. Each driver gets a strength from grid position and season pace; the winner is drawn by softmax, removed, and the next place drawn again. Fit by maximum likelihood on observed finishing orders. Two weights, nothing to hide behind.</p>
-      <p class="after">The <strong>simulator</strong> runs ten thousand races lap by lap: a form draw per driver, tyre degradation fit on eleven thousand laps, a minimum-race-time pit strategy search, safety cars and red flags sampled at each circuit's historic rate, retirements split by owner. Cars do not interact, on purpose. One calibration term stands in for overtaking rather than pretending to model it.</p>
-      <p class="after">Both publish every weekend. The live season is their out-of-sample head-to-head, and the loser is on the record too.</p>
+      <div class="body">
+        <h3>The direct model</h3>
+        <p class="after">Plackett-Luce. Every driver gets a <strong>strength</strong>, a linear function of their features: grid position and season pace history. The probability of winning is the softmax over those strengths. Remove the winner, renormalise over who is left, and draw again for second, and so on down to twentieth.</p>
+        <p class="after">That structure is the reason the output is coherent without any patching. A race is a ranking, so the win probabilities sum to one, and exactly one driver occupies each position. The weights are fit by maximum likelihood on the finishing orders actually observed, in plain numpy and scipy. Ordinal regression was the fallback. A boosted tree was rejected: it would overfit two hundred and forty outcome rows and nobody could read the result.</p>
+        <h3>The simulator</h3>
+        <p class="after">Ten thousand runs of the race, one lap at a time. Each run draws a form deviation per driver, then plays the race out: tyre degradation, fuel burn, a pit strategy chosen by search, safety cars, virtual safety cars, red flags and retirements. Counting how often each driver finishes in each position gives the same matrix the direct model emits, from a completely different direction.</p>
+        <p class="after">The two are not variations on one model. They fail differently, which is the point of running both.</p>
+      </div>
+      <dl class="specs">
+        <div><dt>Direct, Saturday call</dt><dd><b>0.1340</b>mean RPS, walk-forward over rounds 4 to 12</dd></div>
+        <div><dt>Simulator, Saturday call</dt><dd><b>0.1220</b>same races, same protocol</dd></div>
+        <div><dt>Grid-order baseline</dt><dd><b>0.1655</b>finish order equals grid order</dd></div>
+        <div><dt>Real-strategy replay</dt><dd><b>0.1211</b>control: the sim handed the strategies teams actually used</dd></div>
+      </dl>
     </div>
   </section>
 
   <section class="band band-ink">
     <div>
       <p class="claim">Two rules decide<br><span class="dim">what data counts.</span></p>
+      <div class="body">
+        <p class="after">Almost every modelling decision here follows from one question asked before any historical data is used: is this a property of the car, or a property of the track?</p>
+      </div>
       <div class="rules">
         <div>
           <h2>Car properties do not transfer</h2>
-          <p>Pace, degradation and power-unit reliability are fit on 2026 data only. The 2026 regulation change means those older cars no longer exist, so their numbers are worthless here.</p>
+          <p>Pace, degradation and power-unit reliability are fit on 2026 data only. The 2026 regulation change means those older cars no longer exist in any useful sense, so their numbers are worthless here, however tempting the extra sample size is.</p>
         </div>
         <div>
           <h2>Track properties do transfer</h2>
-          <p>Safety car rates, first-lap incident rates and how much grid position persists are functions of barriers, run-off and layout, so they use 2018 to 2026 history. That is what rescues the model from having one observation per circuit.</p>
+          <p>Safety car rates, first-lap incident rates and how much grid position persists are functions of barriers, run-off and layout, so they use 2018 to 2026 history. That is what rescues the model from having exactly one observation per circuit in the current regulations.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-raised">
+    <div>
+      <p class="claim">Inside the sim,<br><span class="dim">one lap at a time.</span></p>
+      <div class="body">
+        <h3>Pace, per driver, never per team</h3>
+        <p class="after">Each driver carries their own pace term and their own degradation slope per dry compound; intermediates and wets are pooled because there are too few laps to do otherwise. There is no team term. Once every driver has a parameter a team term is collinear with them and buys nothing, and worse, it erases the thing the strategy search consumes: teammates diverge most in degradation, because setup and driving style are theirs alone.</p>
+        <p class="after">Those parameters are fit on lap rows, roughly eleven thousand of them, not on race outcomes. Per-driver parameters are cheap at that scale.</p>
+        <h3>The cleaning matters more than the model</h3>
+        <p class="after">Raw lap times are contaminated. In-laps, out-laps, the first two racing laps and every lap under a non-green track status come out before a single parameter is fit, and what is left is corrected for fuel load, compound and tyre age. A pace model fit on uncleaned laps is measuring traffic and safety cars, not cars.</p>
+        <h3>Strategy is a search, not a rule</h3>
+        <p class="after">Every stint plan is chosen by enumerating one, two and three-stop plans over candidate pit laps and taking the minimum total race time. A threshold rule like "pit when the tyre is this old" is what produces a hundred stops in a race, because it never compares the roughly twenty-three second cost of a green-flag stop against what the stop is supposed to gain.</p>
+        <p class="after">The plan is re-solved whenever race control changes the sums. Under a safety car the pit loss falls to about twelve seconds, and that flips the answer, which is why real races reshuffle behind one. Each car solves separately, or all twenty stop on the same lap and the Monte Carlo loses the variance that is the entire output.</p>
+        <h3>Events are sampled, not assumed</h3>
+        <p class="after">Safety car rates come from each circuit's own 2018 to 2026 history, shrunk toward a street or permanent base rate so that one dramatic year does not dominate. Occurrence, lap and duration are all sampled, and virtual safety cars are modelled separately because they cost a different amount of time. Red flags get one pooled rate across all circuits: sixteen in ninety-eight races is not enough to estimate per circuit, and pretending otherwise would be fitting noise. A red flag gives a free tyre change, closes the gaps to zero and re-runs the first-lap incident draw at the standing restart.</p>
+        <p class="after">Retirements are split by who owns them. A per-team per-lap hazard covers mechanical and mid-race collision, since 2026 timing data reports both as "Retired". First-lap incidents are pooled by circuit only: the rate turned out flat across grid quartiles, between 2.4 and 3.0 percent, so a grid-position term would have been invented rather than measured.</p>
+        <h3>The one honest compromise</h3>
+        <p class="after">Cars do not interact. There is no dirty air, no DRS, no blocking. In place of an overtaking model there is a single calibration term: each grid slot costs a car a fixed amount of lap time over the race, re-issued by running order whenever a safety car bunches the field. Its job is narrow, to cancel the strategy search's optimism about undercuts, and it is marked in the code with its own ceiling. A rank blend was tried first and thrown out: it capped a fast car at its starting rank, which is the opposite of what a race does.</p>
       </div>
     </div>
   </section>
@@ -71,22 +110,44 @@
   <section class="band band-accent">
     <div>
       <p class="claim">Ranked probability score.<br><span class="dim">Not accuracy.</span></p>
-      <p class="after">Finishing position is ordered, so predicting P4 when the answer was P12 should hurt more than predicting P4 when the answer was P5. Brier cannot tell those apart; RPS can. Every score is computed in Python on the committed JSON and printed next to the grid-order baseline, on driver-race rows rather than on races.</p>
+      <div class="body">
+        <p class="after">Finishing position is ordered, so a miss has a size. Predicting P4 for a driver who finished twelfth should hurt more than predicting P4 for a driver who finished fifth. Brier score cannot tell those two apart. RPS can, because it scores the cumulative distribution rather than the individual cells.</p>
+        <p class="after">Validation is walk-forward: fit on rounds one to k, predict round k+1, never the reverse. Scores are computed on driver-race rows, about two hundred and forty of them, not on races, because twelve numbers cannot separate two models. Every score is computed in Python from the committed JSON and printed next to the grid-order baseline, which is the honest floor: if a model cannot beat "everyone finishes where they started", it has produced nothing.</p>
+        <p class="after">Two published numbers in this field are worth naming as anti-examples. An R-squared of 0.99 predicting finishing position means post-race features leaked into the inputs. And "78 percent accuracy predicting podiums" is worse than saying nobody gets a podium, which scores 85 percent. Accuracy on rare events is not a measurement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-ink">
+    <div>
+      <p class="claim">Two calls<br>a weekend.</p>
+      <div class="body">
+        <p class="after">The <strong>Thursday</strong> call runs on each driver's season-average grid position, standing in for a predicted grid until a real qualifying model exists. One-lap pace is not race pace, and track evolution across a session is real, so that model is being built rather than guessed at.</p>
+        <p class="after">The <strong>Saturday</strong> call runs on the grid that actually came out of qualifying. The race model always takes the grid as an input and never assumes it.</p>
+        <p class="after">The Thursday model is fit as its own model on its own feature. Feeding a guessed grid into a model trained on known grids would be the subtle version of the leakage above: it learned the weight of a fact, so handing it a guess makes it overconfident by exactly that weight. The simulator does the same thing its own way, by drawing each driver's grid slot from their season scatter instead of a single average.</p>
+      </div>
     </div>
   </section>
 
   <section class="band band-raised">
     <div>
-      <p class="claim">Two calls<br>a weekend.</p>
-      <p class="after">The <strong>Thursday</strong> call runs on each driver's season-average grid position, standing in for a predicted grid until a real qualifying model exists. The <strong>Saturday</strong> call runs on the grid that actually came out of qualifying. The race model takes the grid as an input and never assumes it.</p>
-      <p class="after">Raw lap times are contaminated, so the cleaning matters more than the model on top: in-laps, out-laps, the first two racing laps and anything under a non-green track status all come out before a single parameter is fit.</p>
+      <p class="claim">What it<br><span class="dim">cannot do.</span></p>
+      <div class="body">
+        <p class="after">The backtest is nine races. Two constants in the simulator, the track-position term and the pooled form scatter, were tuned on those same nine, so the backtest number flatters itself. This is why the live season is the real evidence and the backtest is only a smoke test.</p>
+        <p class="after">Monaco is the race the simulator loses, which is exactly what a model with no overtaking should do at the circuit where overtaking does not happen.</p>
+        <p class="after">Setup is unobservable. No wing level, differential, brake bias or ride height data exists publicly, and the effect is real. That is irreducible noise, so it widens the intervals rather than adding a parameter that would fit it spuriously.</p>
+        <p class="after">And there is no qualifying model yet, no bookmaker baseline yet, and no pairwise overtaking model. Each is a known gap with a known cost, not something the page is quiet about.</p>
+      </div>
     </div>
   </section>
 
   <section class="band band-ink">
     <div>
       <p class="claim">Not a product.<br><span class="dim">Not a package.</span><br>Not a bet.</p>
-      <p class="after">A personal pipeline in plain numpy and scipy. The scorecard exists so the misses are on the record alongside the hits, which is the only part of this that is hard to fake.</p>
+      <div class="body">
+        <p class="after">A personal pipeline in plain numpy and scipy, MIT licensed, nothing forked. The scorecard exists so the record is public whichever way it goes.</p>
+        <p class="after">Start with the <a href="probabilities.html">current probabilities</a>, or read <a href="record.html">the record</a>.</p>
+      </div>
     </div>
   </section>
 </main>
