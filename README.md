@@ -43,7 +43,7 @@ nick@gridcast:~$ python scripts/predict.py "Italian Grand Prix" thursday
 | 04 | **race simulator** | lap by lap: form draw, degradation fit on 11,000 lap rows, pit plan search over 80,000 candidates, safety cars, red flags, retirements. cars do not interact, on purpose |
 | 05 | **walk-forward backtest** | every test race predicted only from races before it, scored with ranked probability score against the grid-order baseline. a replay column runs the strategies teams actually used, to separate strategy error from pace error |
 | 06 | **prediction json** | the full P(driver, position) matrix plus headlines and metadata, one file per model, committed before the race. what was never written cannot be scored |
-| 07 | **scorecard** | `score.py` scores every prediction with a result and writes json; a static page in `site/` renders it |
+| 07 | **scorecard** | `score.py` scores every prediction with a result and writes json; four static pages in `site/` render it, counting down to lights out until the race starts |
 
 ## 🚀 Run it
 
@@ -87,6 +87,8 @@ On GitHub Pages the workflow in `.github/workflows/pages.yml` copies `prediction
 | predict | `scripts/predict.py` | trains both models fresh and writes two prediction files for a named event |
 | score | `scripts/score.py` | RPS for every committed prediction with a result, written to `site/` for the page |
 | predictions | `predictions/` | the record. two json files per call, committed before each race |
+| scorecard | `site/` | four pages, no framework and no build step: the current call, the record, how to read the probabilities, and the method. `app.js` only fetches and renders |
+| circuit outlines | `site/circuits.json` | track shapes drawn next to each call, from [apex](https://github.com/nitrimandylis/apex) |
 
 Every script with non-trivial logic carries a self-check under `__main__` (`score.py --check`).
 

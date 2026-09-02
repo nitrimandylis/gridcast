@@ -20,9 +20,11 @@ Two models run side by side and both publish every weekend: the direct
 Plackett-Luce model and the Monte Carlo race simulator. The live season is
 their out-of-sample head-to-head.
 
-The scorecard is a static page in `site/`, served by GitHub Pages. `score.py`
-computes RPS for every prediction with a result and writes JSON; the page only
-renders it, and gets more convincing every fortnight without further work.
+The scorecard is four static pages in `site/`, served by GitHub Pages: the
+current call with a countdown to lights out, the record, how to read the
+probabilities, and the method. `score.py` computes RPS for every prediction
+with a result and writes JSON; the pages only render it, and get more
+convincing every fortnight without further work.
 
 ## Why it exists
 
