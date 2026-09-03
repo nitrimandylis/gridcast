@@ -622,6 +622,101 @@ code { font-family: var(--font-data); }
 .stamps b { color: var(--color-ink-2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 .stamps code { color: var(--color-ink-2); }
 
+/* ---- predicted order · starting-grid formation ---------------------------
+   The staggered two-column formation: odd positions (P1, P3, P5) sit left,
+   even positions (P2, P4, P6) indent right, like a real F1 starting grid. */
+
+.grid-panel {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+}
+
+.grid-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.grid-view[data-active="combined"] .grid-split { display: none; }
+.grid-view[data-active="split"] .grid-combined { display: none; }
+
+.grid-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+}
+
+.grid-label {
+  font-family: var(--font-data);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  padding-bottom: var(--space-sm);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  margin-bottom: var(--space-md);
+}
+
+.grid-slots {
+  /* Single column, not a grid: the stagger is horizontal indent, not a second
+     column, so every slot has the same vertical gap regardless of side. */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  max-width: 22rem;
+  margin: 0 auto;
+}
+
+.grid-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 42%;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-paper-3);
+  border-radius: var(--radius-cell);
+  transition: background var(--dur-micro) var(--ease-out);
+}
+.grid-slot:hover { background: var(--color-paper-4); }
+
+/* Left slots on the left edge, right slots on the right edge,
+   with clear space between them (100% - 42% - 42% = 16% gap). */
+.grid-slot.left  { align-self: flex-start; }
+.grid-slot.right { align-self: flex-end; }
+
+.grid-pos {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  min-width: 2rem;
+}
+
+.grid-driver {
+  font-family: var(--font-data);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+/* Pole: accent fill, matching the logo's red first block. */
+.grid-slot.left:first-child {
+  background: var(--color-accent);
+}
+.grid-slot.left:first-child .grid-pos { color: var(--color-accent-ink); opacity: 0.7; }
+.grid-slot.left:first-child .grid-driver { color: var(--color-accent-ink); }
+.grid-slot.left:first-child .stripe { background: var(--color-accent-ink); opacity: 0.4; }
+.grid-slot.left:first-child:hover { background: var(--color-accent-text); }
+
+@media (max-width: 46rem) {
+  .grid-split { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .grid-slots { max-width: 18rem; gap: var(--space-3xs) var(--space-xl); }
+}
+
 /* One specimen per row. A 20x20 matrix needs the whole spine; side by side
    the two cards were 520px each and both scrolled internally, which defeats
    the point of showing the matrix at all. */
@@ -1096,7 +1191,7 @@ body[data-page="about"] .foot { margin-top: 0; }
 
 /* The JS-rendered blocks land after a fetch; without an entrance they pop in.
    Same rise primitive, short stagger, opacity and transform only. */
-.panel, .call, .tally > div, .fig, .standings .col {
+.panel, .call, .tally > div, .fig, .grid-panel, .standings .col {
   animation: rise var(--dur-long) var(--ease-out) both;
 }
 .tally > div:nth-child(2), .fig:nth-child(2), .standings .col:nth-child(2) { animation-delay: 60ms; }

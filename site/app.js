@@ -214,6 +214,82 @@ async function renderHome() {
   startClock(any.race_start);
 }
 
+// ---- predicted order (starting-grid formation) ----------------------------
+
+// Combined order: average the two models' p_position arrays per driver, then
+// sort by expected finishing position (sum of j * p_j). This is the JS
+// equivalent of the Hungarian assignment Python does per model, close enough
+// for display and needs no external dependency.
+function combinedOrder(preds) {
+  const direct = Object.fromEntries(preds.direct.drivers.map(d => [d.driver, d]));
+  const sim = Object.fromEntries(preds.sim.drivers.map(d => [d.driver, d]));
+  const drivers = preds.direct.drivers.map(d => {
+    const dp = direct[d.driver].p_position;
+    const sp = sim[d.driver].p_position;
+    const avg = dp.map((v, i) => (v + sp[i]) / 2);
+    const expected = avg.reduce((sum, p, j) => sum + (j + 1) * p, 0);
+    return { driver: d.driver, team: d.team, expected };
+  });
+  drivers.sort((a, b) => a.expected - b.expected);
+  return drivers.map(d => d.driver);
+}
+
+function gridFormation(order, teamByDriver, label) {
+  let h = `<div class="grid-col"><p class="grid-label">${label}</p><div class="grid-slots">`;
+  for (let i = 0; i < order.length; i++) {
+    const driver = order[i];
+    const team = teamByDriver[driver] || "";
+    const side = i % 2 === 0 ? "left" : "right";
+    h += `<div class="grid-slot ${side}">
+      <span class="grid-pos">P${i + 1}</span>
+      <span class="grid-driver"><i class="stripe" style="--team:${teamColor(team)}"></i>${esc(driver)}</span>
+    </div>`;
+  }
+  return h + `</div></div>`;
+}
+
+// Fallback when predicted_order is missing from the JSON (pre-existing predictions):
+// sort drivers by expected finishing position from p_position.
+function orderFromMatrix(pred) {
+  if (pred.predicted_order) return pred.predicted_order;
+  const rows = pred.drivers.map(d => ({
+    driver: d.driver,
+    expected: d.p_position.reduce((sum, p, j) => sum + (j + 1) * p, 0),
+  }));
+  rows.sort((a, b) => a.expected - b.expected);
+  return rows.map(r => r.driver);
+}
+
+function gridPanel(preds) {
+  const teamByDriver = {};
+  for (const d of (preds.direct || preds.sim).drivers) teamByDriver[d.driver] = d.team;
+
+  const hasBoth = preds.direct && preds.sim;
+  let h = `<div class="grid-panel">`;
+
+  if (hasBoth) {
+    const combo = combinedOrder(preds);
+    h += `<div class="grid-controls">
+      <div class="seg" role="group" aria-label="Grid view">
+        <button type="button" data-grid="combined" aria-pressed="true">combined</button>
+        <button type="button" data-grid="split" aria-pressed="false">direct / sim</button>
+      </div>
+    </div>`;
+    h += `<div class="grid-view" data-active="combined">`;
+    h += `<div class="grid-combined">${gridFormation(combo, teamByDriver, "Combined")}</div>`;
+    h += `<div class="grid-split">
+      ${gridFormation(orderFromMatrix(preds.direct), teamByDriver, "Direct")}
+      ${gridFormation(orderFromMatrix(preds.sim), teamByDriver, "Sim")}
+    </div>`;
+    h += `</div>`;
+  } else {
+    const key = preds.direct ? "direct" : "sim";
+    h += gridFormation(orderFromMatrix(preds[key]), teamByDriver, MODEL_LABEL[key]);
+  }
+
+  return h + `</div>`;
+}
+
 // ---- probabilities ---------------------------------------------------------
 
 function heatmap(pred, key) {
@@ -270,6 +346,7 @@ async function renderProbabilities() {
     ${entryHead(any, circuits)}
     <ul class="stamps">${stamp(byKey.direct)}${stamp(byKey.sim)}</ul>
     </div>`;
+  h += gridPanel(preds);
   if (preds.direct && preds.sim) {
     h += `<div class="figs">${heatmap(preds.direct, "direct")}${heatmap(preds.sim, "sim")}</div>
       <div class="bars">
@@ -284,9 +361,21 @@ async function renderProbabilities() {
   }
   el.innerHTML = h;
   startClock(any.race_start);
-  for (const btn of el.querySelectorAll(".seg button")) {
+
+  // Grid view toggle (combined / split).
+  for (const btn of el.querySelectorAll(".grid-controls .seg button")) {
     btn.addEventListener("click", () => {
-      for (const b of el.querySelectorAll(".seg button")) b.setAttribute("aria-pressed", b === btn);
+      const view = el.querySelector(".grid-view");
+      if (!view) return;
+      for (const b of el.querySelectorAll(".grid-controls .seg button")) b.setAttribute("aria-pressed", b === btn);
+      view.dataset.active = btn.dataset.grid;
+    });
+  }
+
+  // Metric toggle (win / podium / points).
+  for (const btn of el.querySelectorAll(".bars .seg button")) {
+    btn.addEventListener("click", () => {
+      for (const b of el.querySelectorAll(".bars .seg button")) b.setAttribute("aria-pressed", b === btn);
       document.getElementById("bar-list").innerHTML = bars(preds, btn.dataset.metric);
     });
   }

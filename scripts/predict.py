@@ -35,6 +35,7 @@ from pathlib import Path
 import fastf1
 import numpy as np
 import pandas as pd
+from scipy.optimize import linear_sum_assignment
 
 from backtest import add_history_features, grid_scatter, load_tables, races_as_arrays
 from hazards import canonical
@@ -79,6 +80,18 @@ def expected_laps(tables: dict, circuit: str) -> int:
     seen = tables["seen"]
     here = seen[seen["circuit"].map(canonical) == canonical(circuit)]
     return int(here["total_laps"].median()) if len(here) else DEFAULT_LAPS
+
+
+def predicted_order(matrix: np.ndarray, drivers: list[str]) -> list[str]:
+    """Most probable finishing order via the Hungarian algorithm.
+
+    Finds the single permutation of drivers to positions that maximises the
+    joint probability, with each driver assigned exactly one position."""
+    row_idx, col_idx = linear_sum_assignment(-matrix)
+    order = [""] * len(drivers)
+    for r, c in zip(row_idx, col_idx):
+        order[c] = drivers[r]
+    return order
 
 
 def headline_rows(matrix: np.ndarray, drivers: list[str], teams: list[str]) -> list[dict]:
@@ -153,6 +166,7 @@ def main() -> None:
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     for key, matrix in matrices.items():
         rows = headline_rows(matrix, drivers, list(latest["team"]))
+        order = predicted_order(matrix, drivers)
         out = {
             "event": event["EventName"],
             "season": SEASON,
@@ -165,6 +179,7 @@ def main() -> None:
             "n_samples": N_SAMPLES if key == "direct" else SIM_SAMPLES,
             "grid_overrides": overrides,
             "generated_at": generated_at,
+            "predicted_order": order,
             "drivers": rows,
         }
         if key == "sim":

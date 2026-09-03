@@ -13,8 +13,9 @@ Two calls per race weekend:
 
 Each call is committed to this repo as JSON before the race starts, once per
 model: the full P(driver, position) matrix, the derived P(win), P(podium),
-P(points) per driver, and run metadata. The commit history is the timestamp
-proof: every prediction demonstrably existed before the result.
+P(points) per driver, the predicted finishing order, and run metadata. The
+commit history is the timestamp proof: every prediction demonstrably existed
+before the result.
 
 Two models run side by side and both publish every weekend: the direct
 Plackett-Luce model and the Monte Carlo race simulator. The live season is
@@ -22,9 +23,12 @@ their out-of-sample head-to-head.
 
 The scorecard is four static pages in `site/`, served by GitHub Pages: the
 current call with a countdown to lights out, the record, how to read the
-probabilities, and the method. `score.py` computes RPS for every prediction
-with a result and writes JSON; the pages only render it, and get more
-convincing every fortnight without further work.
+probabilities, and the method. The probabilities page opens with a starting
+grid formation showing the predicted finishing order: combined by default
+(averaged from both models), with a toggle to split into direct and sim
+side by side. `score.py` computes RPS for every prediction with a result and
+writes JSON; the pages only render it, and get more convincing every fortnight
+without further work.
 
 ## Why it exists
 

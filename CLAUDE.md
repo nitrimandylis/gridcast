@@ -104,10 +104,12 @@ Before using any historical data, decide which of the two it is.
     model: it learned the weight of a KNOWN grid and would be overconfident.
     Upgrades when the real qualifying model replaces the proxy (decision 7).
 13. **The prediction JSON stores the full P(driver, position) matrix, the
-    derived P(win)/P(podium)/P(points), and run metadata** (event, call type,
-    model version, races trained on, timestamp) (grilled 2026-08-31).
-    Headlines-only was rejected: RPS can never be computed from data that was
-    never written, and git history means no regeneration after the race.
+    derived P(win)/P(podium)/P(points), the predicted finishing order, and run
+    metadata** (event, call type, model version, races trained on, timestamp)
+    (grilled 2026-08-31). The predicted order is the single most probable
+    permutation via `linear_sum_assignment` on the matrix. Headlines-only was
+    rejected: RPS can never be computed from data that was never written, and
+    git history means no regeneration after the race.
 14. **Reimplement, do not fork TUMFTM** (closed 2026-09-01). The simulator is
     our own code, nothing LGPL is in the tree, so the licence is MIT per
     Nick's default.
