@@ -1,5 +1,29 @@
 [
  {
+  "file": "2026-r13-saturday-direct.json",
+  "season": 2026,
+  "round": 13,
+  "event": "Italian Grand Prix",
+  "call": "saturday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-09-05T17:51:41+00:00",
+  "commit": "3f5b73bdf41926a744237c88a10e50ca66421a7e",
+  "committed_at": "2026-09-05T20:39:21+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r13-saturday-sim.json",
+  "season": 2026,
+  "round": 13,
+  "event": "Italian Grand Prix",
+  "call": "saturday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-09-05T17:51:41+00:00",
+  "commit": "3f5b73bdf41926a744237c88a10e50ca66421a7e",
+  "committed_at": "2026-09-05T20:39:21+03:00",
+  "scored": false
+ },
+ {
   "file": "2026-r13-thursday-direct.json",
   "season": 2026,
   "round": 13,
