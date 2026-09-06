@@ -385,7 +385,7 @@ async function renderProbabilities() {
 
 function standings(summary) {
   if (!summary.length) {
-    return `<p class="empty">No race scored yet. The record opens the evening after the next Grand Prix, and from then on it only grows.</p>`;
+    return `<p class="empty">No race scored yet.</p>`;
   }
   let h = `<div class="standings">`;
   for (const call of ["thursday", "saturday"]) {
@@ -452,19 +452,16 @@ function ledger(results, summary) {
   return h;
 }
 
-function pending(manifest, predFiles) {
-  const unscored = manifest.filter(m => !m.scored);
-  if (!unscored.length) return "";
+function pending(entries, predFiles) {
+  if (!entries.length) return "";
 
   const groups = {};
-  for (const m of unscored) {
+  for (const m of entries) {
     const id = `${m.round}-${m.call}`;
     groups[id] ||= { round: m.round, event: m.event, call: m.call, entries: [] };
     groups[id].entries.push(m);
   }
-  const callOrd = { thursday: 0, saturday: 1 };
-  const rows = Object.values(groups).sort((a, b) =>
-    b.round - a.round || callOrd[b.call] - callOrd[a.call]);
+  const rows = Object.values(groups).sort((a, b) => b.round - a.round);
 
   let h = `<div class="ledger-head" style="margin-top:var(--space-xl)"><span>rnd</span><span>race</span><span>direct</span><span>sim</span><span></span></div>`;
   for (const g of rows) {
@@ -503,12 +500,17 @@ async function renderRecord() {
   ]);
   document.getElementById("standings").innerHTML = standings(scores.summary);
 
-  const unscored = manifest.filter(m => !m.scored);
+  // Superseded: unscored calls where a later call exists for the same round
+  // (Thursday once Saturday is committed).
+  const callOrd = { thursday: 0, saturday: 1 };
+  const superseded = manifest.filter(m =>
+    !m.scored && manifest.some(s => s.round === m.round && callOrd[s.call] > callOrd[m.call])
+  );
   const predFiles = {};
-  await Promise.all(unscored.map(async m => {
+  await Promise.all(superseded.map(async m => {
     predFiles[m.file] = await getJSON(`predictions/${m.file}`).catch(() => null);
   }));
-  document.getElementById("pending").innerHTML = pending(manifest, predFiles);
+  document.getElementById("pending").innerHTML = pending(superseded, predFiles);
   document.getElementById("ledger").innerHTML = ledger(scores.results, scores.summary);
 }
 
