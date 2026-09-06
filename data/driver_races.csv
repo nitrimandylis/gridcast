@@ -263,3 +263,25 @@ round,event,circuit,driver,team,grid,n_entrants,pace_delta,laps_completed,status
 12,Dutch Grand Prix,Zandvoort,STR,Aston Martin,19,22,0.845,45,Retired,20
 12,Dutch Grand Prix,Zandvoort,BEA,Haas F1 Team,20,22,,2,Retired,21
 12,Dutch Grand Prix,Zandvoort,VER,Red Bull Racing,7,22,,1,Retired,22
+13,Italian Grand Prix,Monza,ANT,Mercedes,20,22,-1.439,53,,1
+13,Italian Grand Prix,Monza,RUS,Mercedes,2,22,-0.898,53,,2
+13,Italian Grand Prix,Monza,VER,Red Bull Racing,5,22,-0.996,53,,3
+13,Italian Grand Prix,Monza,NOR,McLaren,8,22,-0.35,53,,4
+13,Italian Grand Prix,Monza,PIA,McLaren,6,22,-0.364,53,,5
+13,Italian Grand Prix,Monza,HAM,Ferrari,4,22,-0.413,53,,6
+13,Italian Grand Prix,Monza,GAS,Alpine,1,22,-0.405,53,,7
+13,Italian Grand Prix,Monza,LIN,Racing Bulls,9,22,0.08,53,,8
+13,Italian Grand Prix,Monza,COL,Alpine,7,22,-0.113,53,,9
+13,Italian Grand Prix,Monza,TSU,Racing Bulls,15,22,0.299,53,,10
+13,Italian Grand Prix,Monza,BOR,Audi,10,22,0.362,53,,11
+13,Italian Grand Prix,Monza,HUL,Audi,12,22,-0.008,53,,12
+13,Italian Grand Prix,Monza,SAI,Williams,13,22,0.0,53,,13
+13,Italian Grand Prix,Monza,LAW,Red Bull Racing,21,22,-0.234,53,,14
+13,Italian Grand Prix,Monza,BEA,Haas F1 Team,11,22,0.809,53,,15
+13,Italian Grand Prix,Monza,OCO,Haas F1 Team,14,22,0.638,52,,16
+13,Italian Grand Prix,Monza,ALB,Williams,22,22,0.652,52,,17
+13,Italian Grand Prix,Monza,PER,Cadillac,17,22,1.955,52,,18
+13,Italian Grand Prix,Monza,BOT,Cadillac,16,22,2.134,51,,19
+13,Italian Grand Prix,Monza,STR,Aston Martin,19,22,2.901,27,,20
+13,Italian Grand Prix,Monza,ALO,Aston Martin,18,22,2.103,23,,21
+13,Italian Grand Prix,Monza,LEC,Ferrari,3,22,,2,,22
