@@ -978,6 +978,8 @@ code { font-family: var(--font-data); }
   text-transform: uppercase;
   color: var(--color-muted);
 }
+.rec-figs.figs { margin: var(--space-md) 0 var(--space-lg); }
+.fig td.c.actual div { box-shadow: inset 0 0 0 2px var(--color-ink); }
 
 .drivers { padding: var(--space-md) 0 var(--space-lg); }
 .drv {

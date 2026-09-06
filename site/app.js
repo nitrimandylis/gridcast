@@ -292,22 +292,30 @@ function gridPanel(preds) {
 
 // ---- probabilities ---------------------------------------------------------
 
-function heatmap(pred, key) {
+function heatmap(pred, key, finishes) {
   const rows = [...pred.drivers].sort((a, b) => b.p_win - a.p_win);
   const max = Math.max(...rows.flatMap(d => d.p_position));
   const n = rows[0].p_position.length;
   let h = `<figure class="fig"><p class="fig-title">${MODEL_LABEL[key]}</p><div class="scroll"><table><thead><tr><th></th>`;
   for (let p = 1; p <= n; p++) h += `<th>${p}</th>`;
-  h += `<th class="n first">win</th><th class="n">podium</th><th class="n">points</th></tr></thead><tbody>`;
+  h += `<th class="n first">win</th><th class="n">podium</th><th class="n">points</th>`;
+  if (finishes) h += `<th class="n">finish</th>`;
+  h += `</tr></thead><tbody>`;
   for (const d of rows) {
+    const actual = finishes?.[d.driver];
     h += `<tr><td class="d"><i class="stripe" style="--team:${teamColor(d.team)}"></i>${esc(d.driver)}</td>`;
-    // The cell's ink is a fraction of the accent token; CSS does the mixing.
     d.p_position.forEach((p, i) => {
-      h += `<td class="c" title="${esc(d.driver)} P${i + 1}: ${(p * 100).toFixed(1)}%"><div style="--f:${(p / max).toFixed(3)}"></div></td>`;
+      const cls = actual != null && i === actual - 1 ? " actual" : "";
+      h += `<td class="c${cls}" title="${esc(d.driver)} P${i + 1}: ${(p * 100).toFixed(1)}%"><div style="--f:${(p / max).toFixed(3)}"></div></td>`;
     });
-    h += `<td class="n first">${pct(d.p_win)}</td><td class="n">${pct(d.p_podium)}</td><td class="n">${pct(d.p_points)}</td></tr>`;
+    h += `<td class="n first">${pct(d.p_win)}</td><td class="n">${pct(d.p_podium)}</td><td class="n">${pct(d.p_points)}</td>`;
+    if (finishes) h += `<td class="n">${actual != null ? "P" + actual : "DNF"}</td>`;
+    h += `</tr>`;
   }
-  h += `</tbody></table></div><figcaption>Rows sorted by P(win). The darkest cell on this table is ${pct(max)}.</figcaption></figure>`;
+  const cap = finishes
+    ? `Rows sorted by P(win). Outlined cells mark actual finish.`
+    : `Rows sorted by P(win). The brightest cell on this table is ${pct(max)}.`;
+  h += `</tbody></table></div><figcaption>${cap}</figcaption></figure>`;
   return h;
 }
 
@@ -405,7 +413,7 @@ function standings(summary) {
   return h + `</div>`;
 }
 
-function ledger(results, summary) {
+function ledger(results, summary, manifest, predFiles) {
   if (!results.length) return "";
   // One row per round and call, with the two model files folded in.
   const groups = {};
@@ -431,14 +439,19 @@ function ledger(results, summary) {
       <span class="rnd">${g.round}</span>
       <span><span class="ev">${esc(g.event)}</span><span class="call">${esc(g.call)} call</span></span>
       ${mark(g.direct, g.baseline, best)}${mark(g.sim, g.baseline, best)}<span>${rps(g.baseline)}</span>
-    </summary><div class="drivers">
-      <div class="drv hd"><span class="code">driver</span><span>grid</span><span>finish</span><span>direct</span><span>sim</span></div>`;
-    const drivers = Object.entries(g.drivers).sort((a, b) => a[1].finish - b[1].finish);
-    for (const [code, d] of drivers) {
-      h += `<div class="drv"><span class="code"><i class="stripe" style="--team:${teamColor(d.team)}"></i>${esc(code)}</span>
-        <span>P${d.grid}</span><span>P${d.finish}</span><span>${rps(d.direct)}</span><span>${rps(d.sim)}</span></div>`;
+    </summary>`;
+    // Heatmaps from prediction files, with actual finish positions marked
+    const mEntries = (manifest || []).filter(m => m.round === g.round && m.call === g.call);
+    const preds = {};
+    for (const e of mEntries) { if (predFiles?.[e.file]) preds[modelKey(e.model)] = predFiles[e.file]; }
+    const finishes = Object.fromEntries(Object.entries(g.drivers).map(([c, d]) => [c, d.finish]));
+    if (preds.direct || preds.sim) {
+      h += `<div class="figs rec-figs">`;
+      if (preds.direct) h += heatmap(preds.direct, "direct", finishes);
+      if (preds.sim) h += heatmap(preds.sim, "sim", finishes);
+      h += `</div>`;
     }
-    h += `</div></details>`;
+    h += `</details>`;
   }
   for (const call of ["saturday", "thursday"]) {
     const rowsFor = summary.filter(s => s.call === call);
@@ -469,25 +482,15 @@ function pending(entries, predFiles) {
     for (const e of g.entries) {
       if (predFiles[e.file]) preds[modelKey(e.model)] = predFiles[e.file];
     }
-    const any = preds.direct || preds.sim;
-    if (!any) continue;
-    const order = orderFromMatrix(any);
-    const teamMap = Object.fromEntries(any.drivers.map(d => [d.driver, d.team]));
+    if (!preds.direct && !preds.sim) continue;
 
     h += `<details class="race"><summary>
       <span class="rnd">${g.round}</span>
       <span><span class="ev">${esc(g.event)}</span><span class="call">${esc(g.call)} call</span></span>
       <span class="pend">pending</span><span class="pend">pending</span><span></span>
-    </summary><div class="drivers">
-      <div class="drv hd"><span class="code">driver</span><span></span><span>pred.</span><span>direct</span><span>sim</span></div>`;
-
-    for (let i = 0; i < order.length; i++) {
-      const code = order[i];
-      const d = preds.direct?.drivers.find(x => x.driver === code);
-      const s = preds.sim?.drivers.find(x => x.driver === code);
-      h += `<div class="drv"><span class="code"><i class="stripe" style="--team:${teamColor(teamMap[code])}"></i>${esc(code)}</span>
-        <span></span><span>P${i + 1}</span><span>${d ? pct(d.p_win) : "–"}</span><span>${s ? pct(s.p_win) : "–"}</span></div>`;
-    }
+    </summary><div class="figs rec-figs">`;
+    if (preds.direct) h += heatmap(preds.direct, "direct");
+    if (preds.sim) h += heatmap(preds.sim, "sim");
     h += `</div></details>`;
   }
   return h;
@@ -500,18 +503,19 @@ async function renderRecord() {
   ]);
   document.getElementById("standings").innerHTML = standings(scores.summary);
 
+  // Fetch all prediction files for heatmaps
+  const predFiles = {};
+  await Promise.all(manifest.map(async m => {
+    predFiles[m.file] = await getJSON(`predictions/${m.file}`).catch(() => null);
+  }));
+
   // Superseded: unscored calls where a later call exists for the same round
-  // (Thursday once Saturday is committed).
   const callOrd = { thursday: 0, saturday: 1 };
   const superseded = manifest.filter(m =>
     !m.scored && manifest.some(s => s.round === m.round && callOrd[s.call] > callOrd[m.call])
   );
-  const predFiles = {};
-  await Promise.all(superseded.map(async m => {
-    predFiles[m.file] = await getJSON(`predictions/${m.file}`).catch(() => null);
-  }));
   document.getElementById("pending").innerHTML = pending(superseded, predFiles);
-  document.getElementById("ledger").innerHTML = ledger(scores.results, scores.summary);
+  document.getElementById("ledger").innerHTML = ledger(scores.results, scores.summary, manifest, predFiles);
 }
 
 // ---- nav (N12: status banner over a retracting bar) ------------------------
