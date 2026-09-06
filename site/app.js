@@ -452,9 +452,63 @@ function ledger(results, summary) {
   return h;
 }
 
+function pending(manifest, predFiles) {
+  const unscored = manifest.filter(m => !m.scored);
+  if (!unscored.length) return "";
+
+  const groups = {};
+  for (const m of unscored) {
+    const id = `${m.round}-${m.call}`;
+    groups[id] ||= { round: m.round, event: m.event, call: m.call, entries: [] };
+    groups[id].entries.push(m);
+  }
+  const callOrd = { thursday: 0, saturday: 1 };
+  const rows = Object.values(groups).sort((a, b) =>
+    b.round - a.round || callOrd[b.call] - callOrd[a.call]);
+
+  let h = `<div class="ledger-head" style="margin-top:var(--space-xl)"><span>rnd</span><span>race</span><span>direct</span><span>sim</span><span></span></div>`;
+  for (const g of rows) {
+    const preds = {};
+    for (const e of g.entries) {
+      if (predFiles[e.file]) preds[modelKey(e.model)] = predFiles[e.file];
+    }
+    const any = preds.direct || preds.sim;
+    if (!any) continue;
+    const order = orderFromMatrix(any);
+    const teamMap = Object.fromEntries(any.drivers.map(d => [d.driver, d.team]));
+
+    h += `<details class="race"><summary>
+      <span class="rnd">${g.round}</span>
+      <span><span class="ev">${esc(g.event)}</span><span class="call">${esc(g.call)} call</span></span>
+      <span class="pend">pending</span><span class="pend">pending</span><span></span>
+    </summary><div class="drivers">
+      <div class="drv hd"><span class="code">driver</span><span></span><span>pred.</span><span>direct</span><span>sim</span></div>`;
+
+    for (let i = 0; i < order.length; i++) {
+      const code = order[i];
+      const d = preds.direct?.drivers.find(x => x.driver === code);
+      const s = preds.sim?.drivers.find(x => x.driver === code);
+      h += `<div class="drv"><span class="code"><i class="stripe" style="--team:${teamColor(teamMap[code])}"></i>${esc(code)}</span>
+        <span></span><span>P${i + 1}</span><span>${d ? pct(d.p_win) : "–"}</span><span>${s ? pct(s.p_win) : "–"}</span></div>`;
+    }
+    h += `</div></details>`;
+  }
+  return h;
+}
+
 async function renderRecord() {
-  const scores = await getJSON("results.json");
+  const [scores, manifest] = await Promise.all([
+    getJSON("results.json"),
+    getJSON("manifest.json").catch(() => []),
+  ]);
   document.getElementById("standings").innerHTML = standings(scores.summary);
+
+  const unscored = manifest.filter(m => !m.scored);
+  const predFiles = {};
+  await Promise.all(unscored.map(async m => {
+    predFiles[m.file] = await getJSON(`predictions/${m.file}`).catch(() => null);
+  }));
+  document.getElementById("pending").innerHTML = pending(manifest, predFiles);
   document.getElementById("ledger").innerHTML = ledger(scores.results, scores.summary);
 }
 
