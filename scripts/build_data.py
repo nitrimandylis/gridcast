@@ -56,6 +56,12 @@ def race_rows(season: int, rnd: int, event_name: str, circuit: str) -> list[dict
     results = session.results
     laps = session.laps
 
+    # A race publishes laps before the official classification and grid land.
+    # Refuse the incomplete version: without positions every driver would be
+    # ranked by lap count alone, and without grids everyone defaults to P22.
+    if results["Position"].isna().all() or results["GridPosition"].isna().all():
+        raise ValueError("classification or grid not published yet")
+
     laps_done = laps.groupby("Driver")["LapNumber"].max()
     clean = clean_laps(laps)
     seconds = clean["LapTime"].dt.total_seconds()
@@ -105,6 +111,10 @@ def main() -> None:
     fastf1.Cache.enable_cache(str(CACHE))
     OUT.parent.mkdir(exist_ok=True)
 
+    # Rows from the last build, so a race FastF1 cannot serve completely today
+    # (or one whose grid was patched by hand) survives a rebuild untouched.
+    old = pd.read_csv(OUT) if OUT.exists() else pd.DataFrame(columns=["round"])
+
     all_rows = []
     for _, ev in completed_rounds(2026).iterrows():
         rnd = int(ev["RoundNumber"])
@@ -114,6 +124,10 @@ def main() -> None:
             all_rows.extend(race_rows(2026, rnd, name, ev["Location"]))
         except Exception as error:
             print(f"  SKIPPED: {type(error).__name__}: {error}")
+            kept = old[old["round"] == rnd]
+            if len(kept):
+                print(f"  kept {len(kept)} rows from the previous build")
+                all_rows.extend(kept.to_dict("records"))
 
     table = pd.DataFrame(all_rows)
     table.to_csv(OUT, index=False)
