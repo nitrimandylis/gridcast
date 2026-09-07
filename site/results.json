@@ -5,28 +5,28 @@
    "call": "saturday",
    "n": 1,
    "rps": 0.1355,
-   "baseline_rps": 0.1905
+   "baseline_rps": 0.1818
   },
   {
    "model": "sim-v1-monte-carlo",
    "call": "saturday",
    "n": 1,
    "rps": 0.1292,
-   "baseline_rps": 0.1905
+   "baseline_rps": 0.1818
   },
   {
    "model": "direct-v1-plackett-luce",
    "call": "thursday",
    "n": 1,
    "rps": 0.1319,
-   "baseline_rps": 0.1905
+   "baseline_rps": 0.1818
   },
   {
    "model": "sim-v1-monte-carlo",
    "call": "thursday",
    "n": 1,
    "rps": 0.117,
-   "baseline_rps": 0.1905
+   "baseline_rps": 0.1818
   }
  ],
  "results": [
@@ -42,7 +42,7 @@
    "committed_at": "2026-09-05T20:39:21+03:00",
    "scored": true,
    "rps": 0.1355,
-   "baseline_rps": 0.1905,
+   "baseline_rps": 0.1818,
    "n_scored": 22,
    "n_entrants": 22,
    "drivers": [
@@ -155,7 +155,7 @@
      "driver": "ANT",
      "team": "Mercedes",
      "finish_rank": 1,
-     "grid": 20,
+     "grid": 19,
      "rps": 0.4422
     },
     {
@@ -176,28 +176,28 @@
      "driver": "LAW",
      "team": "Red Bull Racing",
      "finish_rank": 14,
-     "grid": 21,
+     "grid": 22,
      "rps": 0.093
     },
     {
      "driver": "ALO",
      "team": "Aston Martin",
      "finish_rank": 21,
-     "grid": 18,
+     "grid": 21,
      "rps": 0.1415
     },
     {
      "driver": "STR",
      "team": "Aston Martin",
      "finish_rank": 20,
-     "grid": 19,
+     "grid": 18,
      "rps": 0.1027
     },
     {
      "driver": "ALB",
      "team": "Williams",
      "finish_rank": 17,
-     "grid": 22,
+     "grid": 20,
      "rps": 0.0735
     }
    ]
@@ -214,7 +214,7 @@
    "committed_at": "2026-09-05T20:39:21+03:00",
    "scored": true,
    "rps": 0.1292,
-   "baseline_rps": 0.1905,
+   "baseline_rps": 0.1818,
    "n_scored": 22,
    "n_entrants": 22,
    "drivers": [
@@ -264,21 +264,21 @@
      "driver": "ALB",
      "team": "Williams",
      "finish_rank": 17,
-     "grid": 22,
+     "grid": 20,
      "rps": 0.0415
     },
     {
      "driver": "ALO",
      "team": "Aston Martin",
      "finish_rank": 21,
-     "grid": 18,
+     "grid": 21,
      "rps": 0.0939
     },
     {
      "driver": "ANT",
      "team": "Mercedes",
      "finish_rank": 1,
-     "grid": 20,
+     "grid": 19,
      "rps": 0.5892
     },
     {
@@ -320,7 +320,7 @@
      "driver": "LAW",
      "team": "Red Bull Racing",
      "finish_rank": 14,
-     "grid": 21,
+     "grid": 22,
      "rps": 0.1041
     },
     {
@@ -362,7 +362,7 @@
      "driver": "STR",
      "team": "Aston Martin",
      "finish_rank": 20,
-     "grid": 19,
+     "grid": 18,
      "rps": 0.0479
     },
     {
@@ -386,7 +386,7 @@
    "committed_at": "2026-08-31T21:14:06+03:00",
    "scored": true,
    "rps": 0.1319,
-   "baseline_rps": 0.1905,
+   "baseline_rps": 0.1818,
    "n_scored": 22,
    "n_entrants": 22,
    "drivers": [
@@ -443,7 +443,7 @@
      "driver": "LAW",
      "team": "Red Bull Racing",
      "finish_rank": 14,
-     "grid": 21,
+     "grid": 22,
      "rps": 0.1055
     },
     {
@@ -492,7 +492,7 @@
      "driver": "ANT",
      "team": "Mercedes",
      "finish_rank": 1,
-     "grid": 20,
+     "grid": 19,
      "rps": 0.3877
     },
     {
@@ -513,7 +513,7 @@
      "driver": "ALB",
      "team": "Williams",
      "finish_rank": 17,
-     "grid": 22,
+     "grid": 20,
      "rps": 0.0967
     },
     {
@@ -527,7 +527,7 @@
      "driver": "ALO",
      "team": "Aston Martin",
      "finish_rank": 21,
-     "grid": 18,
+     "grid": 21,
      "rps": 0.1285
     },
     {
@@ -541,7 +541,7 @@
      "driver": "STR",
      "team": "Aston Martin",
      "finish_rank": 20,
-     "grid": 19,
+     "grid": 18,
      "rps": 0.0896
     }
    ]
@@ -558,7 +558,7 @@
    "committed_at": "2026-09-01T17:39:42+03:00",
    "scored": true,
    "rps": 0.117,
-   "baseline_rps": 0.1905,
+   "baseline_rps": 0.1818,
    "n_scored": 22,
    "n_entrants": 22,
    "drivers": [
@@ -629,7 +629,7 @@
      "driver": "LAW",
      "team": "Red Bull Racing",
      "finish_rank": 14,
-     "grid": 21,
+     "grid": 22,
      "rps": 0.1668
     },
     {
@@ -650,21 +650,21 @@
      "driver": "ALB",
      "team": "Williams",
      "finish_rank": 17,
-     "grid": 22,
+     "grid": 20,
      "rps": 0.0636
     },
     {
      "driver": "ALO",
      "team": "Aston Martin",
      "finish_rank": 21,
-     "grid": 18,
+     "grid": 21,
      "rps": 0.0828
     },
     {
      "driver": "ANT",
      "team": "Mercedes",
      "finish_rank": 1,
-     "grid": 20,
+     "grid": 19,
      "rps": 0.6486
     },
     {
@@ -713,7 +713,7 @@
      "driver": "STR",
      "team": "Aston Martin",
      "finish_rank": 20,
-     "grid": 19,
+     "grid": 18,
      "rps": 0.0383
     }
    ]
