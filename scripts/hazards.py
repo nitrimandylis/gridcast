@@ -91,7 +91,7 @@ def fit_dnf(history: pd.DataFrame, season_rows: pd.DataFrame, circuit: str) -> d
     cols = ["circuit", "laps_completed", "status"]
     entries = pd.concat([history[cols], season_rows[cols]], ignore_index=True)
     entries = entries.assign(circuit=entries["circuit"].map(canonical))
-    started = entries[~entries["status"].str.contains("not start|Withdrew", case=False)]
+    started = entries[~entries["status"].str.contains("not start|Withdrew", case=False, na=False)]
     first_lap = started["laps_completed"] <= 1
     pooled = float(first_lap.mean()) if len(started) else 0.03
     here = started["circuit"] == circuit

@@ -285,3 +285,6 @@ season,round,event,circuit,kind,start_lap,end_lap,laps
 2026,12,Dutch Grand Prix,Zandvoort,RED,2,2,1
 2026,12,Dutch Grand Prix,Zandvoort,VSC,55,57,3
 2026,12,Dutch Grand Prix,Zandvoort,VSC,70,70,1
+2026,13,Italian Grand Prix,Monza,SC,3,3,1
+2026,13,Italian Grand Prix,Monza,RED,3,3,1
+2026,13,Italian Grand Prix,Monza,VSC,28,29,2
