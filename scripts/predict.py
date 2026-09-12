@@ -55,10 +55,10 @@ def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
     so anything already known has to be passed in as a DRIVER=POSITION override."""
     session = fastf1.get_session(SEASON, round_number, "Q")
     session.load(telemetry=False, weather=False, messages=False)
-    positions = dict(zip(session.results["Abbreviation"], session.results["Position"]))
-    missing = [d for d in drivers if d not in positions]
-    if missing:
-        raise SystemExit(f"no qualifying position for {missing}")
+    positions = {a: float(p) for a, p in zip(session.results["Abbreviation"], session.results["Position"])
+                 if pd.notna(p)}
+    # FastF1 serves NaN positions until the classification lands, and a driver
+    # with no lap time is NaN forever. Either is filled by a DRIVER=POSITION override.
     return positions
 
 
@@ -140,6 +140,9 @@ def main() -> None:
 
     overrides = parse_grid_overrides(sys.argv[3:], drivers)
     grid_feature.update(overrides)
+    missing = [d for d in drivers if d not in grid_feature]
+    if missing:
+        raise SystemExit(f"no grid position for {' '.join(missing)}: pass DRIVER=POSITION")
 
     # Direct model, trained on walk-forward features exactly as the backtest validated.
     train = add_history_features(table)

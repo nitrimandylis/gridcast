@@ -48,6 +48,30 @@
   "scored": true
  },
  {
+  "file": "2026-r14-saturday-direct.json",
+  "season": 2026,
+  "round": 14,
+  "event": "Spanish Grand Prix",
+  "call": "saturday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-09-12T17:15:04+00:00",
+  "commit": null,
+  "committed_at": null,
+  "scored": false
+ },
+ {
+  "file": "2026-r14-saturday-sim.json",
+  "season": 2026,
+  "round": 14,
+  "event": "Spanish Grand Prix",
+  "call": "saturday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-09-12T17:15:04+00:00",
+  "commit": null,
+  "committed_at": null,
+  "scored": false
+ },
+ {
   "file": "2026-r14-thursday-direct.json",
   "season": 2026,
   "round": 14,
