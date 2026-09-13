@@ -64,7 +64,7 @@ def score_prediction(pred: dict, race: pd.DataFrame) -> dict:
 def first_commit(path: Path) -> dict:
     """Hash and author date of the commit that added the file, or nulls."""
     out = subprocess.run(
-        ["git", "log", "--follow", "--diff-filter=A", "--format=%H%x09%aI", "--", str(path)],
+        ["git", "log", "--diff-filter=A", "--format=%H%x09%aI", "--", str(path)],
         cwd=ROOT, capture_output=True, text=True).stdout.strip()
     if not out:
         return {"commit": None, "committed_at": None}
