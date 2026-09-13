@@ -55,8 +55,8 @@
   "call": "saturday",
   "model": "direct-v1-plackett-luce",
   "generated_at": "2026-09-12T17:15:04+00:00",
-  "commit": null,
-  "committed_at": null,
+  "commit": "678d3576e47d4bc06ada8dad3623e8d1d3e8c35c",
+  "committed_at": "2026-09-12T20:15:15+03:00",
   "scored": false
  },
  {
@@ -67,8 +67,8 @@
   "call": "saturday",
   "model": "sim-v1-monte-carlo",
   "generated_at": "2026-09-12T17:15:04+00:00",
-  "commit": null,
-  "committed_at": null,
+  "commit": "3f5b73bdf41926a744237c88a10e50ca66421a7e",
+  "committed_at": "2026-09-05T20:39:21+03:00",
   "scored": false
  },
  {
