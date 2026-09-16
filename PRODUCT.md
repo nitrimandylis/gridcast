@@ -30,6 +30,12 @@ side by side. `score.py` computes RPS for every prediction with a result and
 writes JSON; the pages only render it, and get more convincing every fortnight
 without further work.
 
+The weekend runs itself. `scripts/weekend.py` runs hourly on a Raspberry Pi
+and does whichever step is due: the Thursday call 48 hours before qualifying,
+the Saturday call when the qualifying classification lands, the score once
+the race is classified. Each step is committed and pushed, and a summary goes
+to Discord. Grid penalties remain the one manual step.
+
 ## Why it exists
 
 Two reasons, both real:
