@@ -285,3 +285,25 @@ round,event,circuit,driver,team,grid,n_entrants,pace_delta,laps_completed,status
 13,Italian Grand Prix,Monza,STR,Aston Martin,18,22,2.901,27,Retired,20
 13,Italian Grand Prix,Monza,ALO,Aston Martin,21,22,2.103,23,Retired,21
 13,Italian Grand Prix,Monza,LEC,Ferrari,3,22,,2,Retired,22
+14,Spanish Grand Prix,Madrid,ANT,Mercedes,2,22,-1.679,57,Finished,1
+14,Spanish Grand Prix,Madrid,VER,Red Bull Racing,3,22,-1.671,57,Finished,2
+14,Spanish Grand Prix,Madrid,NOR,McLaren,1,22,-2.016,57,Finished,3
+14,Spanish Grand Prix,Madrid,LEC,Ferrari,5,22,-1.557,57,Finished,4
+14,Spanish Grand Prix,Madrid,RUS,Mercedes,6,22,-1.593,57,Finished,5
+14,Spanish Grand Prix,Madrid,LAW,Red Bull Racing,8,22,-0.496,57,Finished,6
+14,Spanish Grand Prix,Madrid,COL,Alpine,9,22,-0.088,57,Finished,7
+14,Spanish Grand Prix,Madrid,PIA,McLaren,7,22,-0.715,57,Finished,8
+14,Spanish Grand Prix,Madrid,LIN,Racing Bulls,10,22,0.16,56,Lapped,9
+14,Spanish Grand Prix,Madrid,HUL,Audi,11,22,0.027,56,Lapped,10
+14,Spanish Grand Prix,Madrid,OCO,Haas F1 Team,13,22,-0.027,56,Lapped,11
+14,Spanish Grand Prix,Madrid,GAS,Alpine,14,22,-0.435,56,Lapped,12
+14,Spanish Grand Prix,Madrid,BOR,Audi,12,22,-0.113,56,Lapped,13
+14,Spanish Grand Prix,Madrid,TSU,Racing Bulls,15,22,0.335,56,Lapped,14
+14,Spanish Grand Prix,Madrid,ALB,Williams,16,22,1.569,56,Lapped,15
+14,Spanish Grand Prix,Madrid,BEA,Haas F1 Team,22,22,0.311,56,Lapped,16
+14,Spanish Grand Prix,Madrid,ALO,Aston Martin,17,22,1.097,55,Lapped,17
+14,Spanish Grand Prix,Madrid,BOT,Cadillac,19,22,4.003,54,Lapped,18
+14,Spanish Grand Prix,Madrid,SAI,Williams,20,22,2.694,43,Retired,19
+14,Spanish Grand Prix,Madrid,PER,Cadillac,18,22,3.802,31,Retired,20
+14,Spanish Grand Prix,Madrid,STR,Aston Martin,21,22,4.453,13,Retired,21
+14,Spanish Grand Prix,Madrid,HAM,Ferrari,4,22,1.724,6,Retired,22
