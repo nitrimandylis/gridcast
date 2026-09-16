@@ -7,3 +7,4 @@ site/predictions
 .playwright-mcp/
 design-system/
 .hallmark/
+.venv/

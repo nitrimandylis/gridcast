@@ -49,6 +49,8 @@ nick@gridcast:~$ python scripts/predict.py "Italian Grand Prix" thursday
 
 ## 🚀 Run it
 
+The weekend runs itself: `scripts/weekend.py` on an hourly timer (a Raspberry Pi here) makes the Thursday call 48h before qualifying, the Saturday call when the qualifying classification lands, and scores the race once it is classified, committing and pushing each step. Grid penalties are the one manual step: rerun `predict.py <event> saturday DRIVER=POSITION` and commit.
+
 Needs conda and about ten minutes of FastF1 downloads on first run.
 
 ```bash

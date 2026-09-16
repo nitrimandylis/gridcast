@@ -133,6 +133,19 @@ Before using any historical data, decide which of the two it is.
 18. **MVP means it works and publishes.** The sim is not gated on beating the
     direct model; the number is published either way (it did beat it: see
     PRODUCT.md). Refinement of both models is the next project.
+19. **The Pi runs the weekend** (grilled 2026-09-16). `scripts/weekend.py`
+    runs hourly on the Pi 5 and does whichever step is due: the Thursday call
+    48h before qualifying, the Saturday call when FastF1 first serves the
+    full qualifying classification (a NaN driver after the session is placed
+    at the back and recorded in `grid_overrides`), and the score plus all
+    four data builders once the race is classified. Two commits per call as
+    in the manual history, one push. It pulls `--ff-only` first and refuses a
+    dirty or diverged tree. Consequences for the Mac: pull before touching
+    the repo and push when done; never run `score.py` here on a normal
+    weekend, the Pi owns `site/manifest.json` and `site/results.json`; a
+    grid penalty is still a manual `predict.py <event> saturday DRIVER=POS`,
+    commit, then `score.py` to restamp, commit, push. The manual ritual is
+    the fallback when the Pi is down, unchanged.
 
 ## Gate results, verified 2026-08-31
 
