@@ -94,5 +94,29 @@
   "commit": "1cc73f6aaa894a71c9e3da1a2ae778e37f69b218",
   "committed_at": "2026-09-07T11:21:37+03:00",
   "scored": true
+ },
+ {
+  "file": "2026-r15-thursday-direct.json",
+  "season": 2026,
+  "round": 15,
+  "event": "Azerbaijan Grand Prix",
+  "call": "thursday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-09-24T15:58:11+00:00",
+  "commit": "5ac0748b3c74138096786ff8e6e7277d92001814",
+  "committed_at": "2026-09-24T18:58:11+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r15-thursday-sim.json",
+  "season": 2026,
+  "round": 15,
+  "event": "Azerbaijan Grand Prix",
+  "call": "thursday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-09-24T15:58:11+00:00",
+  "commit": "5ac0748b3c74138096786ff8e6e7277d92001814",
+  "committed_at": "2026-09-24T18:58:11+03:00",
+  "scored": false
  }
 ]
