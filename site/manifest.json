@@ -96,6 +96,30 @@
   "scored": true
  },
  {
+  "file": "2026-r15-saturday-direct.json",
+  "season": 2026,
+  "round": 15,
+  "event": "Azerbaijan Grand Prix",
+  "call": "saturday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-09-26T06:03:28+00:00",
+  "commit": "99195ad601aaaa8c908a7fba604ed32d054f6d53",
+  "committed_at": "2026-09-26T09:03:28+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r15-saturday-sim.json",
+  "season": 2026,
+  "round": 15,
+  "event": "Azerbaijan Grand Prix",
+  "call": "saturday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-09-26T06:03:28+00:00",
+  "commit": "99195ad601aaaa8c908a7fba604ed32d054f6d53",
+  "committed_at": "2026-09-26T09:03:28+03:00",
+  "scored": false
+ },
+ {
   "file": "2026-r15-thursday-direct.json",
   "season": 2026,
   "round": 15,
