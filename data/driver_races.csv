@@ -307,3 +307,25 @@ round,event,circuit,driver,team,grid,n_entrants,pace_delta,laps_completed,status
 14,Spanish Grand Prix,Madrid,PER,Cadillac,18,22,3.802,31,Retired,20
 14,Spanish Grand Prix,Madrid,STR,Aston Martin,21,22,4.453,13,Retired,21
 14,Spanish Grand Prix,Madrid,HAM,Ferrari,4,22,1.724,6,Retired,22
+15,Azerbaijan Grand Prix,Baku,RUS,Mercedes,-1,22,-1.534,51,Finished,1
+15,Azerbaijan Grand Prix,Baku,VER,Red Bull Racing,-1,22,-1.29,51,Finished,2
+15,Azerbaijan Grand Prix,Baku,HAD,Red Bull Racing,-1,22,-1.104,51,Finished,3
+15,Azerbaijan Grand Prix,Baku,LEC,Ferrari,-1,22,-1.134,51,Finished,4
+15,Azerbaijan Grand Prix,Baku,ANT,Mercedes,-1,22,-1.049,51,Finished,5
+15,Azerbaijan Grand Prix,Baku,HAM,Ferrari,-1,22,-0.882,51,Finished,6
+15,Azerbaijan Grand Prix,Baku,LIN,Racing Bulls,-1,22,0.294,51,Finished,7
+15,Azerbaijan Grand Prix,Baku,OCO,Haas F1 Team,-1,22,0.013,51,Finished,8
+15,Azerbaijan Grand Prix,Baku,BEA,Haas F1 Team,-1,22,0.026,51,Finished,9
+15,Azerbaijan Grand Prix,Baku,SAI,Williams,-1,22,0.371,51,Finished,10
+15,Azerbaijan Grand Prix,Baku,HUL,Audi,-1,22,0.633,51,Finished,11
+15,Azerbaijan Grand Prix,Baku,LAW,Racing Bulls,-1,22,-0.013,51,Finished,12
+15,Azerbaijan Grand Prix,Baku,BOR,Audi,-1,22,0.392,51,Finished,13
+15,Azerbaijan Grand Prix,Baku,PIA,McLaren,-1,22,-1.148,51,Finished,14
+15,Azerbaijan Grand Prix,Baku,PER,Cadillac,-1,22,0.761,51,Finished,15
+15,Azerbaijan Grand Prix,Baku,BOT,Cadillac,-1,22,2.743,50,Retired,16
+15,Azerbaijan Grand Prix,Baku,COL,Alpine,-1,22,-0.038,36,Retired,17
+15,Azerbaijan Grand Prix,Baku,GAS,Alpine,-1,22,-0.413,36,Retired,18
+15,Azerbaijan Grand Prix,Baku,NOR,McLaren,-1,22,-0.567,36,Retired,19
+15,Azerbaijan Grand Prix,Baku,ALB,Williams,-1,22,0.279,30,Retired,20
+15,Azerbaijan Grand Prix,Baku,ALO,Aston Martin,-1,22,3.127,20,Retired,21
+15,Azerbaijan Grand Prix,Baku,STR,Aston Martin,-1,22,3.133,8,Retired,22

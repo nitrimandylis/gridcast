@@ -288,3 +288,6 @@ season,round,event,circuit,kind,start_lap,end_lap,laps
 2026,13,Italian Grand Prix,Monza,SC,3,3,1
 2026,13,Italian Grand Prix,Monza,RED,3,3,1
 2026,13,Italian Grand Prix,Monza,VSC,28,29,2
+2026,14,Spanish Grand Prix,Madrid,VSC,14,15,2
+2026,15,Azerbaijan Grand Prix,Baku,SC,31,35,5
+2026,15,Azerbaijan Grand Prix,Baku,SC,36,38,3

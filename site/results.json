@@ -3,30 +3,30 @@
   {
    "model": "direct-v1-plackett-luce",
    "call": "saturday",
-   "n": 2,
-   "rps": 0.1269,
-   "baseline_rps": 0.1429
+   "n": 3,
+   "rps": 0.134,
+   "baseline_rps": 0.2619
   },
   {
    "model": "sim-v1-monte-carlo",
    "call": "saturday",
-   "n": 2,
-   "rps": 0.1,
-   "baseline_rps": 0.1429
+   "n": 3,
+   "rps": 0.1245,
+   "baseline_rps": 0.2619
   },
   {
    "model": "direct-v1-plackett-luce",
    "call": "thursday",
-   "n": 2,
-   "rps": 0.1294,
-   "baseline_rps": 0.1429
+   "n": 3,
+   "rps": 0.131,
+   "baseline_rps": 0.2683
   },
   {
    "model": "sim-v1-monte-carlo",
    "call": "thursday",
-   "n": 2,
-   "rps": 0.1087,
-   "baseline_rps": 0.1429
+   "n": 3,
+   "rps": 0.1177,
+   "baseline_rps": 0.2683
   }
  ],
  "results": [
@@ -1403,6 +1403,680 @@
      "finish_rank": 21,
      "grid": 21,
      "rps": 0.0718
+    }
+   ]
+  },
+  {
+   "file": "2026-r15-saturday-direct.json",
+   "season": 2026,
+   "round": 15,
+   "event": "Azerbaijan Grand Prix",
+   "call": "saturday",
+   "model": "direct-v1-plackett-luce",
+   "generated_at": "2026-09-26T06:03:28+00:00",
+   "commit": "99195ad601aaaa8c908a7fba604ed32d054f6d53",
+   "committed_at": "2026-09-26T09:03:28+03:00",
+   "scored": true,
+   "rps": 0.1483,
+   "baseline_rps": 0.5,
+   "n_scored": 22,
+   "n_entrants": 22,
+   "drivers": [
+    {
+     "driver": "RUS",
+     "team": "Mercedes",
+     "finish_rank": 1,
+     "grid": -1,
+     "rps": 0.1715
+    },
+    {
+     "driver": "LEC",
+     "team": "Ferrari",
+     "finish_rank": 4,
+     "grid": -1,
+     "rps": 0.0844
+    },
+    {
+     "driver": "PIA",
+     "team": "McLaren",
+     "finish_rank": 14,
+     "grid": -1,
+     "rps": 0.1822
+    },
+    {
+     "driver": "HAD",
+     "team": "Red Bull Racing",
+     "finish_rank": 3,
+     "grid": -1,
+     "rps": 0.1451
+    },
+    {
+     "driver": "NOR",
+     "team": "McLaren",
+     "finish_rank": 19,
+     "grid": -1,
+     "rps": 0.3564
+    },
+    {
+     "driver": "HAM",
+     "team": "Ferrari",
+     "finish_rank": 6,
+     "grid": -1,
+     "rps": 0.0857
+    },
+    {
+     "driver": "VER",
+     "team": "Red Bull Racing",
+     "finish_rank": 2,
+     "grid": -1,
+     "rps": 0.2109
+    },
+    {
+     "driver": "GAS",
+     "team": "Alpine",
+     "finish_rank": 18,
+     "grid": -1,
+     "rps": 0.2476
+    },
+    {
+     "driver": "SAI",
+     "team": "Williams",
+     "finish_rank": 10,
+     "grid": -1,
+     "rps": 0.0817
+    },
+    {
+     "driver": "COL",
+     "team": "Alpine",
+     "finish_rank": 17,
+     "grid": -1,
+     "rps": 0.1609
+    },
+    {
+     "driver": "LAW",
+     "team": "Red Bull Racing",
+     "finish_rank": 12,
+     "grid": -1,
+     "rps": 0.0803
+    },
+    {
+     "driver": "BEA",
+     "team": "Haas F1 Team",
+     "finish_rank": 9,
+     "grid": -1,
+     "rps": 0.1007
+    },
+    {
+     "driver": "ANT",
+     "team": "Mercedes",
+     "finish_rank": 5,
+     "grid": -1,
+     "rps": 0.1987
+    },
+    {
+     "driver": "OCO",
+     "team": "Haas F1 Team",
+     "finish_rank": 8,
+     "grid": -1,
+     "rps": 0.1432
+    },
+    {
+     "driver": "ALB",
+     "team": "Williams",
+     "finish_rank": 20,
+     "grid": -1,
+     "rps": 0.2014
+    },
+    {
+     "driver": "BOR",
+     "team": "Audi",
+     "finish_rank": 13,
+     "grid": -1,
+     "rps": 0.0852
+    },
+    {
+     "driver": "LIN",
+     "team": "Racing Bulls",
+     "finish_rank": 7,
+     "grid": -1,
+     "rps": 0.1743
+    },
+    {
+     "driver": "HUL",
+     "team": "Audi",
+     "finish_rank": 11,
+     "grid": -1,
+     "rps": 0.1136
+    },
+    {
+     "driver": "ALO",
+     "team": "Aston Martin",
+     "finish_rank": 21,
+     "grid": -1,
+     "rps": 0.1344
+    },
+    {
+     "driver": "PER",
+     "team": "Cadillac",
+     "finish_rank": 15,
+     "grid": -1,
+     "rps": 0.086
+    },
+    {
+     "driver": "STR",
+     "team": "Aston Martin",
+     "finish_rank": 22,
+     "grid": -1,
+     "rps": 0.1354
+    },
+    {
+     "driver": "BOT",
+     "team": "Cadillac",
+     "finish_rank": 16,
+     "grid": -1,
+     "rps": 0.0837
+    }
+   ]
+  },
+  {
+   "file": "2026-r15-saturday-sim.json",
+   "season": 2026,
+   "round": 15,
+   "event": "Azerbaijan Grand Prix",
+   "call": "saturday",
+   "model": "sim-v1-monte-carlo",
+   "generated_at": "2026-09-26T06:03:28+00:00",
+   "commit": "99195ad601aaaa8c908a7fba604ed32d054f6d53",
+   "committed_at": "2026-09-26T09:03:28+03:00",
+   "scored": true,
+   "rps": 0.1737,
+   "baseline_rps": 0.5,
+   "n_scored": 22,
+   "n_entrants": 22,
+   "drivers": [
+    {
+     "driver": "RUS",
+     "team": "Mercedes",
+     "finish_rank": 1,
+     "grid": -1,
+     "rps": 0.0131
+    },
+    {
+     "driver": "LEC",
+     "team": "Ferrari",
+     "finish_rank": 4,
+     "grid": -1,
+     "rps": 0.0846
+    },
+    {
+     "driver": "PIA",
+     "team": "McLaren",
+     "finish_rank": 14,
+     "grid": -1,
+     "rps": 0.3907
+    },
+    {
+     "driver": "HAD",
+     "team": "Red Bull Racing",
+     "finish_rank": 3,
+     "grid": -1,
+     "rps": 0.0475
+    },
+    {
+     "driver": "NOR",
+     "team": "McLaren",
+     "finish_rank": 19,
+     "grid": -1,
+     "rps": 0.5045
+    },
+    {
+     "driver": "HAM",
+     "team": "Ferrari",
+     "finish_rank": 6,
+     "grid": -1,
+     "rps": 0.0296
+    },
+    {
+     "driver": "GAS",
+     "team": "Alpine",
+     "finish_rank": 18,
+     "grid": -1,
+     "rps": 0.4401
+    },
+    {
+     "driver": "ALB",
+     "team": "Williams",
+     "finish_rank": 20,
+     "grid": -1,
+     "rps": 0.2208
+    },
+    {
+     "driver": "ALO",
+     "team": "Aston Martin",
+     "finish_rank": 21,
+     "grid": -1,
+     "rps": 0.0869
+    },
+    {
+     "driver": "ANT",
+     "team": "Mercedes",
+     "finish_rank": 5,
+     "grid": -1,
+     "rps": 0.291
+    },
+    {
+     "driver": "BEA",
+     "team": "Haas F1 Team",
+     "finish_rank": 9,
+     "grid": -1,
+     "rps": 0.0481
+    },
+    {
+     "driver": "BOR",
+     "team": "Audi",
+     "finish_rank": 13,
+     "grid": -1,
+     "rps": 0.0633
+    },
+    {
+     "driver": "BOT",
+     "team": "Cadillac",
+     "finish_rank": 16,
+     "grid": -1,
+     "rps": 0.0903
+    },
+    {
+     "driver": "COL",
+     "team": "Alpine",
+     "finish_rank": 17,
+     "grid": -1,
+     "rps": 0.3164
+    },
+    {
+     "driver": "HUL",
+     "team": "Audi",
+     "finish_rank": 11,
+     "grid": -1,
+     "rps": 0.192
+    },
+    {
+     "driver": "LAW",
+     "team": "Red Bull Racing",
+     "finish_rank": 12,
+     "grid": -1,
+     "rps": 0.0488
+    },
+    {
+     "driver": "LIN",
+     "team": "Racing Bulls",
+     "finish_rank": 7,
+     "grid": -1,
+     "rps": 0.2914
+    },
+    {
+     "driver": "OCO",
+     "team": "Haas F1 Team",
+     "finish_rank": 8,
+     "grid": -1,
+     "rps": 0.1973
+    },
+    {
+     "driver": "PER",
+     "team": "Cadillac",
+     "finish_rank": 15,
+     "grid": -1,
+     "rps": 0.0873
+    },
+    {
+     "driver": "SAI",
+     "team": "Williams",
+     "finish_rank": 10,
+     "grid": -1,
+     "rps": 0.0541
+    },
+    {
+     "driver": "STR",
+     "team": "Aston Martin",
+     "finish_rank": 22,
+     "grid": -1,
+     "rps": 0.1046
+    },
+    {
+     "driver": "VER",
+     "team": "Red Bull Racing",
+     "finish_rank": 2,
+     "grid": -1,
+     "rps": 0.2193
+    }
+   ]
+  },
+  {
+   "file": "2026-r15-thursday-direct.json",
+   "season": 2026,
+   "round": 15,
+   "event": "Azerbaijan Grand Prix",
+   "call": "thursday",
+   "model": "direct-v1-plackett-luce",
+   "generated_at": "2026-09-24T15:58:11+00:00",
+   "commit": "5ac0748b3c74138096786ff8e6e7277d92001814",
+   "committed_at": "2026-09-24T18:58:11+03:00",
+   "scored": true,
+   "rps": 0.1342,
+   "baseline_rps": 0.5193,
+   "n_scored": 21,
+   "n_entrants": 22,
+   "drivers": [
+    {
+     "driver": "ANT",
+     "team": "Mercedes",
+     "finish_rank": 5,
+     "grid": -1,
+     "rps": 0.0729
+    },
+    {
+     "driver": "RUS",
+     "team": "Mercedes",
+     "finish_rank": 1,
+     "grid": -1,
+     "rps": 0.1904
+    },
+    {
+     "driver": "LEC",
+     "team": "Ferrari",
+     "finish_rank": 4,
+     "grid": -1,
+     "rps": 0.0996
+    },
+    {
+     "driver": "HAM",
+     "team": "Ferrari",
+     "finish_rank": 6,
+     "grid": -1,
+     "rps": 0.0745
+    },
+    {
+     "driver": "NOR",
+     "team": "McLaren",
+     "finish_rank": 19,
+     "grid": -1,
+     "rps": 0.357
+    },
+    {
+     "driver": "VER",
+     "team": "Red Bull Racing",
+     "finish_rank": 2,
+     "grid": -1,
+     "rps": 0.1832
+    },
+    {
+     "driver": "PIA",
+     "team": "McLaren",
+     "finish_rank": 14,
+     "grid": -1,
+     "rps": 0.1537
+    },
+    {
+     "driver": "GAS",
+     "team": "Alpine",
+     "finish_rank": 18,
+     "grid": -1,
+     "rps": 0.1962
+    },
+    {
+     "driver": "LAW",
+     "team": "Red Bull Racing",
+     "finish_rank": 12,
+     "grid": -1,
+     "rps": 0.0803
+    },
+    {
+     "driver": "LIN",
+     "team": "Racing Bulls",
+     "finish_rank": 7,
+     "grid": -1,
+     "rps": 0.1231
+    },
+    {
+     "driver": "BOR",
+     "team": "Audi",
+     "finish_rank": 13,
+     "grid": -1,
+     "rps": 0.083
+    },
+    {
+     "driver": "HUL",
+     "team": "Audi",
+     "finish_rank": 11,
+     "grid": -1,
+     "rps": 0.0811
+    },
+    {
+     "driver": "COL",
+     "team": "Alpine",
+     "finish_rank": 17,
+     "grid": -1,
+     "rps": 0.1369
+    },
+    {
+     "driver": "OCO",
+     "team": "Haas F1 Team",
+     "finish_rank": 8,
+     "grid": -1,
+     "rps": 0.1458
+    },
+    {
+     "driver": "BEA",
+     "team": "Haas F1 Team",
+     "finish_rank": 9,
+     "grid": -1,
+     "rps": 0.1303
+    },
+    {
+     "driver": "SAI",
+     "team": "Williams",
+     "finish_rank": 10,
+     "grid": -1,
+     "rps": 0.1243
+    },
+    {
+     "driver": "ALB",
+     "team": "Williams",
+     "finish_rank": 20,
+     "grid": -1,
+     "rps": 0.153
+    },
+    {
+     "driver": "PER",
+     "team": "Cadillac",
+     "finish_rank": 15,
+     "grid": -1,
+     "rps": 0.0855
+    },
+    {
+     "driver": "ALO",
+     "team": "Aston Martin",
+     "finish_rank": 21,
+     "grid": -1,
+     "rps": 0.13
+    },
+    {
+     "driver": "BOT",
+     "team": "Cadillac",
+     "finish_rank": 16,
+     "grid": -1,
+     "rps": 0.0797
+    },
+    {
+     "driver": "STR",
+     "team": "Aston Martin",
+     "finish_rank": 22,
+     "grid": -1,
+     "rps": 0.1383
+    }
+   ]
+  },
+  {
+   "file": "2026-r15-thursday-sim.json",
+   "season": 2026,
+   "round": 15,
+   "event": "Azerbaijan Grand Prix",
+   "call": "thursday",
+   "model": "sim-v1-monte-carlo",
+   "generated_at": "2026-09-24T15:58:11+00:00",
+   "commit": "5ac0748b3c74138096786ff8e6e7277d92001814",
+   "committed_at": "2026-09-24T18:58:11+03:00",
+   "scored": true,
+   "rps": 0.1356,
+   "baseline_rps": 0.5193,
+   "n_scored": 21,
+   "n_entrants": 22,
+   "drivers": [
+    {
+     "driver": "ANT",
+     "team": "Mercedes",
+     "finish_rank": 5,
+     "grid": -1,
+     "rps": 0.0664
+    },
+    {
+     "driver": "RUS",
+     "team": "Mercedes",
+     "finish_rank": 1,
+     "grid": -1,
+     "rps": 0.0586
+    },
+    {
+     "driver": "LEC",
+     "team": "Ferrari",
+     "finish_rank": 4,
+     "grid": -1,
+     "rps": 0.0413
+    },
+    {
+     "driver": "NOR",
+     "team": "McLaren",
+     "finish_rank": 19,
+     "grid": -1,
+     "rps": 0.4864
+    },
+    {
+     "driver": "VER",
+     "team": "Red Bull Racing",
+     "finish_rank": 2,
+     "grid": -1,
+     "rps": 0.1239
+    },
+    {
+     "driver": "HAM",
+     "team": "Ferrari",
+     "finish_rank": 6,
+     "grid": -1,
+     "rps": 0.0683
+    },
+    {
+     "driver": "PIA",
+     "team": "McLaren",
+     "finish_rank": 14,
+     "grid": -1,
+     "rps": 0.2964
+    },
+    {
+     "driver": "GAS",
+     "team": "Alpine",
+     "finish_rank": 18,
+     "grid": -1,
+     "rps": 0.2942
+    },
+    {
+     "driver": "LAW",
+     "team": "Red Bull Racing",
+     "finish_rank": 12,
+     "grid": -1,
+     "rps": 0.0712
+    },
+    {
+     "driver": "COL",
+     "team": "Alpine",
+     "finish_rank": 17,
+     "grid": -1,
+     "rps": 0.1838
+    },
+    {
+     "driver": "BOR",
+     "team": "Audi",
+     "finish_rank": 13,
+     "grid": -1,
+     "rps": 0.0661
+    },
+    {
+     "driver": "LIN",
+     "team": "Racing Bulls",
+     "finish_rank": 7,
+     "grid": -1,
+     "rps": 0.0628
+    },
+    {
+     "driver": "ALB",
+     "team": "Williams",
+     "finish_rank": 20,
+     "grid": -1,
+     "rps": 0.1338
+    },
+    {
+     "driver": "ALO",
+     "team": "Aston Martin",
+     "finish_rank": 21,
+     "grid": -1,
+     "rps": 0.0762
+    },
+    {
+     "driver": "BEA",
+     "team": "Haas F1 Team",
+     "finish_rank": 9,
+     "grid": -1,
+     "rps": 0.156
+    },
+    {
+     "driver": "BOT",
+     "team": "Cadillac",
+     "finish_rank": 16,
+     "grid": -1,
+     "rps": 0.0667
+    },
+    {
+     "driver": "HUL",
+     "team": "Audi",
+     "finish_rank": 11,
+     "grid": -1,
+     "rps": 0.0397
+    },
+    {
+     "driver": "OCO",
+     "team": "Haas F1 Team",
+     "finish_rank": 8,
+     "grid": -1,
+     "rps": 0.2039
+    },
+    {
+     "driver": "PER",
+     "team": "Cadillac",
+     "finish_rank": 15,
+     "grid": -1,
+     "rps": 0.0842
+    },
+    {
+     "driver": "SAI",
+     "team": "Williams",
+     "finish_rank": 10,
+     "grid": -1,
+     "rps": 0.166
+    },
+    {
+     "driver": "STR",
+     "team": "Aston Martin",
+     "finish_rank": 22,
+     "grid": -1,
+     "rps": 0.1012
     }
    ]
   }
