@@ -17,7 +17,8 @@ head-to-head between them. Git history is the timestamp.
 
 thursday uses each driver's season-average grid (locked decision 12).
 saturday uses the qualifying classification, so it only works after quali.
-The entry list is the set of drivers from the latest completed race.
+thursday's entry list is the set of drivers from the latest completed race;
+saturday's is everyone in qualifying, since a stand-in can be gone a week later.
 
 Trailing DRIVER=POSITION arguments override the grid feature. Grid penalties
 are the case that needs them: build_data.py trains on the real post-penalty
@@ -130,6 +131,8 @@ def main() -> None:
     per_driver = table.groupby("driver").agg(
         pace_hist=("pace_delta", "mean"), grid_avg=("grid", "mean")
     )
+    # Each driver's most recent team, so a returning driver keeps theirs.
+    team_of = table.sort_values("round").groupby("driver")["team"].last()
 
     if call == "thursday":
         feature_cols = ["grid_avg", "pace_hist"]
@@ -138,8 +141,12 @@ def main() -> None:
         feature_cols = ["grid", "pace_hist"]
         grid_feature = qualifying_grid(round_number, drivers)
 
-    overrides = parse_grid_overrides(sys.argv[3:], drivers)
+    overrides = parse_grid_overrides(sys.argv[3:], list(per_driver.index))
     grid_feature.update(overrides)
+    if call == "saturday":
+        # TSU stood in for rounds 12-14 and was gone by Baku qualifying.
+        # ponytail: a driver with no completed race still fails (no pace_hist to use).
+        drivers = sorted(grid_feature)
     missing = [d for d in drivers if d not in grid_feature]
     if missing:
         raise SystemExit(f"no grid position for {' '.join(missing)}: pass DRIVER=POSITION")
@@ -152,7 +159,8 @@ def main() -> None:
 
     # Simulator, fit on the same rounds. The grid it sees is the same feature
     # the direct model sees, so on Thursday both run on the season average.
-    entry = pd.DataFrame({"driver": drivers, "team": list(latest["team"]),
+    teams = [team_of[d] for d in drivers]
+    entry = pd.DataFrame({"driver": drivers, "team": teams,
                           "grid": [grid_feature[d] for d in drivers]})
     if call == "thursday":
         # A guessed grid carries its scatter; an overridden slot (penalty) is known.
@@ -168,7 +176,7 @@ def main() -> None:
 
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     for key, matrix in matrices.items():
-        rows = headline_rows(matrix, drivers, list(latest["team"]))
+        rows = headline_rows(matrix, drivers, teams)
         order = predicted_order(matrix, drivers)
         out = {
             "event": event["EventName"],
