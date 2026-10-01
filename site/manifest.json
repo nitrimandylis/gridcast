@@ -142,5 +142,29 @@
   "commit": "5ac0748b3c74138096786ff8e6e7277d92001814",
   "committed_at": "2026-09-24T18:58:11+03:00",
   "scored": true
+ },
+ {
+  "file": "2026-r16-thursday-direct.json",
+  "season": 2026,
+  "round": 16,
+  "event": "Bahrain Grand Prix",
+  "call": "thursday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-10-01T08:01:41+00:00",
+  "commit": "e19028109d366f4e06fae539ae1a74ef47909652",
+  "committed_at": "2026-10-01T11:01:41+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r16-thursday-sim.json",
+  "season": 2026,
+  "round": 16,
+  "event": "Bahrain Grand Prix",
+  "call": "thursday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-10-01T08:01:41+00:00",
+  "commit": "e19028109d366f4e06fae539ae1a74ef47909652",
+  "committed_at": "2026-10-01T11:01:41+03:00",
+  "scored": false
  }
 ]
