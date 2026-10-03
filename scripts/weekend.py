@@ -123,7 +123,18 @@ def qualifying_positions(round_number: int) -> dict[str, float] | None:
     results = session.results
     if results is None or results.empty:
         return None
-    return dict(zip(results["Abbreviation"], results["Position"].astype(float)))
+    positions = dict(zip(results["Abbreviation"], results["Position"].astype(float)))
+    if not classification_landed(positions):
+        return None
+    return positions
+
+
+def classification_landed(positions: dict[str, float]) -> bool:
+    """FastF1 serves the entry list with every Position NaN until the
+    classification lands, hours after the session. A real no-time driver
+    is one or two NaNs, never most of the field."""
+    classified = sum(1 for p in positions.values() if pd.notna(p))
+    return classified > len(positions) / 2
 
 
 def fill_missing(positions: dict[str, float]) -> list[str]:
@@ -243,6 +254,8 @@ def demo() -> None:
     positions = {"NOR": 1.0, "VER": 2.0, "ANT": float("nan"), "HAM": 3.0, "ALO": float("nan")}
     assert fill_missing(positions) == ["ALO=4", "ANT=5"], fill_missing(positions)
     assert fill_missing({"NOR": 1.0}) == []
+    assert classification_landed(positions)
+    assert not classification_landed({"ALB": float("nan"), "ALO": float("nan"), "VER": float("nan")})
     sprint = pd.Series({"EventName": "Singapore Grand Prix",
                         "Session1": "Practice 1", "Session2": "Sprint Qualifying",
                         "Session3": "Sprint", "Session4": "Qualifying", "Session5": "Race",
