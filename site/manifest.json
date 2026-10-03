@@ -150,7 +150,7 @@
   "event": "Bahrain Grand Prix",
   "call": "saturday",
   "model": "direct-v1-plackett-luce",
-  "generated_at": "2026-10-03T13:01:30+00:00",
+  "generated_at": "2026-10-03T13:11:55+00:00",
   "commit": "6d7c6c756a07b17cb34be0c6fcbce989dcaaac38",
   "committed_at": "2026-10-03T13:01:20+03:00",
   "scored": false
@@ -162,7 +162,7 @@
   "event": "Bahrain Grand Prix",
   "call": "saturday",
   "model": "sim-v1-monte-carlo",
-  "generated_at": "2026-10-03T13:01:30+00:00",
+  "generated_at": "2026-10-03T13:11:55+00:00",
   "commit": "6d7c6c756a07b17cb34be0c6fcbce989dcaaac38",
   "committed_at": "2026-10-03T13:01:20+03:00",
   "scored": false
