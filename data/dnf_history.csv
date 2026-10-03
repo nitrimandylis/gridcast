@@ -1799,3 +1799,523 @@ season,round,circuit,driver,team,grid,laps_completed,total_laps,status
 2022,10,Silverstone,RUS,Mercedes,8,1,52,Collision
 2022,10,Silverstone,ZHO,Alfa Romeo,9,1,52,Collision
 2022,10,Silverstone,ALB,Williams,16,1,52,Collision
+2022,11,Spielberg,LEC,Ferrari,20,71,71,
+2022,11,Spielberg,VER,Red Bull Racing,20,71,71,
+2022,11,Spielberg,HAM,Mercedes,20,71,71,
+2022,11,Spielberg,RUS,Mercedes,20,71,71,
+2022,11,Spielberg,OCO,Alpine,20,71,71,
+2022,11,Spielberg,MSC,Haas F1 Team,20,70,71,
+2022,11,Spielberg,NOR,McLaren,20,70,71,
+2022,11,Spielberg,MAG,Haas F1 Team,20,70,71,
+2022,11,Spielberg,RIC,McLaren,20,70,71,
+2022,11,Spielberg,ALO,Alpine,20,70,71,
+2022,11,Spielberg,BOT,Alfa Romeo,20,70,71,
+2022,11,Spielberg,ALB,Williams,20,70,71,
+2022,11,Spielberg,STR,Aston Martin,20,70,71,
+2022,11,Spielberg,ZHO,Alfa Romeo,20,70,71,
+2022,11,Spielberg,GAS,AlphaTauri,20,70,71,
+2022,11,Spielberg,VET,Aston Martin,20,70,71,
+2022,11,Spielberg,TSU,AlphaTauri,20,70,71,
+2022,11,Spielberg,SAI,Ferrari,20,57,71,
+2022,11,Spielberg,LAT,Williams,20,48,71,
+2022,11,Spielberg,PER,Red Bull Racing,20,24,71,
+2022,12,Le Castellet,VER,Red Bull Racing,2,53,53,Finished
+2022,12,Le Castellet,HAM,Mercedes,4,53,53,Finished
+2022,12,Le Castellet,RUS,Mercedes,6,53,53,Finished
+2022,12,Le Castellet,PER,Red Bull Racing,3,53,53,Finished
+2022,12,Le Castellet,SAI,Ferrari,19,53,53,Finished
+2022,12,Le Castellet,ALO,Alpine,7,53,53,Finished
+2022,12,Le Castellet,NOR,McLaren,5,53,53,Finished
+2022,12,Le Castellet,OCO,Alpine,10,53,53,Finished
+2022,12,Le Castellet,RIC,McLaren,9,53,53,Finished
+2022,12,Le Castellet,STR,Aston Martin,15,53,53,Finished
+2022,12,Le Castellet,VET,Aston Martin,12,53,53,Finished
+2022,12,Le Castellet,GAS,AlphaTauri,14,53,53,Finished
+2022,12,Le Castellet,ALB,Williams,13,53,53,Finished
+2022,12,Le Castellet,BOT,Alfa Romeo,11,53,53,Finished
+2022,12,Le Castellet,MSC,Haas F1 Team,17,53,53,Finished
+2022,12,Le Castellet,ZHO,Alfa Romeo,16,48,53,+6 Laps
+2022,12,Le Castellet,LAT,Williams,18,41,53,Collision damage
+2022,12,Le Castellet,MAG,Haas F1 Team,20,38,53,Collision damage
+2022,12,Le Castellet,LEC,Ferrari,1,18,53,Accident
+2022,12,Le Castellet,TSU,AlphaTauri,8,18,53,Undertray
+2022,13,Budapest,VER,Red Bull Racing,10,70,70,Finished
+2022,13,Budapest,HAM,Mercedes,7,70,70,Finished
+2022,13,Budapest,RUS,Mercedes,1,70,70,Finished
+2022,13,Budapest,SAI,Ferrari,2,70,70,Finished
+2022,13,Budapest,PER,Red Bull Racing,11,70,70,Finished
+2022,13,Budapest,LEC,Ferrari,3,70,70,Finished
+2022,13,Budapest,NOR,McLaren,4,70,70,Finished
+2022,13,Budapest,ALO,Alpine,6,69,70,+1 Lap
+2022,13,Budapest,OCO,Alpine,5,69,70,+1 Lap
+2022,13,Budapest,VET,Aston Martin,18,69,70,+1 Lap
+2022,13,Budapest,STR,Aston Martin,14,69,70,+1 Lap
+2022,13,Budapest,GAS,AlphaTauri,20,69,70,+1 Lap
+2022,13,Budapest,ZHO,Alfa Romeo,12,69,70,+1 Lap
+2022,13,Budapest,MSC,Haas F1 Team,15,69,70,+1 Lap
+2022,13,Budapest,RIC,McLaren,9,69,70,+1 Lap
+2022,13,Budapest,MAG,Haas F1 Team,13,69,70,+1 Lap
+2022,13,Budapest,ALB,Williams,17,69,70,+1 Lap
+2022,13,Budapest,LAT,Williams,19,69,70,+1 Lap
+2022,13,Budapest,TSU,AlphaTauri,16,68,70,+2 Laps
+2022,13,Budapest,BOT,Alfa Romeo,8,66,70,Power Unit
+2022,14,Spa-Francorchamps,VER,Red Bull Racing,14,44,44,Finished
+2022,14,Spa-Francorchamps,PER,Red Bull Racing,2,44,44,Finished
+2022,14,Spa-Francorchamps,SAI,Ferrari,1,44,44,Finished
+2022,14,Spa-Francorchamps,RUS,Mercedes,5,44,44,Finished
+2022,14,Spa-Francorchamps,ALO,Alpine,3,44,44,Finished
+2022,14,Spa-Francorchamps,LEC,Ferrari,15,44,44,Finished
+2022,14,Spa-Francorchamps,OCO,Alpine,16,44,44,Finished
+2022,14,Spa-Francorchamps,VET,Aston Martin,10,44,44,Finished
+2022,14,Spa-Francorchamps,GAS,AlphaTauri,20,44,44,Finished
+2022,14,Spa-Francorchamps,ALB,Williams,6,44,44,Finished
+2022,14,Spa-Francorchamps,STR,Aston Martin,9,44,44,Finished
+2022,14,Spa-Francorchamps,NOR,McLaren,17,44,44,Finished
+2022,14,Spa-Francorchamps,TSU,AlphaTauri,20,44,44,Finished
+2022,14,Spa-Francorchamps,ZHO,Alfa Romeo,18,44,44,Finished
+2022,14,Spa-Francorchamps,RIC,McLaren,7,44,44,Finished
+2022,14,Spa-Francorchamps,MAG,Haas F1 Team,12,43,44,+1 Lap
+2022,14,Spa-Francorchamps,MSC,Haas F1 Team,19,43,44,+1 Lap
+2022,14,Spa-Francorchamps,LAT,Williams,11,43,44,+1 Lap
+2022,14,Spa-Francorchamps,BOT,Alfa Romeo,13,2,44,Accident
+2022,14,Spa-Francorchamps,HAM,Mercedes,4,1,44,Collision damage
+2022,15,Zandvoort,VER,Red Bull Racing,1,72,72,Finished
+2022,15,Zandvoort,RUS,Mercedes,6,72,72,Finished
+2022,15,Zandvoort,LEC,Ferrari,2,72,72,Finished
+2022,15,Zandvoort,HAM,Mercedes,4,72,72,Finished
+2022,15,Zandvoort,PER,Red Bull Racing,5,72,72,Finished
+2022,15,Zandvoort,ALO,Alpine,13,72,72,Finished
+2022,15,Zandvoort,NOR,McLaren,7,72,72,Finished
+2022,15,Zandvoort,SAI,Ferrari,3,72,72,Finished
+2022,15,Zandvoort,OCO,Alpine,12,72,72,Finished
+2022,15,Zandvoort,STR,Aston Martin,10,72,72,Finished
+2022,15,Zandvoort,GAS,AlphaTauri,11,72,72,Finished
+2022,15,Zandvoort,ALB,Williams,15,72,72,Finished
+2022,15,Zandvoort,MSC,Haas F1 Team,8,72,72,Finished
+2022,15,Zandvoort,VET,Aston Martin,19,72,72,Finished
+2022,15,Zandvoort,MAG,Haas F1 Team,18,72,72,Finished
+2022,15,Zandvoort,ZHO,Alfa Romeo,14,72,72,Finished
+2022,15,Zandvoort,RIC,McLaren,17,72,72,Finished
+2022,15,Zandvoort,LAT,Williams,20,71,72,+1 Lap
+2022,15,Zandvoort,BOT,Alfa Romeo,16,54,72,Engine
+2022,15,Zandvoort,TSU,AlphaTauri,9,43,72,Differential
+2022,16,Monza,VER,Red Bull Racing,7,53,53,Finished
+2022,16,Monza,LEC,Ferrari,1,53,53,Finished
+2022,16,Monza,RUS,Mercedes,2,53,53,Finished
+2022,16,Monza,SAI,Ferrari,18,53,53,Finished
+2022,16,Monza,HAM,Mercedes,19,53,53,Finished
+2022,16,Monza,PER,Red Bull Racing,13,53,53,Finished
+2022,16,Monza,NOR,McLaren,3,53,53,Finished
+2022,16,Monza,GAS,AlphaTauri,5,53,53,Finished
+2022,16,Monza,DEV,Williams,8,53,53,Finished
+2022,16,Monza,ZHO,Alfa Romeo,9,53,53,Finished
+2022,16,Monza,OCO,Alpine,14,53,53,Finished
+2022,16,Monza,MSC,Haas F1 Team,17,53,53,Finished
+2022,16,Monza,BOT,Alfa Romeo,15,52,53,+1 Lap
+2022,16,Monza,TSU,AlphaTauri,20,52,53,+1 Lap
+2022,16,Monza,LAT,Williams,10,52,53,+1 Lap
+2022,16,Monza,MAG,Haas F1 Team,16,52,53,+1 Lap
+2022,16,Monza,RIC,McLaren,4,46,53,Oil leak
+2022,16,Monza,STR,Aston Martin,12,39,53,Engine
+2022,16,Monza,ALO,Alpine,6,31,53,Water pressure
+2022,16,Monza,VET,Aston Martin,11,11,53,Engine
+2022,17,Marina Bay,PER,Red Bull Racing,2,59,59,Finished
+2022,17,Marina Bay,LEC,Ferrari,1,59,59,Finished
+2022,17,Marina Bay,SAI,Ferrari,4,59,59,Finished
+2022,17,Marina Bay,NOR,McLaren,6,59,59,Finished
+2022,17,Marina Bay,RIC,McLaren,16,59,59,Finished
+2022,17,Marina Bay,STR,Aston Martin,11,59,59,Finished
+2022,17,Marina Bay,VER,Red Bull Racing,8,59,59,Finished
+2022,17,Marina Bay,VET,Aston Martin,13,59,59,Finished
+2022,17,Marina Bay,HAM,Mercedes,3,59,59,Finished
+2022,17,Marina Bay,GAS,AlphaTauri,7,59,59,Finished
+2022,17,Marina Bay,BOT,Alfa Romeo,15,59,59,Finished
+2022,17,Marina Bay,MAG,Haas F1 Team,9,59,59,Finished
+2022,17,Marina Bay,MSC,Haas F1 Team,12,58,59,+1 Lap
+2022,17,Marina Bay,RUS,Mercedes,20,57,59,+2 Laps
+2022,17,Marina Bay,TSU,AlphaTauri,10,35,59,Accident
+2022,17,Marina Bay,OCO,Alpine,17,27,59,Engine
+2022,17,Marina Bay,ALB,Williams,18,25,59,Collision damage
+2022,17,Marina Bay,ALO,Alpine,5,21,59,Engine
+2022,17,Marina Bay,LAT,Williams,19,7,59,Collision damage
+2022,17,Marina Bay,ZHO,Alfa Romeo,14,7,59,Collision
+2022,18,Suzuka,VER,Red Bull Racing,1,29,29,Finished
+2022,18,Suzuka,PER,Red Bull Racing,4,28,29,Finished
+2022,18,Suzuka,LEC,Ferrari,2,28,29,Finished
+2022,18,Suzuka,OCO,Alpine,5,28,29,Finished
+2022,18,Suzuka,HAM,Mercedes,6,28,29,Finished
+2022,18,Suzuka,VET,Aston Martin,9,28,29,Finished
+2022,18,Suzuka,ALO,Alpine,7,28,29,Finished
+2022,18,Suzuka,RUS,Mercedes,8,28,29,Finished
+2022,18,Suzuka,LAT,Williams,20,28,29,Finished
+2022,18,Suzuka,NOR,McLaren,10,28,29,Finished
+2022,18,Suzuka,RIC,McLaren,11,28,29,Finished
+2022,18,Suzuka,STR,Aston Martin,19,28,29,Finished
+2022,18,Suzuka,TSU,AlphaTauri,13,28,29,Finished
+2022,18,Suzuka,MAG,Haas F1 Team,18,28,29,Finished
+2022,18,Suzuka,BOT,Alfa Romeo,12,28,29,Finished
+2022,18,Suzuka,ZHO,Alfa Romeo,14,28,29,Finished
+2022,18,Suzuka,MSC,Haas F1 Team,15,28,29,Finished
+2022,18,Suzuka,GAS,AlphaTauri,17,28,29,Finished
+2022,18,Suzuka,SAI,Ferrari,3,1,29,Accident
+2022,18,Suzuka,ALB,Williams,16,1,29,Hydraulics
+2022,19,Austin,VER,Red Bull Racing,2,56,56,Finished
+2022,19,Austin,HAM,Mercedes,3,56,56,Finished
+2022,19,Austin,LEC,Ferrari,12,56,56,Finished
+2022,19,Austin,PER,Red Bull Racing,9,56,56,Finished
+2022,19,Austin,RUS,Mercedes,4,56,56,Finished
+2022,19,Austin,NOR,McLaren,6,56,56,Finished
+2022,19,Austin,ALO,Alpine,14,56,56,Finished
+2022,19,Austin,VET,Aston Martin,10,56,56,Finished
+2022,19,Austin,MAG,Haas F1 Team,13,56,56,Finished
+2022,19,Austin,TSU,AlphaTauri,19,56,56,Finished
+2022,19,Austin,OCO,Alpine,20,56,56,Finished
+2022,19,Austin,ZHO,Alfa Romeo,18,56,56,Finished
+2022,19,Austin,ALB,Williams,8,56,56,Finished
+2022,19,Austin,GAS,AlphaTauri,11,56,56,Finished
+2022,19,Austin,MSC,Haas F1 Team,16,56,56,Finished
+2022,19,Austin,RIC,McLaren,15,56,56,Finished
+2022,19,Austin,LAT,Williams,17,56,56,Finished
+2022,19,Austin,STR,Aston Martin,5,22,56,Collision
+2022,19,Austin,BOT,Alfa Romeo,7,17,56,Spun off
+2022,19,Austin,SAI,Ferrari,1,1,56,Collision damage
+2022,20,Mexico City,VER,Red Bull Racing,1,71,71,Finished
+2022,20,Mexico City,HAM,Mercedes,3,71,71,Finished
+2022,20,Mexico City,PER,Red Bull Racing,4,71,71,Finished
+2022,20,Mexico City,RUS,Mercedes,2,71,71,Finished
+2022,20,Mexico City,SAI,Ferrari,5,71,71,Finished
+2022,20,Mexico City,LEC,Ferrari,7,71,71,Finished
+2022,20,Mexico City,RIC,McLaren,11,70,71,+1 Lap
+2022,20,Mexico City,OCO,Alpine,10,70,71,+1 Lap
+2022,20,Mexico City,NOR,McLaren,8,70,71,+1 Lap
+2022,20,Mexico City,BOT,Alfa Romeo,6,70,71,+1 Lap
+2022,20,Mexico City,GAS,AlphaTauri,14,70,71,+1 Lap
+2022,20,Mexico City,ALB,Williams,17,70,71,+1 Lap
+2022,20,Mexico City,ZHO,Alfa Romeo,12,70,71,+1 Lap
+2022,20,Mexico City,VET,Aston Martin,16,70,71,+1 Lap
+2022,20,Mexico City,STR,Aston Martin,20,70,71,+1 Lap
+2022,20,Mexico City,MSC,Haas F1 Team,15,70,71,+1 Lap
+2022,20,Mexico City,MAG,Haas F1 Team,19,70,71,+1 Lap
+2022,20,Mexico City,LAT,Williams,18,69,71,+2 Laps
+2022,20,Mexico City,ALO,Alpine,9,64,71,Engine
+2022,20,Mexico City,TSU,AlphaTauri,13,50,71,Collision damage
+2022,21,São Paulo,RUS,Mercedes,1,71,71,Finished
+2022,21,São Paulo,HAM,Mercedes,2,71,71,Finished
+2022,21,São Paulo,SAI,Ferrari,7,71,71,Finished
+2022,21,São Paulo,LEC,Ferrari,5,71,71,Finished
+2022,21,São Paulo,ALO,Alpine,17,71,71,Finished
+2022,21,São Paulo,VER,Red Bull Racing,3,71,71,Finished
+2022,21,São Paulo,PER,Red Bull Racing,4,71,71,Finished
+2022,21,São Paulo,OCO,Alpine,16,71,71,Finished
+2022,21,São Paulo,BOT,Alfa Romeo,14,71,71,Finished
+2022,21,São Paulo,STR,Aston Martin,15,71,71,Finished
+2022,21,São Paulo,VET,Aston Martin,9,71,71,Finished
+2022,21,São Paulo,ZHO,Alfa Romeo,13,71,71,Finished
+2022,21,São Paulo,MSC,Haas F1 Team,12,71,71,Finished
+2022,21,São Paulo,GAS,AlphaTauri,10,71,71,Finished
+2022,21,São Paulo,ALB,Williams,19,71,71,Finished
+2022,21,São Paulo,LAT,Williams,18,71,71,Finished
+2022,21,São Paulo,TSU,AlphaTauri,20,70,71,+1 Lap
+2022,21,São Paulo,NOR,McLaren,6,51,71,Gearbox
+2022,21,São Paulo,MAG,Haas F1 Team,8,1,71,Collision
+2022,21,São Paulo,RIC,McLaren,11,1,71,Collision
+2022,22,Yas Island,VER,Red Bull Racing,1,58,58,Finished
+2022,22,Yas Island,LEC,Ferrari,3,58,58,Finished
+2022,22,Yas Island,PER,Red Bull Racing,2,58,58,Finished
+2022,22,Yas Island,SAI,Ferrari,4,58,58,Finished
+2022,22,Yas Island,RUS,Mercedes,6,58,58,Finished
+2022,22,Yas Island,NOR,McLaren,7,58,58,Finished
+2022,22,Yas Island,OCO,Alpine,8,58,58,Finished
+2022,22,Yas Island,STR,Aston Martin,14,58,58,Finished
+2022,22,Yas Island,RIC,McLaren,13,58,58,Finished
+2022,22,Yas Island,VET,Aston Martin,9,58,58,Finished
+2022,22,Yas Island,TSU,AlphaTauri,11,58,58,Finished
+2022,22,Yas Island,ZHO,Alfa Romeo,15,57,58,+1 Lap
+2022,22,Yas Island,ALB,Williams,19,57,58,+1 Lap
+2022,22,Yas Island,GAS,AlphaTauri,17,57,58,+1 Lap
+2022,22,Yas Island,BOT,Alfa Romeo,18,57,58,+1 Lap
+2022,22,Yas Island,MSC,Haas F1 Team,12,57,58,+1 Lap
+2022,22,Yas Island,MAG,Haas F1 Team,16,57,58,+1 Lap
+2022,22,Yas Island,HAM,Mercedes,5,55,58,Hydraulics
+2022,22,Yas Island,LAT,Williams,20,55,58,Collision damage
+2022,22,Yas Island,ALO,Alpine,10,27,58,Water leak
+2023,1,Sakhir,VER,Red Bull Racing,1,57,57,Finished
+2023,1,Sakhir,PER,Red Bull Racing,2,57,57,Finished
+2023,1,Sakhir,ALO,Aston Martin,5,57,57,Finished
+2023,1,Sakhir,SAI,Ferrari,4,57,57,Finished
+2023,1,Sakhir,HAM,Mercedes,7,57,57,Finished
+2023,1,Sakhir,STR,Aston Martin,8,57,57,Finished
+2023,1,Sakhir,RUS,Mercedes,6,57,57,Finished
+2023,1,Sakhir,BOT,Alfa Romeo,12,57,57,Finished
+2023,1,Sakhir,GAS,Alpine,20,57,57,Finished
+2023,1,Sakhir,ALB,Williams,15,57,57,Finished
+2023,1,Sakhir,TSU,AlphaTauri,14,57,57,Finished
+2023,1,Sakhir,SAR,Williams,16,56,57,Lapped
+2023,1,Sakhir,MAG,Haas F1 Team,17,56,57,Lapped
+2023,1,Sakhir,DEV,AlphaTauri,19,56,57,Lapped
+2023,1,Sakhir,HUL,Haas F1 Team,10,56,57,Lapped
+2023,1,Sakhir,ZHO,Alfa Romeo,13,56,57,Lapped
+2023,1,Sakhir,NOR,McLaren,11,55,57,Lapped
+2023,1,Sakhir,OCO,Alpine,9,41,57,Retired
+2023,1,Sakhir,LEC,Ferrari,3,40,57,Retired
+2023,1,Sakhir,PIA,McLaren,18,13,57,Retired
+2023,2,Jeddah,PER,Red Bull Racing,1,50,50,Finished
+2023,2,Jeddah,VER,Red Bull Racing,15,50,50,Finished
+2023,2,Jeddah,ALO,Aston Martin,2,50,50,Finished
+2023,2,Jeddah,RUS,Mercedes,3,50,50,Finished
+2023,2,Jeddah,HAM,Mercedes,7,50,50,Finished
+2023,2,Jeddah,SAI,Ferrari,4,50,50,Finished
+2023,2,Jeddah,LEC,Ferrari,12,50,50,Finished
+2023,2,Jeddah,OCO,Alpine,6,50,50,Finished
+2023,2,Jeddah,GAS,Alpine,9,50,50,Finished
+2023,2,Jeddah,MAG,Haas F1 Team,13,50,50,Finished
+2023,2,Jeddah,TSU,AlphaTauri,16,50,50,Finished
+2023,2,Jeddah,HUL,Haas F1 Team,10,50,50,Finished
+2023,2,Jeddah,ZHO,Alfa Romeo,11,50,50,Finished
+2023,2,Jeddah,DEV,AlphaTauri,18,50,50,Finished
+2023,2,Jeddah,PIA,McLaren,8,50,50,Finished
+2023,2,Jeddah,SAR,Williams,20,50,50,Finished
+2023,2,Jeddah,NOR,McLaren,19,50,50,Finished
+2023,2,Jeddah,BOT,Alfa Romeo,14,49,50,Lapped
+2023,2,Jeddah,ALB,Williams,17,27,50,Retired
+2023,2,Jeddah,STR,Aston Martin,5,17,50,Retired
+2023,3,Melbourne,VER,Red Bull Racing,1,58,58,Finished
+2023,3,Melbourne,HAM,Mercedes,3,58,58,Finished
+2023,3,Melbourne,ALO,Aston Martin,4,58,58,Finished
+2023,3,Melbourne,STR,Aston Martin,6,58,58,Finished
+2023,3,Melbourne,PER,Red Bull Racing,20,58,58,Finished
+2023,3,Melbourne,NOR,McLaren,13,58,58,Finished
+2023,3,Melbourne,HUL,Haas F1 Team,10,58,58,Finished
+2023,3,Melbourne,PIA,McLaren,16,58,58,Finished
+2023,3,Melbourne,ZHO,Alfa Romeo,17,58,58,Finished
+2023,3,Melbourne,TSU,AlphaTauri,12,58,58,Finished
+2023,3,Melbourne,BOT,Alfa Romeo,19,58,58,Finished
+2023,3,Melbourne,SAI,Ferrari,5,58,58,Finished
+2023,3,Melbourne,GAS,Alpine,9,57,58,Retired
+2023,3,Melbourne,OCO,Alpine,11,57,58,Retired
+2023,3,Melbourne,DEV,AlphaTauri,15,57,58,Retired
+2023,3,Melbourne,SAR,Williams,18,57,58,Retired
+2023,3,Melbourne,MAG,Haas F1 Team,14,53,58,Retired
+2023,3,Melbourne,RUS,Mercedes,2,18,58,Retired
+2023,3,Melbourne,ALB,Williams,8,7,58,Retired
+2023,3,Melbourne,LEC,Ferrari,7,1,58,Retired
+2023,4,Baku,PER,Red Bull Racing,3,51,51,Finished
+2023,4,Baku,VER,Red Bull Racing,2,51,51,Finished
+2023,4,Baku,LEC,Ferrari,1,51,51,Finished
+2023,4,Baku,ALO,Aston Martin,6,51,51,Finished
+2023,4,Baku,SAI,Ferrari,4,51,51,Finished
+2023,4,Baku,HAM,Mercedes,5,51,51,Finished
+2023,4,Baku,STR,Aston Martin,9,51,51,Finished
+2023,4,Baku,RUS,Mercedes,11,51,51,Finished
+2023,4,Baku,NOR,McLaren,7,51,51,Finished
+2023,4,Baku,TSU,AlphaTauri,8,51,51,Finished
+2023,4,Baku,PIA,McLaren,10,51,51,Finished
+2023,4,Baku,ALB,Williams,12,51,51,Finished
+2023,4,Baku,MAG,Haas F1 Team,16,51,51,Finished
+2023,4,Baku,GAS,Alpine,17,51,51,Finished
+2023,4,Baku,OCO,Alpine,19,51,51,Finished
+2023,4,Baku,SAR,Williams,14,51,51,Finished
+2023,4,Baku,HUL,Haas F1 Team,20,50,51,Lapped
+2023,4,Baku,BOT,Alfa Romeo,13,50,51,Lapped
+2023,4,Baku,ZHO,Alfa Romeo,15,36,51,Retired
+2023,4,Baku,DEV,AlphaTauri,18,10,51,Retired
+2023,5,Miami,VER,Red Bull Racing,9,57,57,Finished
+2023,5,Miami,PER,Red Bull Racing,1,57,57,Finished
+2023,5,Miami,ALO,Aston Martin,2,57,57,Finished
+2023,5,Miami,RUS,Mercedes,6,57,57,Finished
+2023,5,Miami,SAI,Ferrari,3,57,57,Finished
+2023,5,Miami,HAM,Mercedes,13,57,57,Finished
+2023,5,Miami,LEC,Ferrari,7,57,57,Finished
+2023,5,Miami,GAS,Alpine,5,57,57,Finished
+2023,5,Miami,OCO,Alpine,8,57,57,Finished
+2023,5,Miami,MAG,Haas F1 Team,4,57,57,Finished
+2023,5,Miami,TSU,AlphaTauri,17,57,57,Finished
+2023,5,Miami,STR,Aston Martin,18,57,57,Finished
+2023,5,Miami,BOT,Alfa Romeo,10,57,57,Finished
+2023,5,Miami,ALB,Williams,11,57,57,Finished
+2023,5,Miami,HUL,Haas F1 Team,12,57,57,Finished
+2023,5,Miami,ZHO,Alfa Romeo,14,57,57,Finished
+2023,5,Miami,NOR,McLaren,16,57,57,Finished
+2023,5,Miami,DEV,AlphaTauri,15,57,57,Finished
+2023,5,Miami,PIA,McLaren,19,56,57,Lapped
+2023,5,Miami,SAR,Williams,20,56,57,Lapped
+2023,6,Monaco,VER,Red Bull Racing,1,78,78,Finished
+2023,6,Monaco,ALO,Aston Martin,2,78,78,Finished
+2023,6,Monaco,OCO,Alpine,3,78,78,Finished
+2023,6,Monaco,HAM,Mercedes,5,78,78,Finished
+2023,6,Monaco,RUS,Mercedes,8,78,78,Finished
+2023,6,Monaco,LEC,Ferrari,6,78,78,Finished
+2023,6,Monaco,GAS,Alpine,7,78,78,Finished
+2023,6,Monaco,SAI,Ferrari,4,78,78,Finished
+2023,6,Monaco,NOR,McLaren,10,77,78,Lapped
+2023,6,Monaco,PIA,McLaren,11,77,78,Lapped
+2023,6,Monaco,BOT,Alfa Romeo,15,77,78,Lapped
+2023,6,Monaco,DEV,AlphaTauri,12,77,78,Lapped
+2023,6,Monaco,ZHO,Alfa Romeo,19,77,78,Lapped
+2023,6,Monaco,ALB,Williams,13,77,78,Lapped
+2023,6,Monaco,TSU,AlphaTauri,9,76,78,Lapped
+2023,6,Monaco,PER,Red Bull Racing,20,76,78,Lapped
+2023,6,Monaco,HUL,Haas F1 Team,18,76,78,Lapped
+2023,6,Monaco,SAR,Williams,16,76,78,Lapped
+2023,6,Monaco,MAG,Haas F1 Team,17,71,78,Retired
+2023,6,Monaco,STR,Aston Martin,14,54,78,Retired
+2023,7,Barcelona,VER,Red Bull Racing,1,66,66,Finished
+2023,7,Barcelona,HAM,Mercedes,4,66,66,Finished
+2023,7,Barcelona,RUS,Mercedes,12,66,66,Finished
+2023,7,Barcelona,PER,Red Bull Racing,11,66,66,Finished
+2023,7,Barcelona,SAI,Ferrari,2,66,66,Finished
+2023,7,Barcelona,STR,Aston Martin,5,66,66,Finished
+2023,7,Barcelona,ALO,Aston Martin,8,66,66,Finished
+2023,7,Barcelona,OCO,Alpine,6,66,66,Finished
+2023,7,Barcelona,ZHO,Alfa Romeo,13,66,66,Finished
+2023,7,Barcelona,GAS,Alpine,10,66,66,Finished
+2023,7,Barcelona,LEC,Ferrari,19,66,66,Finished
+2023,7,Barcelona,TSU,AlphaTauri,15,66,66,Finished
+2023,7,Barcelona,PIA,McLaren,9,65,66,Lapped
+2023,7,Barcelona,DEV,AlphaTauri,14,65,66,Lapped
+2023,7,Barcelona,HUL,Haas F1 Team,7,65,66,Lapped
+2023,7,Barcelona,ALB,Williams,18,65,66,Lapped
+2023,7,Barcelona,NOR,McLaren,3,65,66,Lapped
+2023,7,Barcelona,MAG,Haas F1 Team,17,65,66,Lapped
+2023,7,Barcelona,BOT,Alfa Romeo,16,65,66,Lapped
+2023,7,Barcelona,SAR,Williams,20,65,66,Lapped
+2023,8,Montréal,VER,Red Bull Racing,1,70,70,Finished
+2023,8,Montréal,ALO,Aston Martin,2,70,70,Finished
+2023,8,Montréal,HAM,Mercedes,3,70,70,Finished
+2023,8,Montréal,LEC,Ferrari,10,70,70,Finished
+2023,8,Montréal,SAI,Ferrari,11,70,70,Finished
+2023,8,Montréal,PER,Red Bull Racing,12,70,70,Finished
+2023,8,Montréal,ALB,Williams,9,70,70,Finished
+2023,8,Montréal,OCO,Alpine,6,70,70,Finished
+2023,8,Montréal,STR,Aston Martin,16,70,70,Finished
+2023,8,Montréal,BOT,Alfa Romeo,14,70,70,Finished
+2023,8,Montréal,PIA,McLaren,8,70,70,Finished
+2023,8,Montréal,GAS,Alpine,15,70,70,Finished
+2023,8,Montréal,NOR,McLaren,7,70,70,Finished
+2023,8,Montréal,TSU,AlphaTauri,19,70,70,Finished
+2023,8,Montréal,HUL,Haas F1 Team,5,69,70,Lapped
+2023,8,Montréal,ZHO,Alfa Romeo,20,69,70,Lapped
+2023,8,Montréal,MAG,Haas F1 Team,13,69,70,Lapped
+2023,8,Montréal,DEV,AlphaTauri,17,69,70,Lapped
+2023,8,Montréal,RUS,Mercedes,4,54,70,Retired
+2023,8,Montréal,SAR,Williams,18,7,70,Retired
+2023,9,Spielberg,VER,Red Bull Racing,1,71,71,Finished
+2023,9,Spielberg,LEC,Ferrari,2,71,71,Finished
+2023,9,Spielberg,PER,Red Bull Racing,15,71,71,Finished
+2023,9,Spielberg,NOR,McLaren,4,71,71,Finished
+2023,9,Spielberg,ALO,Aston Martin,7,71,71,Finished
+2023,9,Spielberg,SAI,Ferrari,3,71,71,Finished
+2023,9,Spielberg,RUS,Mercedes,11,71,71,Finished
+2023,9,Spielberg,HAM,Mercedes,5,71,71,Finished
+2023,9,Spielberg,STR,Aston Martin,6,71,71,Finished
+2023,9,Spielberg,GAS,Alpine,9,71,71,Finished
+2023,9,Spielberg,ALB,Williams,10,71,71,Finished
+2023,9,Spielberg,ZHO,Alfa Romeo,17,70,71,Lapped
+2023,9,Spielberg,SAR,Williams,18,70,71,Lapped
+2023,9,Spielberg,OCO,Alpine,12,70,71,Lapped
+2023,9,Spielberg,BOT,Alfa Romeo,14,70,71,Lapped
+2023,9,Spielberg,PIA,McLaren,13,70,71,Lapped
+2023,9,Spielberg,DEV,AlphaTauri,20,70,71,Lapped
+2023,9,Spielberg,MAG,Haas F1 Team,19,70,71,Lapped
+2023,9,Spielberg,TSU,AlphaTauri,16,70,71,Lapped
+2023,9,Spielberg,HUL,Haas F1 Team,8,13,71,Retired
+2023,10,Silverstone,VER,Red Bull Racing,1,52,52,Finished
+2023,10,Silverstone,NOR,McLaren,2,52,52,Finished
+2023,10,Silverstone,HAM,Mercedes,7,52,52,Finished
+2023,10,Silverstone,PIA,McLaren,3,52,52,Finished
+2023,10,Silverstone,RUS,Mercedes,6,52,52,Finished
+2023,10,Silverstone,PER,Red Bull Racing,15,52,52,Finished
+2023,10,Silverstone,ALO,Aston Martin,9,52,52,Finished
+2023,10,Silverstone,ALB,Williams,8,52,52,Finished
+2023,10,Silverstone,LEC,Ferrari,4,52,52,Finished
+2023,10,Silverstone,SAI,Ferrari,5,52,52,Finished
+2023,10,Silverstone,SAR,Williams,14,52,52,Finished
+2023,10,Silverstone,BOT,Alfa Romeo,20,52,52,Finished
+2023,10,Silverstone,HUL,Haas F1 Team,11,52,52,Finished
+2023,10,Silverstone,STR,Aston Martin,12,52,52,Finished
+2023,10,Silverstone,ZHO,Alfa Romeo,17,52,52,Finished
+2023,10,Silverstone,TSU,AlphaTauri,16,52,52,Finished
+2023,10,Silverstone,DEV,AlphaTauri,18,52,52,Finished
+2023,10,Silverstone,GAS,Alpine,10,46,52,Retired
+2023,10,Silverstone,MAG,Haas F1 Team,19,32,52,Retired
+2023,10,Silverstone,OCO,Alpine,13,9,52,Retired
+2023,11,Budapest,VER,Red Bull Racing,2,70,70,Finished
+2023,11,Budapest,NOR,McLaren,3,70,70,Finished
+2023,11,Budapest,PER,Red Bull Racing,9,70,70,Finished
+2023,11,Budapest,HAM,Mercedes,1,70,70,Finished
+2023,11,Budapest,PIA,McLaren,4,70,70,Finished
+2023,11,Budapest,RUS,Mercedes,18,70,70,Finished
+2023,11,Budapest,LEC,Ferrari,6,70,70,Finished
+2023,11,Budapest,SAI,Ferrari,11,70,70,Finished
+2023,11,Budapest,ALO,Aston Martin,8,70,70,Finished
+2023,11,Budapest,STR,Aston Martin,14,69,70,Lapped
+2023,11,Budapest,ALB,Williams,16,69,70,Lapped
+2023,11,Budapest,BOT,Alfa Romeo,7,69,70,Lapped
+2023,11,Budapest,RIC,AlphaTauri,13,69,70,Lapped
+2023,11,Budapest,HUL,Haas F1 Team,10,69,70,Lapped
+2023,11,Budapest,TSU,AlphaTauri,17,69,70,Lapped
+2023,11,Budapest,ZHO,Alfa Romeo,5,69,70,Lapped
+2023,11,Budapest,MAG,Haas F1 Team,19,69,70,Lapped
+2023,11,Budapest,SAR,Williams,20,67,70,Retired
+2023,11,Budapest,OCO,Alpine,12,2,70,Retired
+2023,11,Budapest,GAS,Alpine,15,1,70,Retired
+2023,12,Spa-Francorchamps,VER,Red Bull Racing,6,44,44,Finished
+2023,12,Spa-Francorchamps,PER,Red Bull Racing,2,44,44,Finished
+2023,12,Spa-Francorchamps,LEC,Ferrari,1,44,44,Finished
+2023,12,Spa-Francorchamps,HAM,Mercedes,3,44,44,Finished
+2023,12,Spa-Francorchamps,ALO,Aston Martin,9,44,44,Finished
+2023,12,Spa-Francorchamps,RUS,Mercedes,8,44,44,Finished
+2023,12,Spa-Francorchamps,NOR,McLaren,7,44,44,Finished
+2023,12,Spa-Francorchamps,OCO,Alpine,14,44,44,Finished
+2023,12,Spa-Francorchamps,STR,Aston Martin,10,44,44,Finished
+2023,12,Spa-Francorchamps,TSU,AlphaTauri,11,44,44,Finished
+2023,12,Spa-Francorchamps,GAS,Alpine,12,44,44,Finished
+2023,12,Spa-Francorchamps,BOT,Alfa Romeo,13,44,44,Finished
+2023,12,Spa-Francorchamps,ZHO,Alfa Romeo,17,44,44,Finished
+2023,12,Spa-Francorchamps,ALB,Williams,15,44,44,Finished
+2023,12,Spa-Francorchamps,MAG,Haas F1 Team,16,44,44,Finished
+2023,12,Spa-Francorchamps,RIC,AlphaTauri,19,44,44,Finished
+2023,12,Spa-Francorchamps,SAR,Williams,18,44,44,Finished
+2023,12,Spa-Francorchamps,HUL,Haas F1 Team,20,44,44,Finished
+2023,12,Spa-Francorchamps,SAI,Ferrari,4,23,44,Retired
+2023,12,Spa-Francorchamps,PIA,McLaren,5,1,44,Retired
+2023,13,Zandvoort,VER,Red Bull Racing,1,72,72,Finished
+2023,13,Zandvoort,ALO,Aston Martin,5,72,72,Finished
+2023,13,Zandvoort,GAS,Alpine,12,72,72,Finished
+2023,13,Zandvoort,PER,Red Bull Racing,7,72,72,Finished
+2023,13,Zandvoort,SAI,Ferrari,6,72,72,Finished
+2023,13,Zandvoort,HAM,Mercedes,13,72,72,Finished
+2023,13,Zandvoort,NOR,McLaren,2,72,72,Finished
+2023,13,Zandvoort,ALB,Williams,4,72,72,Finished
+2023,13,Zandvoort,PIA,McLaren,8,72,72,Finished
+2023,13,Zandvoort,OCO,Alpine,16,72,72,Finished
+2023,13,Zandvoort,STR,Aston Martin,11,72,72,Finished
+2023,13,Zandvoort,HUL,Haas F1 Team,14,72,72,Finished
+2023,13,Zandvoort,LAW,AlphaTauri,19,72,72,Finished
+2023,13,Zandvoort,BOT,Alfa Romeo,18,72,72,Finished
+2023,13,Zandvoort,TSU,AlphaTauri,17,72,72,Finished
+2023,13,Zandvoort,MAG,Haas F1 Team,20,72,72,Finished
+2023,13,Zandvoort,RUS,Mercedes,3,72,72,Finished
+2023,13,Zandvoort,ZHO,Alfa Romeo,15,63,72,Accident
+2023,13,Zandvoort,LEC,Ferrari,9,41,72,Undertray
+2023,13,Zandvoort,SAR,Williams,10,15,72,Accident
+2023,14,Monza,VER,Red Bull Racing,2,51,51,Finished
+2023,14,Monza,PER,Red Bull Racing,5,51,51,Finished
+2023,14,Monza,SAI,Ferrari,1,51,51,Finished
+2023,14,Monza,LEC,Ferrari,3,51,51,Finished
+2023,14,Monza,RUS,Mercedes,4,51,51,Finished
+2023,14,Monza,HAM,Mercedes,8,51,51,Finished
+2023,14,Monza,ALB,Williams,6,51,51,Finished
+2023,14,Monza,NOR,McLaren,9,51,51,Finished
+2023,14,Monza,ALO,Aston Martin,10,51,51,Finished
+2023,14,Monza,BOT,Alfa Romeo,14,51,51,Finished
+2023,14,Monza,LAW,AlphaTauri,12,51,51,Finished
+2023,14,Monza,PIA,McLaren,7,51,51,Finished
+2023,14,Monza,SAR,Williams,15,51,51,Finished
+2023,14,Monza,ZHO,Alfa Romeo,16,51,51,Finished
+2023,14,Monza,GAS,Alpine,17,51,51,Finished
+2023,14,Monza,STR,Aston Martin,20,51,51,Finished
+2023,14,Monza,HUL,Haas F1 Team,13,51,51,Lapped
+2023,14,Monza,MAG,Haas F1 Team,19,51,51,Lapped
+2023,14,Monza,OCO,Alpine,18,39,51,Retired
+2023,14,Monza,TSU,AlphaTauri,11,0,51,Did not start

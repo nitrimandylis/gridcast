@@ -59,7 +59,8 @@ def race_rows(season: int, rnd: int, event_name: str, circuit: str) -> list[dict
     # A race publishes laps before the official classification and grid land.
     # Refuse the incomplete version: without positions every driver would be
     # ranked by lap count alone, and without grids everyone defaults to P22.
-    if results["Position"].isna().all() or results["GridPosition"].isna().all():
+    # The unpublished grid comes as NaN or as -1 for every driver (Baku 2026).
+    if results["Position"].isna().all() or not (results["GridPosition"] > 0).any():
         raise ValueError("classification or grid not published yet")
 
     laps_done = laps.groupby("Driver")["LapNumber"].max()
