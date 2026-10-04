@@ -291,3 +291,7 @@ season,round,event,circuit,kind,start_lap,end_lap,laps
 2026,14,Spanish Grand Prix,Madrid,VSC,14,15,2
 2026,15,Azerbaijan Grand Prix,Baku,SC,31,35,5
 2026,15,Azerbaijan Grand Prix,Baku,SC,36,38,3
+2026,16,Bahrain Grand Prix,Kuala Lumpur,RED,1,1,1
+2026,16,Bahrain Grand Prix,Kuala Lumpur,SC,9,12,4
+2026,16,Bahrain Grand Prix,Kuala Lumpur,VSC,43,46,4
+2026,16,Bahrain Grand Prix,Kuala Lumpur,SC,46,51,6

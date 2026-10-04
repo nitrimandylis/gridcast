@@ -153,7 +153,7 @@
   "generated_at": "2026-10-03T13:11:55+00:00",
   "commit": "6d7c6c756a07b17cb34be0c6fcbce989dcaaac38",
   "committed_at": "2026-10-03T13:01:20+03:00",
-  "scored": false
+  "scored": true
  },
  {
   "file": "2026-r16-saturday-sim.json",
@@ -165,7 +165,7 @@
   "generated_at": "2026-10-03T13:11:55+00:00",
   "commit": "6d7c6c756a07b17cb34be0c6fcbce989dcaaac38",
   "committed_at": "2026-10-03T13:01:20+03:00",
-  "scored": false
+  "scored": true
  },
  {
   "file": "2026-r16-thursday-direct.json",
@@ -177,7 +177,7 @@
   "generated_at": "2026-10-01T08:01:41+00:00",
   "commit": "e19028109d366f4e06fae539ae1a74ef47909652",
   "committed_at": "2026-10-01T11:01:41+03:00",
-  "scored": false
+  "scored": true
  },
  {
   "file": "2026-r16-thursday-sim.json",
@@ -189,6 +189,6 @@
   "generated_at": "2026-10-01T08:01:41+00:00",
   "commit": "e19028109d366f4e06fae539ae1a74ef47909652",
   "committed_at": "2026-10-01T11:01:41+03:00",
-  "scored": false
+  "scored": true
  }
 ]
