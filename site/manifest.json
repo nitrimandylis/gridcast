@@ -190,5 +190,29 @@
   "commit": "e19028109d366f4e06fae539ae1a74ef47909652",
   "committed_at": "2026-10-01T11:01:41+03:00",
   "scored": true
+ },
+ {
+  "file": "2026-r17-thursday-direct.json",
+  "season": 2026,
+  "round": 17,
+  "event": "Singapore Grand Prix",
+  "call": "thursday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-10-08T13:00:48+00:00",
+  "commit": "d29c802bcf6b2552d86aa461ff3ee73016c742a8",
+  "committed_at": "2026-10-08T16:00:48+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r17-thursday-sim.json",
+  "season": 2026,
+  "round": 17,
+  "event": "Singapore Grand Prix",
+  "call": "thursday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-10-08T13:00:48+00:00",
+  "commit": "d29c802bcf6b2552d86aa461ff3ee73016c742a8",
+  "committed_at": "2026-10-08T16:00:48+03:00",
+  "scored": false
  }
 ]
