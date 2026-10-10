@@ -192,6 +192,30 @@
   "scored": true
  },
  {
+  "file": "2026-r17-saturday-direct.json",
+  "season": 2026,
+  "round": 17,
+  "event": "Singapore Grand Prix",
+  "call": "saturday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-10-10T23:00:50+00:00",
+  "commit": "558486752a7af893b5fcafc388e24583be7763f9",
+  "committed_at": "2026-10-11T02:00:50+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r17-saturday-sim.json",
+  "season": 2026,
+  "round": 17,
+  "event": "Singapore Grand Prix",
+  "call": "saturday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-10-10T23:00:50+00:00",
+  "commit": "558486752a7af893b5fcafc388e24583be7763f9",
+  "committed_at": "2026-10-11T02:00:50+03:00",
+  "scored": false
+ },
+ {
   "file": "2026-r17-thursday-direct.json",
   "season": 2026,
   "round": 17,
