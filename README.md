@@ -13,11 +13,11 @@
 
 *a race outcome model whose predictions are in the git history, so the misses are too*
 
-**[nitrimandylis.github.io/gridcast](https://nitrimandylis.github.io/gridcast)**
+**[gridcast.nicktrim.com](https://gridcast.nicktrim.com/)**
 
 ![models](https://img.shields.io/badge/models-plackett__luce_%2B_monte__carlo-d90429?style=flat-square&labelColor=111111) ![language](https://img.shields.io/badge/language-python_3.12-555555?style=flat-square&labelColor=111111) ![data](https://img.shields.io/badge/data-fastf1-555555?style=flat-square&labelColor=111111) ![timestamps](https://img.shields.io/badge/timestamps-git_history-d90429?style=flat-square&labelColor=111111) ![overtaking model](https://img.shields.io/badge/overtaking_model-0_(for_now)-555555?style=flat-square&labelColor=111111)
 
-[![gridcast home: singapore grand prix countdown, both calls committed to git, driver odds from both models below](.github/assets/screenshot.jpg)](https://nitrimandylis.github.io/gridcast)
+[![gridcast home: singapore grand prix countdown, both calls committed to git, driver odds from both models below](.github/assets/screenshot.jpg)](https://gridcast.nicktrim.com/)
 
 </div>
 

@@ -46,7 +46,7 @@ SCRIPTS = ROOT / "scripts"
 PREDICTIONS = ROOT / "predictions"
 RACES = ROOT / "data" / "driver_races.csv"
 SEASON = 2026
-SITE_URL = "https://nitrimandylis.github.io/gridcast/"
+SITE_URL = "https://gridcast.nicktrim.com/"
 RECORD_URL = SITE_URL + "record.html"
 THURSDAY_LEAD = timedelta(hours=48)
 QUALI_LENGTH = timedelta(hours=1)
