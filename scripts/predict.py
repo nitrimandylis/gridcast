@@ -30,6 +30,7 @@ for a driver who is starting last.
 
 import json
 import sys
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -53,14 +54,16 @@ MODELS = {"direct": "direct-v1-plackett-luce", "sim": "sim-v1-monte-carlo"}
 
 def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
     """Qualifying classification. NOT the starting grid: penalties come after,
-    so anything already known has to be passed in as a DRIVER=POSITION override."""
-    session = fastf1.get_session(SEASON, round_number, "Q")
-    session.load(telemetry=False, weather=False, messages=False)
-    positions = {a: float(p) for a, p in zip(session.results["Abbreviation"], session.results["Position"])
-                 if pd.notna(p)}
-    # FastF1 serves NaN positions until the classification lands, and a driver
-    # with no lap time is NaN forever. Either is filled by a DRIVER=POSITION override.
-    return positions
+    so anything already known has to be passed in as a DRIVER=POSITION override.
+
+    From Jolpica, not FastF1: F1 put the livetiming archive behind an F1 TV
+    login in October 2026 (FastF1 issue #978), and Jolpica still serves results."""
+    url = f"https://api.jolpi.ca/ergast/f1/{SEASON}/{round_number}/qualifying.json"
+    with urllib.request.urlopen(url, timeout=30) as response:
+        races = json.load(response)["MRData"]["RaceTable"]["Races"]
+    if not races:
+        raise SystemExit(f"no qualifying classification for round {round_number} yet")
+    return {q["Driver"]["code"]: float(q["position"]) for q in races[0]["QualifyingResults"]}
 
 
 def parse_grid_overrides(args: list[str], drivers: list[str]) -> dict[str, float]:
