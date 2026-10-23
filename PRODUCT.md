@@ -36,6 +36,12 @@ the Saturday call when the qualifying classification lands, the score once
 the race is classified. Each step is committed and pushed, and a summary goes
 to Discord. Grid penalties remain the one manual step.
 
+Paused since mid-October 2026: F1 now requires an F1 TV login for the
+timing archive, so new races cannot be loaded or scored. Predictions are
+still made by hand each weekend from the data already collected (through
+round 16), with the qualifying grid from Jolpica. Scoring resumes once data
+access is back.
+
 ## Why it exists
 
 Two reasons, both real:

@@ -23,13 +23,30 @@ then your recommendation. Options without the case get rejected.
     forecast carries a track record. Needs an odds source that can be
     collected before each race, and if that is not practical the idea dies.
 
+**Data access is blocked since ~2026-10-15.** F1 put the livetiming archive
+behind an F1 TV login (FastF1 issue #978); every FastF1 session load now
+returns 401, for every season, so no builder can run and no race can be
+scored. The local `cache/` was lost in the Mac wipe. Until this is solved
+(F1 TV Access plus FastF1 >= 3.9 with auth, undecided) the weekend is manual
+and calls only, on the Mac, Pi off:
+
+- Thursday: `predict.py "<event>" thursday`, commit `predict <event> thursday`,
+  `score.py`, commit `stamp <event> thursday`, push. Trains on the committed
+  CSVs, which stop at round 16 (Bahrain); Singapore (17) is unscored.
+- Saturday: same with `saturday`, after qualifying. The grid comes from
+  Jolpica now (`qualifying_grid` in predict.py), which is still free.
+- No scoring, no rebuilds. `weekend.py` cannot work: its scoring step and
+  its qualifying check both need FastF1.
+
 The race-weekend ritual (Thursday call, Saturday call, score after the race)
 is deliberately NOT tracked in Things. Only build work goes there.
 
 ## Environment
 
 - conda env `gridcast`, Python 3.12. Install into it, never into base.
-- `fastf1` is the data layer. Cache to `cache/` (gitignored).
+- `fastf1` is the data layer. Cache to `cache/` (gitignored; create it, FastF1
+  refuses a missing directory). Since 2026-10-15 it needs an F1 TV login.
+- Jolpica (`api.jolpi.ca/ergast`) serves the qualifying grid, stdlib urllib.
 - Ask before adding any dependency beyond what fastf1 pulls in.
 
 ## The two data-validity rules
@@ -145,7 +162,8 @@ Before using any historical data, decide which of the two it is.
     weekend, the Pi owns `site/manifest.json` and `site/results.json`; a
     grid penalty is still a manual `predict.py <event> saturday DRIVER=POS`,
     commit, then `score.py` to restamp, commit, push. The manual ritual is
-    the fallback when the Pi is down, unchanged.
+    the fallback when the Pi is down, unchanged. SUSPENDED since 2026-10-15,
+    see the data-access note in READ FIRST.
 
 ## Gate results, verified 2026-08-31
 
