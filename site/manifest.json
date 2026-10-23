@@ -238,5 +238,29 @@
   "commit": "d29c802bcf6b2552d86aa461ff3ee73016c742a8",
   "committed_at": "2026-10-08T16:00:48+03:00",
   "scored": false
+ },
+ {
+  "file": "2026-r18-thursday-direct.json",
+  "season": 2026,
+  "round": 18,
+  "event": "United States Grand Prix",
+  "call": "thursday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-10-23T19:36:28+00:00",
+  "commit": "0067095eba4afbf151974513a45d7aa170751702",
+  "committed_at": "2026-10-23T22:36:35+03:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r18-thursday-sim.json",
+  "season": 2026,
+  "round": 18,
+  "event": "United States Grand Prix",
+  "call": "thursday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-10-23T19:36:28+00:00",
+  "commit": "0067095eba4afbf151974513a45d7aa170751702",
+  "committed_at": "2026-10-23T22:36:35+03:00",
+  "scored": false
  }
 ]
