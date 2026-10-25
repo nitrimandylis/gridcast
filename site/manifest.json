@@ -240,6 +240,30 @@
   "scored": false
  },
  {
+  "file": "2026-r18-saturday-direct.json",
+  "season": 2026,
+  "round": 18,
+  "event": "United States Grand Prix",
+  "call": "saturday",
+  "model": "direct-v1-plackett-luce",
+  "generated_at": "2026-10-25T06:51:45+00:00",
+  "commit": "fcdff22c93cdde2b32b3c5cc44fa64f187d8d913",
+  "committed_at": "2026-10-25T08:51:57+02:00",
+  "scored": false
+ },
+ {
+  "file": "2026-r18-saturday-sim.json",
+  "season": 2026,
+  "round": 18,
+  "event": "United States Grand Prix",
+  "call": "saturday",
+  "model": "sim-v1-monte-carlo",
+  "generated_at": "2026-10-25T06:51:45+00:00",
+  "commit": "fcdff22c93cdde2b32b3c5cc44fa64f187d8d913",
+  "committed_at": "2026-10-25T08:51:57+02:00",
+  "scored": false
+ },
+ {
   "file": "2026-r18-thursday-direct.json",
   "season": 2026,
   "round": 18,
