@@ -34,7 +34,8 @@ and calls only, on the Mac, Pi off:
   `score.py`, commit `stamp <event> thursday`, push. Trains on the committed
   CSVs, which stop at round 16 (Bahrain); Singapore (17) is unscored.
 - Saturday: same with `saturday`, after qualifying. The grid comes from
-  Jolpica now (`qualifying_grid` in predict.py), which is still free.
+  formula1.com's results page now (`qualifying_grid` in predict.py).
+  Jolpica stopped updating after Singapore, so it is no fallback either.
 - No scoring, no rebuilds. `weekend.py` cannot work: its scoring step and
   its qualifying check both need FastF1.
 
@@ -46,7 +47,8 @@ is deliberately NOT tracked in Things. Only build work goes there.
 - conda env `gridcast`, Python 3.12. Install into it, never into base.
 - `fastf1` is the data layer. Cache to `cache/` (gitignored; create it, FastF1
   refuses a missing directory). Since 2026-10-15 it needs an F1 TV login.
-- Jolpica (`api.jolpi.ca/ergast`) serves the qualifying grid, stdlib urllib.
+- The qualifying grid is scraped from formula1.com/en/results/<season>/races
+  (round N is the Nth race link), stdlib urllib and re. No penalties there.
 - Ask before adding any dependency beyond what fastf1 pulls in.
 
 ## The two data-validity rules

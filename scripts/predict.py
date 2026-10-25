@@ -28,7 +28,9 @@ after the session. Without the override the model is fed a front-row start
 for a driver who is starting last.
 """
 
+import html
 import json
+import re
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -52,18 +54,38 @@ DEFAULT_LAPS = 60
 MODELS = {"direct": "direct-v1-plackett-luce", "sim": "sim-v1-monte-carlo"}
 
 
+def fetch_page(url: str) -> str:
+    request = urllib.request.Request(url, headers={"User-Agent": "gridcast"})
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return response.read().decode()
+
+
 def qualifying_grid(round_number: int, drivers: list[str]) -> dict[str, float]:
     """Qualifying classification. NOT the starting grid: penalties come after,
     so anything already known has to be passed in as a DRIVER=POSITION override.
 
-    From Jolpica, not FastF1: F1 put the livetiming archive behind an F1 TV
-    login in October 2026 (FastF1 issue #978), and Jolpica still serves results."""
-    url = f"https://api.jolpi.ca/ergast/f1/{SEASON}/{round_number}/qualifying.json"
-    with urllib.request.urlopen(url, timeout=30) as response:
-        races = json.load(response)["MRData"]["RaceTable"]["Races"]
-    if not races:
+    Scraped from formula1.com: F1 put the livetiming archive behind an F1 TV
+    login in October 2026 (FastF1 issue #978), and Jolpica, which used to be
+    the fallback here, stopped updating after Singapore."""
+    index = fetch_page(f"https://www.formula1.com/en/results/{SEASON}/races")
+    # The results index lists every race once, in calendar order.
+    # ponytail: breaks if F1 reorders or restyles the page; then pass DRIVER=POSITION for all.
+    links = []
+    for link in re.findall(r"races/\d+/[a-z-]+/race-result", index):
+        if link not in links:
+            links.append(link)
+    page = fetch_page(f"https://www.formula1.com/en/results/{SEASON}/"
+                      + links[round_number - 1].replace("race-result", "qualifying"))
+    positions = {}
+    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", page, re.S):
+        cells = [html.unescape(re.sub(r"<[^>]+>", " ", cell)).split()
+                 for cell in re.findall(r"<td[^>]*>(.*?)</td>", row, re.S)]
+        # Cells: position, number, "First Last ABC", team. NC or DQ is no position.
+        if len(cells) >= 3 and cells[0] and cells[0][0].isdigit():
+            positions[cells[2][-1]] = float(cells[0][0])
+    if not positions:
         raise SystemExit(f"no qualifying classification for round {round_number} yet")
-    return {q["Driver"]["code"]: float(q["position"]) for q in races[0]["QualifyingResults"]}
+    return positions
 
 
 def parse_grid_overrides(args: list[str], drivers: list[str]) -> dict[str, float]:
